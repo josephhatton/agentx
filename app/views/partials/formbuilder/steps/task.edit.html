@@ -1,0 +1,15 @@
+<fieldset class="step_cont task_type" ng-drop="true" ng-drop-success="DropStep($index, $data)">
+	<legend>Question Details</legend>
+	<strong>Question Name</strong>
+	<input type="text" ng-model="NewTask.name">
+	<strong>Section</strong>
+	<br>
+	<select ng-model="NewTask.inspection_type_id" ng-options="Opt.id as Opt.title for Opt in ListInspections"></select>
+	<br>
+	<strong>Question required</strong>
+	</br>
+	<input ng-model="NewTask.required" ng-value="0" type="radio" name="task_req" checked> No
+	<input ng-model="NewTask.required" ng-value="1" type="radio" name="task_req" checked> Yes
+	<br><br>
+	<!--<button ng-click="SaveTask()">Save Task</button>-->
+</fieldset>

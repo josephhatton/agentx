@@ -1,0 +1,28 @@
+<div id="fb-nav" data-ng-include data-src="'views/partials/formbuilder/nav.html'">
+</div>
+
+<div id="fb-header">
+	<div id="fb-header-main">
+		Section Builder
+		<input type="button" id="tpl-save" value="Save As New" ng-click="SaveInspectionType(true)" class="btn-blue" style="float:right; margin-left: 20px;" ng-if="!IsNewInspectionType">
+		<input type="button" id="tpl-save" value="Save" ng-click="SaveInspectionType(false)" class="btn-blue" style="float:right;">
+		<span ng-if="!IsNewInspectionType">#{{Inspection.id}}</span>
+		<img id="spinner" src="./images/spinner.gif" width="30px" height="30px" style="display: none;">
+	</div>
+	<div id="fb-header-box">
+		Question Box
+		<div class="fb-box-filter task-box">
+			<input type="input" class="fb-box-filter-keyword" ng-model="keywordFilterTaskBox" />
+			<div class="fb-box-filter-btn"></div>
+		</div>
+		<div class="fb-box-plus" ng-click="open_taskmodal()" >
+			+
+		</div>
+	</div>
+</div>
+
+<div id="fb-inspectiontypebuilder">
+	<div id="fb-inspectiontypebuilder-edit" data-ng-include data-src="'views/partials/formbuilder/inspections/inspectiontype.edit.html'"></div>
+	<div id="fb-inspectiontypebuilder-view" data-ng-include data-src="'views/partials/formbuilder/inspections/inspectiontype.view.html'" ng-init="Inspection=NewInspectionType;" class="view-inspectiontype"></div>
+	<div id="fb-inspectiontypebuilder-box" data-ng-include data-src="'views/partials/formbuilder/inspections/box.html'"></div>
+</div>

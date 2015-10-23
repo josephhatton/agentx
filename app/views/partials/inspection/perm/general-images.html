@@ -1,0 +1,22 @@
+<div class="printable-images">
+    <nav class="sub-nav-btns inspection">
+        <ul class="print-menu">
+            <li class="print-data"><a href="javascript:void(0);" onclick="window.print();">Printable Images</a></li>
+            <!-- <li class="download-data"><a href="#">Download</a></li> -->
+        </ul>
+    </nav>
+    <div class="info-block" style="width: 225px">
+        <section>
+            <div ng-repeat="image in general_images">
+                <div class="left-component-info">
+                    <div style="height: 20px"></div>
+                    <div class="inner-info">
+                        <div class="left-image">
+                            <img ng-src="{{image.url}}" src="images/tmp-comp.png" class="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>

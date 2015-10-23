@@ -1,0 +1,162 @@
+<article class="row">
+    <div id="dashboard">
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs">
+            <li class="active"><a href="#/reports/" data-toggle="tab">Graphs</a></li>
+        </ul>
+
+        <!-- Tab panes -->
+        <div class="tab-content">
+            <!-- All sorts of Graphs -->
+            <div class="tab-pane active" id="graphs">
+                <h1>Report Charts</h1>
+                <p></p>
+                <p></p>
+                <div class="filter-row">
+                    <fieldset>
+                        <label>From Date:</label>
+                        <mac-datepicker mac-datepicker-id="input-start-date" mac-datepicker-model="fromChartDate"></mac-datepicker>
+                    </fieldset>
+                    <fieldset>
+                        <label>To Date:</label>
+                        <mac-datepicker mac-datepicker-id="input-start-date" mac-datepicker-model="toChartDate"></mac-datepicker>
+                    </fieldset>
+                    <fieldset>
+                        <label>Charts:</label>
+                        <select ng-model="chartType">
+                            <option value="column">Column</option>
+                            <option value="bar">Bar</option>
+                            <option value="">Line</option>
+                            <option value="bubble">Bubble</option>
+                            <option value="scatter">Scatter</option>
+                            <option value="spline">Spline</option>
+                            <option value="areaspline">Area Spline</option>
+                        </select>
+                    </fieldset>
+                    <fieldset>
+                        <br/>
+                        <button data-ng-click="UpdateDateRangeData();" id="report-submit" class="add-btn green-button">Graph</button>
+                        <img id="spinner" src="./images/spinner.gif" width="30px" height="30px">
+                    </fieldset>
+                    <div class="clearboth"></div>
+                </div>
+
+                <section class="chart-section">
+                    <div>
+                        <h1>Machine population vs Wear</h1>
+
+                        <div class="gray-content-wrap">
+                            <div id="machine-population-wear-chart" class="graph"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <h1>Real Time Inspection Tracker</h1>
+
+                        <div class="gray-content-wrap">
+                            <div id="realtime-inspection-chart" class="graph"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <h1>Life-cycle wear analysis</h1>
+
+                        <div class="gray-content-wrap">
+                            <div id="wear-analysis-chart" class="graph"></div>
+                        </div>
+                    </div>
+                    <div style="display: none;">
+                        <h1>Inspection Performance Gauge</h1>
+
+                        <div class="gray-content-wrap">
+                            <div id="inspection-gauge-monthly-chart" class="graph half-width"></div>
+                            <div id="inspection-gauge-annual-chart" class="graph half-width"></div>
+                            <div class="clearboth"></div>
+                            <div class="chart-float-title">
+                                <div class="title"><h2>Monthly Goal</h2></div>
+                                <div class="title"><h2>Annual Goal</h2></div>
+                                <div class="clearboth"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="display: none;">
+                        <h1>Machine Population</h1>
+
+                        <div class="gray-content-wrap">
+                            <div id="machine-population-chart" class="graph"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <h1>OPPORTUNITIES</h1>
+
+                        <div class="gray-content-wrap">
+                            <div id="opportunities-conversions-chart" class="graph"></div>
+                        </div>
+                    </div>
+                    <div style="display: none;">
+                        <h1>AVERAGE CPH PER MACHINE VS CUSTOMER XYZ CPH</h1>
+
+                        <div class="gray-content-wrap">
+                            <div id="machine-cph-chart" class="graph" style="height:600px;"></div>
+                        </div>
+                    </div>
+                    <div ng-show="ulevel < 2">
+                        <h1>Total Inspections per Dealer</h1>
+
+                        <div class="gray-content-wrap">
+                            <div id="dealer-total-chart" class="graph"></div>
+                        </div>
+                    </div>
+                    <div ng-show="ulevel < 2">
+                        <h1>Dealer Performance</h1>
+
+                        <div class="gray-content-wrap">
+                            <div id="dealer-performance-chart" class="graph"></div>
+                        </div>
+                    </div>
+                    <div ng-show="ulevel < 2">
+                        <h1>Fleet Undercarriage Life Prediction</h1>
+
+                        <div class="gray-content-wrap">
+                            <div id="average-wear-chart" class="graph"></div>
+                        </div>
+                    </div>
+                    <div ng-show="ulevel < 2">
+                        <h1>Total Inspections</h1>
+
+                        <div class="gray-content-wrap">
+                            <div id="total-inspections-chart" class="graph"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <h1>Undercarriage Brands</h1>
+
+                        <div class="gray-content-wrap">
+                            <div id="undercarriage-brands-chart" class="graph"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <h1>Total Customers</h1>
+
+                        <div class="gray-content-wrap">
+                            <div id="total-customers-chart" class="graph"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <h1>Machines</h1>
+
+                        <div class="gray-content-wrap">
+                            <div id="total-machines-chart" class="graph"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <h1>Percentage of Machines Inspected</h1>
+
+                        <div class="gray-content-wrap">
+                            <div id="machines-percentage-chart" class="graph"></div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+        </div>
+    </div>
+</article>

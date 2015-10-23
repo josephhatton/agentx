@@ -1,0 +1,20 @@
+<!--
+<fieldset class="step_cont inspection_type">
+	<legend>InspectionType Details</legend>
+	<strong>Label</strong>
+	<input type="text" ng-model="NewInspectionType.title">
+</fieldset>
+-->
+<div id="fb-inspectiontypebuilder-editfields" style="margin-bottom: 10px;">
+	<label for="tpl-title" style="margin-bottom:5px;">Section Title</label>
+	<input type="text" id="tpl-title" ng-model="NewInspectionType.title" placeholder="name your inspection" style="margin-bottom:5px;">
+</div>
+<ul id="dropped_elements" style="margin-bottom: 10px;">
+	<li ng-repeat="tplobj in NewInspectionType.tasks track by $index" ng-drag-data="tplobj" ng-drop="true" ng-drop-success="MoveTask($index, $data, $event)">
+		<div ng-drag="true" ng-drag-data="tplobj" data-ng-include="GetElemView(tplobj)"></div>
+		<div class="icon-remove" style="position:absolute; top:10px; right:10px;" ng-click="removeInDroppedTasks($index);"></div>
+	</li>
+</ul>
+<div ng-drop="true" id="add_element" ng-drop-success="DropTask($data, $event)">
+	<h3>Drag a Question from the Question Box to add it</h3>
+</div>

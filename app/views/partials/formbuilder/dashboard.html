@@ -1,0 +1,38 @@
+<div id="fb-nav" data-ng-include data-src="'views/partials/formbuilder/nav.html'"></div>
+<div id="fb-dashboard">
+	<p class="align-center welcome">Welcome, Lets Start Building!</p>
+	<p class="align-center description">Use this tool to build custom templates for you and your team. Create templates by organizing inspection types and tasks based upon inspection requirements. Build a template efficiently by customizing preloaded Modustri templates, or create a new template by organizing task widgets such as free form fields, comment boxes, check boxes, dropdowns and image inputs.</p>
+	<p class="align-center" style="margin:20px 0px;">
+		<a class="btn-blue" ng-click="open_createform();">Create a new form</a>
+		<a class="btn-blue" ng-href="#/forms">Build from an existing form</a>
+	</p>
+	<table id="fb-recents" width="100%" class="tbl-purestyle">
+		<caption>
+			Recently added<img id="spinner" src="./images/spinner.gif" width="30px" height="30px" style="display: none;">
+		</caption>
+		<thead>
+			<tr>
+				<th></th>
+				<th>Title</th>
+				<th>Description</th>
+				<th>Type</th>
+				<th>Created On</th>
+			</tr>
+		</thead>
+		<tbody>	
+			<tr ng-repeat="tplobj in ListRecents | limitTo:15">
+				<td width="30px">
+					<a ng-if="tplobj.type=='template'" class="icon-edit" ng-href="#/templates/{{tplobj.id}}"></a>
+					<a ng-if="tplobj.type=='instype'" class="icon-edit" ng-href="#/inspections/{{tplobj.id}}"></a>
+				</td>
+				<td><b>{{tplobj.title}}</td>
+				<td>{{tplobj.description}}</td>
+				<td>
+					<span ng-if="tplobj.type=='template'">Inspection</span>
+					<span ng-if="tplobj.type=='instype'">Section</span>
+				</td>
+				<td ng-bind="tplobj.date"></td>
+			</tr>
+		</tbody>
+	</table>
+</div>

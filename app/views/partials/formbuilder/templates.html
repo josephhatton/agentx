@@ -1,0 +1,25 @@
+<div id="fb-nav" data-ng-include data-src="'views/partials/formbuilder/nav.html'">
+</div>
+
+<div id="fb-header">
+	<div id="fb-header-main">
+		Inspection Builder
+		<input type="button" id="tpl-save" value="Save As New" ng-click="SaveTemplate(true)" class="btn-blue" style="float:right; margin-left:20px;" ng-if="!IsNewTemplate">
+		<input type="button" id="tpl-save" value="Save" ng-click="SaveTemplate(false)" class="btn-blue" style="float:right;">		
+		<span ng-if="!IsNewTemplate">#{{NewTemplate.id}}</span>
+		<img id="spinner" src="./images/spinner.gif" width="30px" height="30px" style="display: none;">
+	</div>
+	<div id="fb-header-box">
+		Section Box
+		<div class="fb-box-filter inspectiontype-box">
+			<input type="input" class="fb-box-filter-keyword" ng-model="keywordFilterInspectionTypeBox" />
+			<div class="fb-box-filter-btn"></div>
+		</div>
+	</div>
+</div>
+
+<div id="fb-templatebuilder">
+	<div id="fb-templatebuilder-edit" data-ng-include data-src="'views/partials/formbuilder/templates/template.edit.html'"></div>
+	<div id="fb-templatebuilder-view" data-ng-include data-src="'views/partials/formbuilder/templates/template.view.html'" ng-init="Template=NewTemplate;" class="view-template"></div>
+	<div id="fb-templatebuilder-box" data-ng-include data-src="'views/partials/formbuilder/templates/box.html'"></div>
+</div>

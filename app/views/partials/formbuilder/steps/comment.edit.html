@@ -1,0 +1,8 @@
+<fieldset class="step_comment task_type">
+	<legend>Comment</legend>
+	<strong>Question presented when requesting comment</strong>
+	<input type="text" ng-model="Step.comment.directions">
+	<strong>Example results</strong><br>
+	<span ng-bind="Step.comment.value"></span>
+	<button ng-click="RemoveWidget($index,'comment')" class="rem_widget">Remove</button>
+</fieldset>

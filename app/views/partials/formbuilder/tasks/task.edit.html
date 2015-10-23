@@ -1,0 +1,11 @@
+<div class="task-id" ng-if="mode=='edit'">Question<br>#{{task.id}}</div>
+<div class="task-id" ng-if="mode=='new'">Create a New Question</div>
+<div class="task-fields">
+	<strong>Question Name</strong>
+	<input type="text" ng-model="task.name" />
+	<strong>Required</strong>
+	<input ng-model="task.required" ng-value="0" type="radio" name="task-req" checked> No
+	<input ng-model="task.required" ng-value="1" type="radio" name="task-req" checked> Yes
+	<strong>Section</strong>
+	<select ng-model="task.inspection_type_id" ng-options="Opt.id as Opt.title for Opt in instypes"></select>
+</div>

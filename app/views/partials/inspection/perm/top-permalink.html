@@ -1,0 +1,136 @@
+<article class="info-row">
+    <section id="section-details" class="row animated fadeIn">
+        <div class="col-md-2 padding-left-0" style="padding-top: 33px;">
+            <a href="{{ Ins.inspection_obj.machine.img_full }}" target="_blank" data-modal="lightbox" class="bordered-image main-image">
+                <img ng-src="{{ Ins.inspection_obj.machine.img }}" src="images/tmp.png" />
+            </a>
+        </div>
+
+        <div class="col-md-3 padding-left-0">
+            <table class="table tbl-details">
+                <caption>Inspection Information</caption>
+                <tbody>
+                    <tr>
+                        <td class="details-title">IN Number</td>
+                        <td class="details-value">{{ Ins.id }}</td>
+                    </tr>
+                    <tr>
+                        <td class="details-title">Inspector</td>
+                        <td class="details-value">
+                            <span ng-show="Ins.inspection_obj.user.username">{{ Ins.inspection_obj.user.username }}</span>
+                            <span ng-show="!Ins.inspection_obj.user.username">No Data</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="details-title">Inspection Type</td>
+                        <td class="details-value">
+                            <span ng-show="Ins.inspection_obj.inspectionTypeGET==1">GET</span>
+                            <span ng-show="Ins.inspection_obj.inspectionTypeUCI==1">UCI</span>
+                            <span ng-show="Ins.inspection_obj.inspectionTypeGeneral==1">General</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="details-title">Inspection Date</td>
+                        <td class="details-value">
+                            <span ng-show="Ins.datestring">{{ Ins.datestring }}</span>
+                            <span ng-show="!Ins.datestring">No Data</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="details-title">Maintenance Date</td>
+                        <td class="details-value">
+                            <span ng-show="Ins.inspection_obj.maintenance_datestring">{{ Ins.inspection_obj.maintenance_datestring }}</span>
+                            <span ng-show="!Ins.inspection_obj.maintenance_datestring">No Data</span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="col-md-2 padding-left-0">
+            <table class="table tbl-details">
+                <caption>Jobsite Information</caption>
+                <tbody>
+                    <tr>
+                        <td class="details-title">Address</td>
+                        <td class="details-value">{{ Ins.inspection_obj.jobsite.address }}</td>
+                    </tr>
+                    <tr>
+                        <td class="details-title">Latitude</td>
+                        <td class="details-value">{{ Ins.inspection_obj.jobsite.lat }}</td>
+                    </tr>
+                    <tr>
+                        <td class="details-title">Longitude</td>
+                        <td class="details-value">{{ Ins.inspection_obj.jobsite.lon }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="col-md-5 padding-left-0 padding-right-0">
+            <table class="table tbl-details">
+                <caption>Machine Information</caption>
+                <tbody>
+                    <tr>
+                        <td class="details-title">Serial Number</td>
+                        <td class="details-value">
+                            <a href="#/machines/{{ Ins.inspection_obj.machine.id }}">{{ Ins.inspection_obj.machine.serial }}</a>
+                        </td>
+                        <td class="details-title">Hour Meter Operative</td>
+                        <td class="details-value">
+                            <span ng-show="Ins.inspection_obj.results.hour_meter_operative=='yes'">Yes</span>
+                            <span ng-show="Ins.inspection_obj.results.hour_meter_operative=='no'">No</span>
+                            <span ng-show="!Ins.inspection_obj.results.hour_meter_operative">No Data</span>
+                        </td>
+                    <tr>
+                        <td class="details-title">Manufacturer</td>
+                        <td class="details-value">
+                            <span ng-show="Ins.inspection_obj.machine.manufacturer_name">{{ Ins.inspection_obj.machine.manufacturer_name }}</span>
+                            <span ng-show="!Ins.inspection_obj.machine.manufacturer_name">No Data</span>
+                        </td>
+                        <td class="details-title">Hours Per Week</td>
+                        <td class="details-value">
+                            <span ng-show="Ins.inspection_obj.machine.hours_per_week">{{ Ins.inspection_obj.machine.hours_per_week }}</span>
+                            <span ng-show="!Ins.inspection_obj.machine.hours_per_week">No Data</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="details-title">Model</td>
+                        <td class="details-value">
+                            <span ng-show="Ins.inspection_obj.machine.model">{{ Ins.inspection_obj.machine.model }}</span>
+                            <span ng-show="!Ins.inspection_obj.machine.model">No Data</span>
+                        </td>
+                        <td class="details-title">Odometer Reading</td>
+                        <td class="details-value">
+                            <span ng-show="Ins.inspection_obj.machine.odometer_reading">{{ Ins.inspection_obj.machine.odometer_reading }}</span>
+                            <span ng-show="!Ins.inspection_obj.machine.odometer_reading">No Data</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="details-title">Customer</td>
+                        <td class="details-value">
+                            <span ng-show="Ins.inspection_obj.customer.name">{{ Ins.inspection_obj.customer.name }}</span>
+                            <span ng-show="!Ins.inspection_obj.customer.name">No Data</span>
+                        </td>
+                        <td class="details-title">Reverse Odometer</td>
+                        <td class="details-value">
+                            <span ng-show="Ins.inspection_obj.reverse_odometer_reading">{{ Ins.inspection_obj.reverse_odometer_reading }}</span>
+                            <span ng-show="!Ins.inspection_obj.reverse_odometer_reading">No Data</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="details-title">Unit #</td>
+                        <td class="details-value">
+                            <span ng-show="Ins.inspection_obj.machine.equipment_id">{{ Ins.inspection_obj.machine.equipment_id }}</span>
+                            <span ng-show="!Ins.inspection_obj.machine.equipment_id">No Data</span>
+                        </td>
+                        <td class="details-title">Hour Meter Reading</td>
+                        <td class="details-value">
+                        <span ng-show="Ins.inspection_obj.hour_meter_reading">{{ Ins.inspection_obj.hour_meter_reading }}</span>
+                        <span ng-show="!Ins.inspection_obj.hour_meter_reading">No Data</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+</article>

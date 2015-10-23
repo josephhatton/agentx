@@ -1,0 +1,64 @@
+<div class="machinelistpage">
+
+<nav id="section-navbtns" class="sub-nav-btns">    
+    <div class="row">
+		<div class="col-xs-12 col-md-8 nopadding">
+			<a href="#/machines/add" class="green-button fullwidth align-center" style="float: none;">Create New Machine</a>
+		</div>
+		<div class="col-xs-12 col-md-4 nopadding sub-search">
+            <input type="text" class="rounded3px input160w alignright" md-Autocomplete-Search="machines" placeholder="Search Machines" style="margin-right:0px; width:300px !important;" />
+		</div>
+	</div>
+</nav>
+
+<div id="section-machinelist">
+	<table id="tbl-machinelist" width="100%" ng-init="predicate='latest_inspection';reversed=true" class="gray-thead">
+		<thead>
+			<tr>
+				<th colspan="2" style="text-align: center;">Rating</th>
+		        <th sort predicate="'serial'" by="predicate" reversed="reversed">Serial Number</th>
+		        <th sort predicate="'manufacturer_name'" by="predicate" reversed="reversed">Man / Model</th>
+		        <th sort predicate="'CustomerData.name'" by="predicate" reversed="reversed">Customer</th>
+		        <th sort predicate="'latest_inspection'" by="predicate" reversed="reversed">Last Inspected</th>
+				<th>&nbsp;</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr class="animated fadeIn" ng-repeat="Machine in Machines | orderBy:predicate:reversed">
+				<td style="width: 80px;">
+		            <a href="{{ Machine.img_full }}" target="_blank" data-modal="lightbox" ng-show="Machine.img">
+		                <img ng-src="{{ Machine.img }}" class="machine-img" src="images/tmp.png" />
+		            </a>
+		            <img src="images/tmp.png" ng-hide="Machine.img" class="machine-img machine-noimg noimg" />
+		        </td>
+		        <td style="width: 80px; text-align: center; border-right: solid 1px #d2d2d2;">
+		        	<span class="machine-color machine-color-{{Machine.color}}"></span>
+		        	{{ Machine.rating }}
+		        </td>
+		        <td>
+		        	<a ng-bind="Machine.serial" ng-href="#/machines/{{ Machine.id }}"></a>
+		        </td>
+		        <td>
+		        	{{ Machine.manufacturer_name }} {{ Machine.model }} 
+		        </td>
+				<td>
+					<a ng-href="#/customers/{{ Machine.CustomerData.id }}" ng-bind="Machine.CustomerData.name"></a>
+				</td>
+				<td>
+					<span ng-show="Machine.last_inspector">{{ Machine.last_inspector }} - </span>
+					<span ng-show="Machine.latest_inspection">{{ Machine.latest_inspection }}</span>
+				</td>			
+				<td style="width: 70px; text-align: center;">
+					<a class="icon-white-button icon-white-button-scheduleinspection" href="#/inspections/add/{{Machine.serial}}"></a>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+
+<div id="section-pagination" class="pagination-wrapper">
+    <div class="pagination alignright" md-Pagination></div>
+</div>
+<script src="./scripts/ui/modals.js"></script>
+
+</div>

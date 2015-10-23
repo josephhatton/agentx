@@ -1,0 +1,18 @@
+<section class="address-fields">
+    <div class="half-width">
+        <div>
+            <label>Latitude</label>
+
+            <div id="lat" class="location-field" ng-bind="Ins.inspection_obj.jobsite.lat"></div>
+        </div>
+        <div>
+            <label>Longitude</label>
+
+            <div id="lon" class="location-field" ng-bind="Ins.inspection_obj.jobsite.lon"></div>
+        </div>
+    </div>
+</section>
+
+<div class="map">
+    <div id="map-canvas" md-Map></div>
+</div>

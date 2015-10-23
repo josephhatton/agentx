@@ -1,0 +1,13 @@
+<div class="modal-body">
+    <div class="btn-close" ng-click="cancel()"></div>
+    <p class="align-center" style="color:black; font-size: 14px; padding: 10px 0px;">
+        What do you want to build?
+    </p>
+	<p class="align-center">
+	    <label class="form-type" ng-model="formType.selected" btn-radio="'template'">Inspection</label>
+	    <label class="form-type" ng-model="formType.selected" btn-radio="'inspectiontype'">Section</label>
+	</p>
+    <p class="align-center" style="margin-top: 10px;">
+        <button class="btn-blue" ng-click="ok()">Start Building</button>    
+    </p>
+</div>

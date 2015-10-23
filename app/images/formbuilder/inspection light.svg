@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="102px" height="110px" viewBox="0 0 102 110" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    <!-- Generator: Sketch 3.1 (8751) - http://www.bohemiancoding.com/sketch -->
+    <title>inspection light</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+        <g id="Icons-Light" sketch:type="MSLayerGroup" transform="translate(-166.000000, 0.000000)" stroke="#FFFFFF">
+            <g id="inspection" transform="translate(166.000000, 0.000000)" sketch:type="MSShapeGroup">
+                <path d="M88,88 L88,110 L0,110 L0,22 L14,22 L14,0 L102,0 L102,88 L88,88 Z" id="Rectangle-4" stroke-width="4"></path>
+                <rect id="Rectangle-4" stroke-width="4" x="14" y="0" width="88" height="88"></rect>
+                <path d="M28.5831233,18.2612677 L87,18.2612678" id="Path-9" stroke-width="8"></path>
+                <path d="M28.5831233,42.2612677 L87,42.2612678" id="Path-10" stroke-width="8"></path>
+                <path d="M28.5831233,66.2612677 L87,66.2612678" id="Path-11" stroke-width="8"></path>
+            </g>
+        </g>
+    </g>
+</svg>

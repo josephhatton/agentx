@@ -1,0 +1,122 @@
+<section class="column-wrapper">
+    <div class="col1">
+        <div>
+            <div><img class="machine-thumb" ng-src="{{ Ins.inspection_obj.machine.img }}"/></div>
+            <div><label>Machine Serial #</label>
+                <input type="text" md-Autocomplete-Search="inspection-machines" class="search-serial"
+                    placeholder="Search for Serial..." />
+            </div>
+            <div ng-bind="Ins.inspection_obj.machine.manufacturer_name"></div>
+            <div ng-bind="Ins.inspection_obj.machine.model"></div>
+            <div ng-bind="Ins.inspection_obj.machine.equipment_id"></div>
+        </div>
+    </div>
+    <div class="col2">
+        <div>
+            <ul>
+                <li><a ng-href="#customers/{{ Ins.inspection_obj.customer.id }}"
+                    ng-bind="Ins.inspection_obj.customer.name | truncate"></a></li>
+                <li ng-bind="Ins.inspection_obj.customer.phone">&nbsp;</li>
+                <li><a ng-href="mailto:{{ Ins.inspection_obj.customer.email }}"
+                    ng-bind="Ins.inspection_obj.customer.email"></a></li>
+            </ul>
+        </div>
+        <div>
+            <div class="logo-image">
+                <img ng-show="Ins.dealer_img_url" ng-src="{{ Ins.dealer_img_url }}" alt="Dealer Logo"/>
+            </div>
+            <div><label>Inspection Date</label>
+                <mac-datepicker id="last-inspection-date" mac-datepicker-id="last-inspection-date"
+                    mac-datepicker-default-date="{{ today_ds }}"
+                    mac-datepicker-model="Ins.datestring">
+                </mac-datepicker>
+            </div>
+            <div>
+                <label>Maintenance Date</label>
+
+                <div>
+                    <mac-datepicker id="maintenance-date" mac-datepicker-default-date="{{ today_ds }}"
+                        mac-datepicker-model="Ins.inspection_obj.maintenance_datestring">
+                    </mac-datepicker>
+                </div>
+            </div>
+            <div>
+                <label for="undercarriage-code">Undercarriage Code</label>
+
+                <div>
+                    <input type="text" name="undercarriage-code" id="undercarriage-code"
+                        ng-model="Ins.inspection_obj.machine.under_carriage_code">
+                </div>
+            </div>
+            <div>
+                <label for="undercarriage-brand">Undercarriage Brand</label>
+
+                <div>
+                    <select
+                        ng-model="Ins.inspection_obj.machine.under_carriage_brand"
+                        ng-options="uc_brand.name for uc_brand in UndercarriageBrands">
+                        <option value="">Undercarriage Brand...</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col3">
+        <div>
+            <div>
+                <label for="hour-meter-reading">Hour Meter Reading</label>
+
+                <div>
+                    <input type="number" ng-model="Ins.inspection_obj.hour_meter_reading"
+                        name="hour-meter-reading" id="hour-meter-reading"/></div>
+            </div>
+            <div>
+                <label for="odometer-reading">Odometer Reading</label>
+
+                <div>
+                    <input type="number" name="odometer-reading" id="odometer-reading"
+                        ng-model="Ins.inspection_obj.machine.odometer_reading"/>
+                </div>
+            </div>
+            <div>
+                <div>
+                    <div>
+                        <label for="hours-per-week">Hours Per Week</label>
+                        <select ng-model="Ins.inspection_obj.hours_per_week">
+                            <option value="40">40</option>
+                            <option value="80">80</option>
+                            <option value="120">120</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div>
+                    <label>Inspector</label>
+                    <select ng-model="Ins.inspection_obj.user.id"
+                        ng-options="user.id as user.username for user in UserList">
+                    </select>
+                </div>
+            </div>
+            <div class="toggles clearboth">
+                <label>Inspection Type</label>
+
+                <div>
+                    <label>UCI</label>
+
+                    <div md-Toggle="inspectionTypeUCI"></div>
+                </div>
+                <div>
+                    <label>GET</label>
+
+                    <div md-toggle="inspectionTypeGET"></div>
+                </div>
+                <div>
+                    <label>General</label>
+
+                    <div md-toggle="inspectionTypeGeneral"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

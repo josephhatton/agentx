@@ -1,0 +1,40 @@
+<nav class="sub-nav-btns inspection">
+    <div class="half-width-block sub-nav-block">
+        <a href="#/machines/add" class="add-btn green-button">Add Machine <span class="add-machine"></span></a>
+        <a href="#/customers/add" class="add-btn green-button">Add Customer <span class="add-customer"></span></a>
+        <a href="#/inspections/add" class="add-btn green-button">Add Inspection <span class="add-inspection"></span></a>
+
+        <div class="clearboth"></div>
+    </div>
+</nav>
+<div id="settings-view animated fadeIn">
+    <form id="settings-form">        
+        <h2>HDE Portal Settings</h2>
+        <article class="info-row row white-gray-bg">
+            <a ng-click="saveSettings()" class="green-button save-settings">Save Settings</a>
+            <div class="info-block col-md-3">
+                <h4>Dealer Image</h4>
+                <div class="info-block image" ng-init="new_image = false">
+                    <img ng-hide="new_image" ng-src="{{ Dealer.img }}" src="images/tmp.png"/>
+                    <div ng-show="new_image" md-image-upload="customer"></div>
+                    <div id="image-btn-wrapper">
+                        <a href="" ng-click="new_image = !new_image" class="image-upload-btn">Upload new image</a>
+                        <a href="" ng-show="new_image" class="remove-image">Remove image</a>
+                    </div>
+                </div>
+            </div>
+            <div class="info-block col-md-3">
+                <label>Dealer Name: </label>
+                <h3>{{Dealer.name}}</h3>
+            </div>
+            <div class="info-block col-md-3">
+            	<!--
+                <div>
+                    <label>Metric Measurements</label>
+                    <div md-toggle="show_metric"></div>
+                </div>
+               -->
+            </div>
+        </article>
+    </form>
+</div>

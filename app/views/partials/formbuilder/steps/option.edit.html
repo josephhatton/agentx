@@ -1,0 +1,17 @@
+<fieldset class="step_option task_type">
+	<legend>Option</legend>
+	<div class="element_cont">
+		<strong>Directions</strong>
+		<input type="text" ng-model="Step.option.directions">
+		<strong>Add Option</strong>
+		<input type="text" ng-model="Step.TempOpt" placeholder="Enter new option">
+		<button ng-click="AddOpt(Step)">Add</strong>
+	</div>
+	<div class="element_cont">
+		<strong>Reference Key</strong>
+		<div ng-repeat="Opt in Step.option.option_choices track by Opt" class="element_opt">
+			{{ $index }} - {{ Opt }} <button ng-click="RemoveOption($index, Step)" class="rem_widget">X</button>
+		</div>
+	</div>
+	<button ng-click="RemoveWidget($index,'option')" class="rem_widget">Remove</button>
+</fieldset>

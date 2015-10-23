@@ -1,0 +1,12 @@
+<div class="modal-body">
+    <div class="btn-close" ng-click="cancel()"></div>
+    
+    <div data-ng-include data-src="'views/partials/formbuilder/tasks/task.edit.html'" class="task-edit"></div>
+    
+    <div ng-repeat="step in task.instructions.steps" data-ng-include data-src="'views/partials/formbuilder/tasksteps/taskstep.edit.html'" class="task-step"></div>
+
+    <div class="task-actionbar">
+		<input type="button" value="Add Step" ng-click="step_add()" class="btn-blue" style="float:left;">
+    	<input type="button" value="Save Question" ng-click="task_save()" class="btn-blue" style="float:right;">
+    </div>
+</div>

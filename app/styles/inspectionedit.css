@@ -1,0 +1,209 @@
+.inspectionedit .row{
+  margin: 0px;
+}
+
+.inspectionedit .popover{
+  line-height: 18px;
+}
+
+.inspectionedit .icon-white-button.icon-white-button-saveinspection{
+  background: url(../images/save_inactive.png);
+}
+.inspectionedit .icon-white-button.icon-white-button-saveinspection:hover{
+  background: url(../images/save_hover.png);
+}
+
+.inspectionedit .icon-white-button.icon-white-button-cancel{
+  background: url(../images/cancel_inactive.png);
+}
+.inspectionedit .icon-white-button.icon-white-button-cancel:hover{
+  background: url(../images/cancel_hover.png);
+}
+
+.inspectionedit #section-edit-details{
+  padding: 0px 30px;
+  margin: 10px 0px;
+}
+
+.inspectionedit .details-value{
+  line-height: 24px;
+}
+
+.inspectionedit .details-value label{
+
+}
+
+.inspectionedit .details-value .onoffswitch{
+
+}
+
+.inspectionedit input.search-serial{
+  margin: 0px !important;
+  max-width: 100%;
+}
+
+.inspectionedit .tbl-details tr:nth-child(even){
+  background: #f9f9f9 !important;
+}
+
+.inspectionedit .inspectiontype-toggle{
+  float: left;
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.inspectionedit #section-edit-feature{
+  padding: 0px 30px;
+  margin: 10px 0px 10px 0px;
+}
+
+.inspectionedit #section-edit-components{
+  padding: 20px 30px;
+}
+
+.inspectionedit .comp{
+  margin: 0px 0px 30px 0px;
+  border-radius: 0px;
+  border: 0px;
+}
+
+.inspectionedit .comp-bar{
+  border: solid 2px #d8d8d8;
+  border-radius: 3px;
+  line-height: 30px;
+}
+
+.inspectionedit .comp-title{
+  color: #141414;
+  font-weight: bold;
+  font-size: 13px;
+}
+
+.inspectionedit .part-add{
+  float: none;
+  padding: 0px 40px;
+  height: auto;
+  line-height: 30px;
+}
+
+.inspectionedit .comp-info{
+  padding: 20px 0px 20px 0px;
+}
+
+.inspectionedit .comp-part{
+  margin: 10px 0px;
+}
+
+.inspectionedit .part-remove{
+  width: 40px;
+  height: 30px;
+}
+
+.inspectionedit .comp-info-row-content{
+  padding: 10px 0px 0px 0px;
+}
+
+.inspectionedit .comp-tool-icon{
+  min-height: 16px;
+}
+
+.inspectionedit .comp-tool-installdatestring{
+  width: 100% !important;
+}
+
+.inspectionedit .comp-tool{
+  margin-top: 7px;
+}
+
+.inspectionedit .comp-metric{
+  margin-top: 7px;
+}
+
+.inspectionedit .comp-note{
+  padding-top: 10px;
+}
+
+.inspectionedit #section-edit-location{
+  padding: 0px 30px;
+  margin: 10px 0px 10px 0px;
+}
+
+.inspectionedit #section-general{
+  
+}
+
+.inspectionedit .template-type-task-step-content-item{
+	margin: 10px 0px;
+}
+
+.inspectionedit .template-type-task-step-content-item .item-value input[type=text]{
+	width: 500px;
+	display: inline-block;
+	margin-right: 10px;
+}
+
+.inspectionedit .template-type-task-step-content-item .item-value select{
+	width: 500px;
+	display: inline-block;
+	margin-right: 10px;
+}
+
+.inspectionedit .template-type-task-step-content-item .item-value input[type=radio]{
+	margin-top: 0px;
+	vertical-align: middle;
+}
+
+.inspectionedit .template-type-task-step-content-item .template-type-task-step-optionradio{
+	display: block;
+}
+
+.inspectionedit .template-type-task-step-content-item .template-type-task-step-attentiontype-radios{
+	margin-bottom: 10px;
+}
+
+.inspectionedit .photo-upload{
+  	display: inline-block;
+  	margin: 10px 20px 10px 0px;
+}
+
+.inspectionedit .photo-upload .upload-image-wrapper{
+
+}
+
+.inspectionedit .photo-upload .upload-image-wrapper img{
+	width: auto;
+	height: 80px; 
+}
+
+.inspectionedit .photo-upload .template-type-task-step-photo{
+	width: auto;
+	height: 80px;
+	margin-right: 0px;
+}
+
+.inspectionedit .photo-upload div[md-image-upload]{
+	width: 80px;
+	height: 80px;	
+}
+
+.inspectionedit .photo-upload .image-btn-wrapper{
+		
+}
+
+.inspectionedit .photo-upload .image-upload-btn{
+	display: inline-block;
+	float: none;
+}
+
+.inspectionedit .photo-upload .remove-image{
+	display: inline-block;
+	float: none;
+	margin-top: 8px;
+}
+
+.inspectionedit .photo-upload .delete-photo{	
+	display: inline-block;
+	vertical-align: top;
+	margin-top: 15px;
+	margin-left: 20px;
+}

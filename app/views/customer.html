@@ -1,0 +1,308 @@
+<nav class="sub-nav-btns inspection">
+    <div class="seventy-width-block sub-nav-block">
+        <a href="#/machines/add" class="add-btn green-button">Add Machine <span class="add-machine"></span></a>
+        <a href="#/customers/add" class="add-btn green-button">Add Customer <span class="add-customer"></span></a>
+        <a href="#/inspections/add" class="add-btn green-button">Add Inspection <span class="add-inspection"></span></a>
+
+        <div class="clearboth"></div>
+    </div>
+    <div class="thirty-width-block sub-nav-block" style="float: right;">
+        <a class="noimg-btn-right green-button" ng-click="deleteCustomer()">Delete Customer</a>
+        <a ng-href="#/customers/{{ Customer.id }}/edit" class="noimg-btn-right green-button">Edit Customer</a>
+        <img id="spinner" src="./images/spinner.gif" width="30px" height="30px">
+    </div>
+    <div class="thirty-width-block sub-nav-block" id="score_dates">
+        <label for="months_past">Past</label>
+        <select id="months_past" ng-model="past" ng-change="RefreshScoreboard()" style="width: 80px; margin-bottom: 0;">
+            <option value="3">3 Months</option>
+            <option value="6">6 Months</option>
+            <option value="12" selected="selected">1 Year</option>
+            <option value="24">2 Years</option>
+            <option value="36">3 Years</option>
+        </select>
+        <label for="months_fut">Future</label>
+        <select id="months_fut" ng-model="fut" ng-change="RefreshScoreboard()" style="width: 80px;">
+            <option value="3">3 Months</option>
+            <option value="6">6 Months</option>
+            <option value="12" selected="selected">1 Year</option>
+            <option value="24">2 Years</option>
+            <option value="36">3 Years</option>
+        </select>
+    </div>
+</nav>
+<div class="white-gray-bg animated fadeIn">
+    <article class="info-row">
+        <div class="info-block image">
+            <a ng-show="Customer.img_full" ng-href="{{ Customer.img_full }}" data-modal="lightbox">
+                <img width="140" ng-src="{{ Customer.img }}"/>
+            </a>
+            <img width="140" ng-hide="Customer.img" src="images/default_customer.png"/>
+        </div>
+        <div class="info-block unit-info">
+            <h1 ng-bind="Customer.name"></h1>
+            <div class="info-details" style="width: 260px;">
+                <ul>
+                    <li>Total Machines:</li>
+                    <li>Total Inspections:</li>
+                </ul>
+                <ul>
+                    <li ng-bind="Customer.total_machines"></li>
+                    <li ng-bind="Customer.total_inspections"></li>
+                </ul>
+            </div>
+        </div>
+        <div class="info-block customer">
+            <div class="info-details short-detail-space">
+                <label class="aligncenter">Last Inspection:</label>
+                <h3 ng-show="Customer.last_inspected" class="aligncenter" ng-bind="Customer.last_inspected"></h3>
+            </div>
+        </div>
+        <div class="info-block">
+            <div class="info-details short-detail-space">
+                <label>Phone:</label>
+	                <h3 ng-bind="Customer.phone"></h3>
+                <label>Email:</label>
+	                <h3 ng-bind="Customer.email"></h3>
+            </div>
+            <fieldset class="info-details short-detail-space">
+                <legend>Calendar Legend</legend>
+                <ul>
+                    <li><img src="/images/formbuilder/ipad-tools.svg" style="height: 30px;width: auto;"> Completed inspection performed this month</li>
+                    <li><img src="/images/formbuilder/green-arrow.svg" style="height: 20px;width: auto;"> This machine was projected to be 70% this month</li>
+                    <li><img src="/images/formbuilder/orange-arrow.svg" style="height: 20px;width: auto;"> This machine was projected to be 100% this month</li>
+                    <li><img src="/images/formbuilder/red-arrow.svg" style="height: 20px;width: auto;"> This machine is projected to be 120% worn this month</li>
+                </ul>
+            </fieldset>
+        </div>
+        <div class="clearboth"></div>
+    </article>
+
+    <article class="info-row">
+        <div class="report-filter-cont">
+            <div class="rl">
+                <label for="report_type">Report Type : </label>
+                <select id="report_type" name="report_type" ng-model="report_type" ng-options="report_type.id as report_type.label for report_type in ReportTypeList"></select>
+            </div>
+            <div class="rr">
+                <a class="green-button button-small" data-ng-click="createReport(report_type)">Report</a>
+            </div>
+        </div>
+        <div class="clearboth"></div>
+    </article>
+
+    <div style="overflow: scroll;width: auto;margin:0;">
+        <table id="scoreboard" ng-init="predicate='last_inspected';reversed=true" class="scoreboard green-list-header data-display">
+            <thead>
+                <tr>
+                    <th class="aligncenter scorebrdrlef-solid" style="min-width: 40px;"><input type="checkbox" ng-model="SelectedAll" ng-click="CheckAll()"></th>
+                    <th class="aligncenter one-twen" sort predicate="'serial'" by="predicate" reversed="reversed">Serial #</th>
+                    <th class="aligncenter one-twen" sort predicate="'under_carriage_brand'" by="predicate" reversed="reversed">Make</th>
+                    <th class="aligncenter one-twen" sort predicate="'model'" by="predicate" reversed="reversed">Model</th>
+                    <th class="aligncenter one-twen" sort predicate="'equipment_id'" by="predicate" reversed="reversed">Unit</th>
+                    <th class="aligncenter one-twen" sort predicate="'last_inspected'" by="predicate" reversed="reversed">Last Inspection</th>
+                    <th class="aligncenter one-twen" sort predicate="'part_manuf'" by="predicate" reversed="reversed">UCB</th>
+                    <!-- <th class="aligncenter">UC Performance</th> -->
+                    <!--<th sort predicate="'last_inspection.inspection_obj.jobsite.name'" by="predicate" reversed="reversed">Location Title</th>-->
+                    <!-- <th sort predicate="'rating_value'" by="predicate" reversed="reversed">Rating</th> -->
+                    <th ng-repeat="Month in Months" class="aligncenter scorebrdrleft-dotted scr_mon_hdr" ng-class="{true:'curmonth',false:'scoremonth'}[Month.active]">{{ Month.label }}</th>
+                    <th class="aligncenter scorenotes scorebrdrleft-dotted">Notes</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="scoreboard_machine_row" ng-repeat="Machine in Customer.MachineData | filter: { serial: serial_filter, model: model_filter } | orderBy:predicate:reversed">
+                    <td class="aligncenter"><input type="checkbox" id="mach_{{Machine.id}}" value="{{Machine.id}}"></td>
+                    <td class="aligncenter scorebrdrleft-solid"><a ng-href="#/machines/{{ Machine.id }}" ng-bind="Machine.serial"></a></td>
+                    <td class="aligncenter scorebrdrleft-solid">{{Machine.part_manuf}}</td><!-- Fix, needs to ref Machine.manufacturer_id-->
+                    <td class="aligncenter scorebrdrleft-solid" ng-bind="Machine.model"></td>
+                    <td class="aligncenter scorebrdrleft-solid" ng-bind="Machine.equipment_id" nowrap></td>
+
+                    <td class="aligncenter scorebrdrleft-solid">
+                        <span ng-bind="Machine.last_inspected"></span><br>
+                        <span ng-bind="Machine.rating" class="{{Machine.bgcolor}}"></span>
+                    </td>
+
+                    <td class="aligncenter scorebrdrleft-solid" ng-bind="Machine.under_carriage_brand"></td>
+                    <!--
+                    <td class="aligncenter scorebrdrleft-solid">
+                        <span class="scph_perf">SCPH $-.--</span>
+                        <span class="acph_perf">ACPH $-.--
+                        <span ng-show="{{ Machine.id%2 ? true : false }}" class="acph_prc acph_bd">&darr; --%</span>
+                        <span ng-show="{{ Machine.id%2 ? false : true }}" class="acph_prc acph_grn">&uarr; --%</span>
+                        </span>
+                    </td>
+                    -->
+                    <td ng-repeat="Month in Months" class="aligncenter scorebrdrleft-solid scoremonth" ng-class="{true:'curmonth',false:'scoremonth'}[Month.active]"  ng-click="MachineSummaryModal(Machine.id, Month.idp)">
+                        <!-- Month cell -->
+                        <div class="month_status_bsfix"><!-- I frown upon divs in td's but this is necessary for bootstrap.ui popovers -- JJR -->
+                            <span class="month_status" id="stat_{{Machine.id}}_{{Month.idp}}">
+                                <span id="stat_{{Machine.id}}_{{Month.idp}}_insp"></span>
+                            </span>
+                            <span class="month_actions" id="mon_ac_{{Machine.id}}_{{Month.idp}}" style="display: block;width:auto; margin-left: 0; margin-right: 0;">
+                                &nbsp;
+                            </span>
+                        </div>
+                    </td>
+                    <td class="aligncenter scorebrdrleft-solid scorenotes">
+                        <!--
+                        <span class="noteicon" style="cursor:pointer;" onclick="alert('UC performance data\nis for demo purposes only.\nOther data is accurate.');">N</span>
+                        -->
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Report Related Parts -->
+    <div id="report_cont_fleet" style="display: none;">
+        <div class="customer-report-container">
+            <h2>Fleet Summary</h2>
+            <table class="data-display" style="width:100%">
+                <tr>
+                    <th>Customer</th>
+                    <td ng-repeat="ReportData in ReportSummary">{{ReportData.customer}}</td>
+                </tr>
+                <tr>
+                    <th>Model</th>
+                    <td ng-repeat="ReportData in ReportSummary">{{ReportData.model}}</td>
+                </tr>
+                <tr>
+                    <th>Serial Number</th>
+                    <td ng-repeat="ReportData in ReportSummary">{{ReportData.serial}}</td>
+                </tr>
+                <tr>
+                    <th>Equipment Number</th>
+                    <td ng-repeat="ReportData in ReportSummary">{{ReportData.equipment_id}}</td>
+                </tr>
+                <tr>
+                    <th>Inspection Date</th>
+                    <td ng-repeat="ReportData in ReportSummary">{{ReportData.last_inspected}}</td>
+                </tr>
+                <tr>
+                    <th>Next Inspection Date</th>
+                    <td ng-repeat="ReportData in ReportSummary">{{ReportData.next_inspection_date}}</td>
+                </tr>
+                <tr>
+                    <th>Hours</th>
+                    <td ng-repeat="ReportData in ReportSummary">{{ReportData.hour_meter_reading}}</td>
+                </tr>
+                <tr>
+                    <th>Hours Per Week</th>
+                    <td ng-repeat="ReportData in ReportSummary">{{ReportData.hours_per_week}}</td>
+                </tr>
+                <tr>
+                    <th>Job Site</th>
+                    <td ng-repeat="ReportData in ReportSummary">{{ReportData.jobsite}}</td>
+                </tr>
+                <tr>
+                    <th>Bushings Turned</th>
+                    <td ng-repeat="ReportData in ReportSummary">{{ReportData.bushing_turned}}</td>
+                </tr>
+                <tr>
+                    <th class="hr">Percent Worn</th>
+                    <td ng-repeat="ReportData in ReportSummary" class="hr"></td>
+                </tr>
+                <tr>
+                    <th>Links</th>
+                    <td ng-repeat="ReportData in ReportSummary">{{ReportData.percent_worn.links}}</td>
+                </tr>
+                <tr>
+                    <th>Bushings</th>
+                    <td ng-repeat="ReportData in ReportSummary">{{ReportData.percent_worn.bushings}}</td>
+                </tr>
+                <tr>
+                    <th>Shoes</th>
+                    <td ng-repeat="ReportData in ReportSummary">{{ReportData.percent_worn.shoes}}</td>
+                </tr>
+                <tr>
+                    <th>Idlers (Front)</th>
+                    <td ng-repeat="ReportData in ReportSummary">{{ReportData.percent_worn.idlers_front}}</td>
+                </tr>
+                <tr>
+                    <th>Idlers (Rear)</th>
+                    <td ng-repeat="ReportData in ReportSummary">{{ReportData.percent_worn.idlers_rear}}</td>
+                </tr>
+                <tr>
+                    <th>Carrier Rollers</th>
+                    <td ng-repeat="ReportData in ReportSummary">{{ReportData.percent_worn.carrier_rollers}}</td>
+                </tr>
+                <tr>
+                    <th>Track Rollers</th>
+                    <td ng-repeat="ReportData in ReportSummary">{{ReportData.percent_worn.track_rollers}}</td>
+                </tr>
+                <tr>
+                    <th>Sprockets</th>
+                    <td ng-repeat="ReportData in ReportSummary">{{ReportData.percent_worn.sprockets}}</td>
+                </tr>
+
+                <tr>
+                    <th class="hr">Hours On Wear Surface</th>
+                    <td ng-repeat="ReportData in ReportSummary" class="hr"></td>
+                </tr>
+
+                <tr>
+                    <th>Links</th>
+                    <td ng-repeat="ReportData in ReportSummary">{{ReportData.hours_on_wear_surface.links}}</td>
+                </tr>
+                <tr>
+                    <th>Bushings</th>
+                    <td ng-repeat="ReportData in ReportSummary">{{ReportData.hours_on_wear_surface.bushings}}</td>
+                </tr>
+                <tr>
+                    <th>Shoes</th>
+                    <td ng-repeat="ReportData in ReportSummary">{{ReportData.hours_on_wear_surface.shoes}}</td>
+                </tr>
+                <tr>
+                    <th>Idlers (Front)</th>
+                    <td ng-repeat="ReportData in ReportSummary">{{ReportData.hours_on_wear_surface.idlers_front}}</td>
+                </tr>
+                <tr>
+                    <th>Idlers (Rear)</th>
+                    <td ng-repeat="ReportData in ReportSummary">{{ReportData.hours_on_wear_surface.idlers_rear}}</td>
+                </tr>
+                <tr>
+                    <th>Carrier Rollers</th>
+                    <td ng-repeat="ReportData in ReportSummary">{{ReportData.hours_on_wear_surface.carrier_rollers}}</td>
+                </tr>
+                <tr>
+                    <th>Track Rollers</th>
+                    <td ng-repeat="ReportData in ReportSummary">{{ReportData.hours_on_wear_surface.track_rollers}}</td>
+                </tr>
+                <tr>
+                    <th>Sprockets</th>
+                    <td ng-repeat="ReportData in ReportSummary">{{ReportData.hours_on_wear_surface.sprockets}}</td>
+                </tr>
+
+            </table>
+        </div>
+    </div>
+
+    <div id="report_cont_fleet_2" style="display: none;">
+        <div class="customer-report-container">
+            <h2>Report</h2>
+            <table class="data-display data-display-print" style="width:100%">
+                <tr>
+                    <th style="width:10%">Model</th>
+                    <th style="width:15%">Serial Number</th>
+                    <th style="width:10%">Hour Meter</th>
+                    <th style="width:45%">Notes</th>
+                    <th style="width:10%">Action Required</th>
+                    <th style="width:10%">Information / Bushings</th>
+                </tr>
+                <tr ng-repeat="ReportData in ReportSummary">
+                    <td>{{ReportData.model}}</td>
+                    <td>{{ReportData.serial}}</td>
+                    <td>{{ReportData.hour_meter_reading}}</td>
+                    <td>{{ReportData.note}}</td>
+                    <td>{{ReportData.action_required}}</td>
+                    <td>{{ReportData.percent_worn.bushings}}</td>
+                </tr>
+
+            </table>
+        </div>
+    </div>
+    <!-- End of Report Related Parts -->
+
+
+
+</div>
+<script src="./scripts/ui/modals.js"></script>

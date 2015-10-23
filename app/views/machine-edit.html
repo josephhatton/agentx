@@ -1,0 +1,146 @@
+<form name="machine_form" novalidate>
+    <nav class="sub-nav-btns inspection">
+        <div class="seventy-width-block sub-nav-block">
+            <a href="#/machines/add" class="add-btn green-button">Add Machine <span class="add-machine"></span></a>
+            <a href="#/customers/add" class="add-btn green-button">Add Customer <span class="add-customer"></span></a>
+            <a href="#/inspections/add" class="add-btn green-button">Add Inspection <span class="add-inspection"></span></a>
+            <div class="clearboth"></div>
+        </div>
+        <div class="thirty-width-block sub-nav-block">
+            <a class="noimg-btn-right green-button" data-ng-click="saveMachine()">Save Machine</a>
+            <a ng-href="#/machines/list" class="noimg-btn-right green-button">Cancel</a>
+            <a class="noimg-btn-right green-button" ng-click="deleteMachine()" data-ng-show="uiShow('delete')">Delete</a>
+        </div>
+    </nav>
+    <div class="white-gray-bg animated fadeIn">
+        <article class="info-row machine-add">
+            <div class="info-block image" ng-init="new_image = false">
+                <img ng-hide="new_image" width="140" ng-src="{{ Machine.img }}" src="images/tmp.png" />
+                <div ng-show="new_image" md-image-upload="machine"></div>
+                <div id="image-btn-wrapper">
+                    <a href="" ng-hide="new_image" ng-click="new_image = !new_image" class="image-upload-btn">Upload new image</a>
+                    <a href="" ng-show="new_image" ng-click="new_image = false" class="remove-image">Remove image</a>
+                </div>
+            </div>
+            <div class="info-block unit-info">
+                <div class="info-details detail-space">
+                    <h1 class="nomargin nopadding" ng-bind="Machine.name">Machine Name</h1>
+                </div>
+            </div>
+            <div class="info-block customer">
+                <div class="info-details detail-space">
+                    <ul class="lineheight30">
+                        <li>
+                            <label ng-show="Machine.latest_inspection">Last Inspection</label>
+                        </li>
+                    </ul>
+                    <ul class="lineheight30">
+                        <li>
+                            <span ng-bind="Machine.latest_inspection"></span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="clearboth"></div>
+            <hr />
+        </article>
+
+        <div class="info-section">
+            <div class="half-width">
+                <div class="info-field left-info">
+                    <label for="manufacturer">Manufacturer</label>
+                    <div class="field-details">
+                        <select id="manufacturer" name="manufacturer" ng-model="Machine.manufacturer_id" ng-options="manufacturer.id as manufacturer.company for manufacturer in ManufacturerList" ng-change="updateMachineModels(this)" required ng-focus></select>
+                        <div class="error-container ng-hide" ng-show="machine_form.manufacturer.$dirty && machine_form.manufacturer.$invalid && !machine_form.manufacturer.$focused">
+                            <small class="error ng-hide" ng-show="machine_form.manufacturer.$error.required">Manufacturer is required.</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="info-field left-info">
+                    <label for="serial_num">Serial Number</label>
+                    <div class="field-details">
+                        <input type="text" id="serial_num"  name="serial_num" ng-model="Machine.serial" ng-minlength="3" ng-maxlength="200" required ng-focus>
+                        <div class="error-container ng-hide" ng-show="machine_form.serial_num.$dirty && machine_form.serial_num.$invalid && !machine_form.serial_num.$focused">
+                            <small class="error ng-hide" ng-show="machine_form.serial_num.$error.required">Serial number is required.</small>
+                            <small class="error ng-hide" ng-show="machine_form.serial_num.$error.minlength">Serial number is required to be at least 3 characters.</small>
+                            <small class="error ng-hide" ng-show="machine_form.serial_num.$error.maxlength">Serial number cannot be longer than 200 characters.</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="info-field left-info">
+                    <label for="equipment_num">Unit Number</label>
+                    <div class="field-details">
+                        <input type="text" id="equipment_num" name="equipment_num" ng-model="Machine.equipment_id" ng-maxlength="200" required ng-focus>
+                        <div class="error-container ng-hide" ng-show="machine_form.equipment_num.$dirty && machine_form.equipment_num.$invalid && !machine_form.equipment_num.$focused">
+                            <small class="error ng-hide" ng-show="machine_form.equipment_num.$error.required">Unit number is required.</small>
+                            <small class="error ng-hide" ng-show="machine_form.equipment_num.$error.maxlength">Unit number cannot be longer than 200 characters.</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="info-field left-info">
+                    <label for="model">Model</label>
+                    <div class="field-details">
+                        <select type="text" id="model" name="model" ng-model="Machine.model_id" ng-options="model.id as model.model for model in ModelList" required ng-focus></select>
+                        <div class="error-container ng-hide" ng-show="machine_form.model.$dirty && machine_form.model.$invalid && !machine_form.model.$focused">
+                            <small class="error ng-hide" ng-show="machine_form.model.$error.required">Model is required.</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="info-field left-info">
+                    <label for="model">Hour Meter Reading</label>
+                    <div class="field-details">
+                        <input type="text" id="hour-meter-reading" name="hour-meter-reading" ng-model="Machine.hour_meter_reading">
+                    </div>
+                </div>
+            </div>
+            <div class="half-width">
+                <!--<div class="info-field right-info">-->
+                <!--<label for="install-date">Install Date</label>-->
+                <!--<div class="field-details"><div class="field-details"><mac-datepicker id="install-date" mac-datepicker-id="install-date" mac-datepicker-model="startDate"></mac-datepicker></div></div>-->
+                <!--</div>-->
+                <!--<div class="info-field right-info">-->
+                <!--<label for="warranty-date">Warranty Expiration Date</label>-->
+                <!--<div class="field-details"><div class="field-details"><mac-datepicker id="warranty-date" mac-datepicker-id="warranty-date" mac-datepicker-model="warrantyDate"></mac-datepicker></div></div>-->
+                <!--</div>-->
+                <div class="info-field right-info">
+                    <label>Customer</label>
+                    <div class="field-details">
+                        <input type="text" placeholder="Search for customer..." name="customer_name" ng-model="Machine.customer_name" md-Autocomplete-Form-Field="customers" required ng-focus>
+                        <div class="error-container ng-hide" ng-show="machine_form.customer_name.$dirty && machine_form.customer_name.$invalid && !machine_form.customer_name.$focused">
+                            <small class="error ng-hide" ng-show="machine_form.customer_name.$error.required">Customer is required.</small>
+                        </div>
+                    </div>
+                </div>
+                <!--<div class="info-field right-info">-->
+                <!--<label for="machine-sales-rep">Machine Sales Rep</label>-->
+                <!--<div class="field-details"><input type="text" id="machine-sales-rep" name="machine-sales-rep" ng-model="Machine.sales_rep" /></div>-->
+                <!--</div>-->
+                <!--<div class="info-field right-info">-->
+                <!--<label for="product-support-sales-rep">Product Support Sales Rep</label>-->
+                <!--<div class="field-details"><input type="text" id="product-support-sales-rep" name="product-support-sales-rep" ng-model="Machine.product_support_sales_rep" /></div>-->
+                <!--</div>-->
+            </div>
+            <div class="clearboth"></div>
+        </div>
+
+        <table width="100%" class="green-list-header data-display">
+            <tr>
+                <th>&nbsp;</th>
+                <th>Title</th>
+                <th>Created</th>
+                <th>Update</th>
+                <th>Inspector</th>
+                <th>&nbsp;</th>
+            </tr>
+            <tr class="list-entry repeated-item " ng-repeat="Inspection in Inspections">
+                <td></td>
+                <td ng-bind="Inspection.name"></td>
+                <td ng-bind="Inspection.datestring"></td>
+                <td ng-bind="Inspection.datestring"></td>
+                <td ng-bind="Inspection.inspector"></td>
+                <td></td>
+            </tr>
+        </table>
+    </div>
+
+</form>

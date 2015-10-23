@@ -1,0 +1,38 @@
+<article id="login" class="animated slideInDown">
+        <header><h3>Log In</h3></header>
+        <form ng-submit="login()">
+            <div>
+                <label for="login-user">User</label>
+                <input type="text" id="login-user" name="email" autofocus="autofocus" required ng-model="user" />
+            </div>
+            <div>
+                <label for="login-password">Password</label>
+                <input name="password" id="login-password" type="password" required ng-model="pass" />
+            </div>
+            <div>
+                <input type="submit" value="Submit" class="green-button" />
+            </div>
+            <div id="forgot-password">
+                <p><a href="#/password/reset-request/">Forgot password?</a></p>
+            </div>
+        </form>
+    <div class="login-support">
+    <h3>Supported Browsers</h3>
+        <div class="third">
+            <img src="./images/browsers/chrome.png" style="width:32px;height:32px;">
+            <span>Google Chrome</span>
+        </div>
+        <div class="third">
+            <img src="./images/browsers/firefox.png" style="width:33px;height:32px;">
+            <span>Mozilla Firefox</span>
+        </div>
+        <div class="third">
+            <img src="./images/browsers/ie10.png" style="width:30px;height:32px;">
+            <span>IE 10 and above</span>
+        </div>
+    </div>
+    <br>
+    <div>
+        <br clear="all">
+    </div>
+</article>

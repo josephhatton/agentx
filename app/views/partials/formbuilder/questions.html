@@ -1,0 +1,24 @@
+<div id="fb-nav" data-ng-include data-src="'views/partials/formbuilder/nav.html'"></div>
+<div id="fb-tasks">
+	<input type="button" value="Create a New Question" ng-click="open_taskmodal()" class="btn-blue" style="float:right;">
+	<table id="fb-tasks-tbl" width="100%" class="tbl-purestyle">
+		<caption>
+		</caption>
+		<thead>
+			<tr>
+				<th></th>
+				<th>Title</th>
+				<th>Section</th>
+				<th>Steps</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="tplobj in ListTasks">
+				<td width="30px"><a class="icon-edit" ng-click="open_taskmodal(tplobj.id)"></a></td>
+				<td><b>{{tplobj.title}}</td>
+				<td>{{tplobj.inspection_type.title}}</td>
+				<td class="align-center">{{tplobj.instructions.steps.length}}</td>
+			</tr>
+		</tbody>
+	</table>
+</div>

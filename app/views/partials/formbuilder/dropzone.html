@@ -1,0 +1,11 @@
+<div id="popular_templates">
+	<h2>Your Template</h2>
+</div>
+<div ng-drop="true" id="add_element" ng-drop-success="DropElement($data, $event)">
+	<h3>Drop Template Elements here</h3>
+</div>
+<ul id="dropped_elements">
+	<li ng-repeat="tplobj in DroppedObjs track by $index" ng-drag-data="tplobj" ng-drop="true" ng-drop-success="MoveElement($index, $data, $event)">
+		<div ng-drag="true" ng-drag-data="tplobj" data-ng-include="GetElemView(tplobj)"></div>
+	</li>
+</ul>

@@ -1,0 +1,84 @@
+<nav class="sub-nav-btns">
+    <div class="seventy-width-block">
+    	<div class="add-button-row top-add-buttons">
+    		<a href="#/machines/add" class="add-btn green-button">Add Machine <span class="add-machine"></span></a>
+	        <a href="#/customers/add" class="add-btn green-button">Add Customer <span class="add-customer"></span></a>
+	        <a href="#/inspections/add" class="add-btn green-button">Add Inspection <span class="add-inspection"></span></a>
+	    	<div class="clearboth"></div>
+	    </div>
+    </div>
+    <div class="thirty-width-block">
+        <div class="sub-search">
+            <input type="search" ng-model="q" placeholder="Search Users" class="rounded3px input160w alignright" />
+        </div>
+    </div>
+    <div class="pagination-top">
+        <div class="pagination alignright" md-Pagination></div>
+    </div>
+</nav>
+
+<div id="user-management" class="user-management-wrapper">
+	<div class="page-head">
+    	<h1>User Management</h1>
+		<div class="add-btn-wrapper">
+	    	<div class="add-button-row top-add-buttons">
+	        <a class="add-btn green-button blue-button" ng-click="addUser()" data-ng-show="uiShow('create')">Add User <span class="add-user"></span></a>
+	        <div class="add-btn green-button red-button" ng-click="removeChecked()">Remove Selected<span class="remove-user"></span></div>
+			<div class="clearboth"></div>
+			</div>
+	    </div>
+	</div>
+	<table width="100%" ng-init="predicate='username';reversed=false" class="table green-list-header data-display">
+		<tr>
+			<th>&nbsp;</th>
+            <th sort predicate="'username'" by="predicate" reversed="reversed">Name</th>
+            <th sort predicate="'email'" by="predicate" reversed="reversed">Email</th>
+            <th sort predicate="'userlevel'" by="predicate" reversed="reversed">Type</th>
+            <th sort predicate="'dealer_id'" by="predicate" reversed="reversed">Dealer</th>
+            <th sort predicate="'customer'" by="predicate" reversed="reversed">Customer</th>
+			<th>&nbsp;</th>
+		</tr>
+        <tr class="repeated-item" ng-repeat="user in users | filter:q | orderBy:predicate:reversed">
+            <td class="aligncenter" style="width:3%;"><input type="checkbox" ng-model="ids[user.id]"></td>
+            <td style="width:27%">
+                <span editable-text="user.username" e-id="username" e-name="username" e-form="rowform" onshow="editableName($data, user.id)" e-required onbeforesave="userEditableValidation('username', $data)">{{ user.username || 'empty' }}
+                </span>
+            </td>
+            <td style="width:15%;">
+                <span editable-email="user.email" e-name="email" e-form="rowform" e-required style="word-wrap:break-word;" onbeforesave="userEditableValidation('email', $data)">
+                  {{  user.email || 'empty' }}
+                </span>
+            </td>
+            <td style="width:15%;">
+                <span editable-select="user.userlevel" e-name="userlevel" e-form="rowform" e-ng-options="s.value as s.text for s in userlevels">
+                      {{ showUserLevel(user.userlevel) }}
+                </span>
+            </td>
+            <td style="width:15%">
+                <span e-form="rowform" ng-show="!rowform.$visible">{{ showDealer(user.dealer_id) }}</span>
+                <div ng-show="rowform.$visible && isAdmin">
+                    <span editable-select="user.dealer_id" e-name="dealer_id" e-form="rowform" e-ng-options="s.id as s.name for s in dealers">
+                          {{ showDealer(user.dealer_id) }}
+                    </span>
+                </div>
+            </td>
+            <td  style="width:15%">
+                <span editable-text="user.customer" e-name="customer" e-form="rowform" e-typeahead="customer for customer in getCustomers($viewValue) | limitTo:20"
+                        e-placeholder="Start Typing...">
+                    {{ user.customer || 'NA' }}
+                </span>
+            </td>
+            <td style="white-space: nowrap; width:10%" >
+                <form class="form-buttons form-inline user-management-btns" editable-form name="rowform" onbeforesave="saveUser($data, user.id, rowform)" ng-show="rowform.$visible" shown="inserted == user">
+                    <button type="submit" ng-disabled="rowform.$waiting" class="add-btn">Save<span class="edit-user"></span></button>
+                    <button type="button" ng-disabled="rowform.$waiting" ng-click="cancelUser($index, rowform)" class="add-btn">Cancel<span class="cancel-icon"></span></button>
+                </form>
+                <div class="buttons user-management-btns" ng-show="!rowform.$visible">
+                    <button type="button"  class="add-btn" ng-click="rowform.$show()">Edit<span class="edit-user"></span></button>
+                    <button type="button" class="add-btn" ng-click="removeUser(user.id, $index)">Remove<span class="remove-user"></span></button>
+                </div>
+            </td>
+    	</tr>
+    </table>
+    <div class="clearboth"></div>
+</div>

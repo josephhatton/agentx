@@ -1,0 +1,27 @@
+<fieldset class="step_cont task_type" ng-drop="true" ng-drop-success="DropStep($index,$data)">
+	<legend>Step {{ $index + 1 }}</legend>
+	<br>
+	<button ng-click="MoveStep($index,1)">Down</button>
+	<button ng-click="MoveStep($index,-1)">Up</button>
+	<br><br>
+	<div class="step_base">
+		<div ng-if="Step.attention" data-ng-include data-src="'views/partials/formbuilder/steps/attention.edit.html'"></div>
+
+		<div ng-if="Step.goal" data-ng-include data-src="'views/partials/formbuilder/steps/goal.edit.html'"></div>
+
+		<div ng-if="Step.help" data-ng-include data-src="'views/partials/formbuilder/steps/help.edit.html'"></div>
+
+		<div ng-if="Step.rating" data-ng-include data-src="'views/partials/formbuilder/steps/rating.edit.html'"></div>
+
+		<div ng-if="Step.photos" data-ng-include data-src="'views/partials/formbuilder/steps/photos.edit.html'"></div>
+
+		<div ng-if="Step.boolean" data-ng-include data-src="'views/partials/formbuilder/steps/boolean.edit.html'"></div>
+
+		<div ng-if="Step.option" data-ng-include data-src="'views/partials/formbuilder/steps/option.edit.html'"></div>
+
+		<div ng-if="Step.comment" data-ng-include data-src="'views/partials/formbuilder/steps/comment.edit.html'"></div>
+
+		<div ng-if="Step.input" data-ng-include data-src="'views/partials/formbuilder/steps/input.edit.html'"></div>
+	</div>
+	<button ng-click="RemoveStep($index)" class="rem_widget">Remove Step</button>
+</fieldset>

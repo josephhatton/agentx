@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 16.2.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="60.75px"
+	 height="55px" viewBox="0 0 60.75 55" enable-background="new 0 0 60.75 55" xml:space="preserve">
+<g id="Layer_1">
+</g>
+<g id="Layer_2">
+	<g>
+		<g>
+			<polygon fill="#33CC66" points="9.5,22 25.5,34 49,0 60.75,9 28.75,55 0,33.75 			"/>
+		</g>
+		<defs>
+			<filter id="Adobe_OpacityMaskFilter" filterUnits="userSpaceOnUse" x="0" y="0" width="60.75" height="55">
+				
+					<feColorMatrix  type="matrix" values="-1 0 0 0 1  0 -1 0 0 1  0 0 -1 0 1  0 0 0 1 0" color-interpolation-filters="sRGB" result="source"/>
+			</filter>
+		</defs>
+		<mask maskUnits="userSpaceOnUse" x="0" y="0" width="60.75" height="55" id="SVGID_1_">
+			<g filter="url(#Adobe_OpacityMaskFilter)">
+				
+					<image overflow="visible" width="66" height="60" xlink:href="data:image/jpeg;base64,/9j/4AAQSkZJRgABAgEASABIAAD/7AARRHVja3kAAQAEAAAAHgAA/+4AIUFkb2JlAGTAAAAAAQMA
+EAMCAwYAAAHJAAACXgAAA2r/2wCEABALCwsMCxAMDBAXDw0PFxsUEBAUGx8XFxcXFx8eFxoaGhoX
+Hh4jJSclIx4vLzMzLy9AQEBAQEBAQEBAQEBAQEABEQ8PERMRFRISFRQRFBEUGhQWFhQaJhoaHBoa
+JjAjHh4eHiMwKy4nJycuKzU1MDA1NUBAP0BAQEBAQEBAQEBAQP/CABEIADwAQgMBIgACEQEDEQH/
+xACIAAEAAwEBAQEAAAAAAAAAAAAABQYHBAIBAwEBAAAAAAAAAAAAAAAAAAAAABAAAgMAAgIDAQAA
+AAAAAAAABAUCAwYgAQAQQBESExEAAgIBAQYFAgcAAAAAAAAAAQIRAwAhIDFBEiMEEFFhoSJxEzCx
+wTJiMxQSAQAAAAAAAAAAAAAAAAAAAED/2gAMAwEAAhEDEQAAAM/AALIfIHdqIZ+A/S/GepeJOrZI
+G2nNjk7UACd13BbGarWp7vPNTnsbOXyAAHbo2WeixVsAAP/aAAgBAgABBQD4n//aAAgBAwABBQD4
+n//aAAgBAQABBQDj11332JjjCQCRrxbeWQz1jMymiumrf1L64cVi+5iWlV1LQmJ1QIz1ta0O8oot
+ItW4OE1rvOHKLYxlKWKzcAR5zjCO40PZl/rKEhDsRrqrqjAhzKhsCAOyhCMI7bRdACznKyfvO68t
+XNY4EZU+OWlK0NsxtZG8VrY1Zal24hdGv0M2ZXOH9P139/fD/9oACAECAgY/ACf/2gAIAQMCBj8A
+J//aAAgBAQEGPwDZgak7hn+nVbCJCx7Y1V6FHUxB/TbXuLFnt6zIniRgqQAKBGSQPvE/GN87SdtU
+D8j8mHAYlNagEATj3WECAYnHuYn7YJCDh9fBaaV5ncwBnLfra4knjOHmUvQN1nl9cCqJZjAHqcHd
+3r17ACZ/LCzGAN+HsaG6a/2QfbxVu50Y/tY7sV6iCscMNV6BgRGuDvFbprqKtOUHzwIohRoBh7ah
+us+gjC7nmZjJJ2FqvY2dsNPMjFtocHmExPg91jBSAYnH7mw6EkIPTaFnbOQOKE/E5Fx5bVHyB0w0
+Vt0EOvqeH4HTnm/jv9sM7+M7P//Z" transform="matrix(1 0 0 1 -2.75 -2.25)">
+				</image>
+			</g>
+		</mask>
+		<g opacity="0.6" mask="url(#SVGID_1_)">
+			<polygon points="9.5,22 25.5,34 49,0 60.75,9 28.75,55 0,33.75 			"/>
+		</g>
+	</g>
+</g>
+</svg>

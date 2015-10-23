@@ -1,0 +1,162 @@
+<div class="info-row machine-options">
+    <div class="info-block">
+        <table class="inspection-table">
+            <tr>
+                <td width="100">&nbsp;</td>
+                <td width="50" class="aligncenter">Left</td>
+                <td width="50" class="aligncenter">Right</td>
+            </tr>
+            <tr>
+                <td>Track Sag</td>
+                <td colspan="2" rowspan="4">
+                    <table width="100%">
+                        <tr>
+                            <td>
+                                <div ng-show="Ins.inspection_obj.results.track_sag.left"
+                                    ng-bind="Ins.inspection_obj.results.track_sag.left"></div>
+                                <div ng-show="!Ins.inspection_obj.results.track_sag.left">-</div>
+                            </td>
+                            <td>
+                                <div ng-show="Ins.inspection_obj.results.track_sag.right"
+                                    ng-bind="Ins.inspection_obj.results.track_sag.right"></div>
+                                <div ng-show="!Ins.inspection_obj.results.track_sag.right">-</div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div ng-show="Ins.inspection_obj.results.frame_extension.left"
+                                    ng-bind="Ins.inspection_obj.results.frame_extension.left"></div>
+                                <div ng-show="!Ins.inspection_obj.results.frame_extension.left">-</div>
+                            </td>
+                            <td>
+                                <div ng-show="Ins.inspection_obj.results.frame_extension.right"
+                                    ng-bind="Ins.inspection_obj.results.frame_extension.right"></div>
+                                <div ng-show="!Ins.inspection_obj.results.frame_extension.right">-</div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div ng-show="Ins.inspection_obj.results.dry_joints.left"
+                                    ng-bind="Ins.inspection_obj.results.dry_joints.left"></div>
+                                <div ng-show="!Ins.inspection_obj.results.dry_joints.left">-</div>
+                            </td>
+                            <td>
+                                <div ng-show="Ins.inspection_obj.results.dry_joints.right"
+                                    ng-bind="Ins.inspection_obj.results.dry_joints.right"></div>
+                                <div ng-show="!Ins.inspection_obj.results.dry_joints.right">-</div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div ng-show="Ins.inspection_obj.results.shoe_width.left"
+                                    ng-bind="Ins.inspection_obj.results.shoe_width.left"></div>
+                                <div ng-show="!Ins.inspection_obj.results.shoe_width.left">-</div>
+                            </td>
+                            <td>
+                                <div ng-show="Ins.inspection_obj.results.shoe_width.right"
+                                    ng-bind="Ins.inspection_obj.results.shoe_width.right"></div>
+                                <div ng-show="!Ins.inspection_obj.results.shoe_width.right">-</div>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td>Frame Extension</td>
+            </tr>
+            <tr>
+                <td>Internal Wear</td>
+            </tr>
+            <tr>
+                <td>Shoe Width</td>
+            </tr>
+        </table>
+    </div>
+    <div class="info-block">
+        <div class="top-block">
+            Impact
+            <div class="block-details" ng-show="Ins.inspection_obj.results.underfoot_conditions.impact"
+                ng-bind="Ins.inspection_obj.results.underfoot_conditions.impact"></div>
+            <div class="block-details" ng-show="!Ins.inspection_obj.results.underfoot_conditions.impact">No
+                Data
+            </div>
+        </div>
+        <div class="low-block">
+            Abrasive
+            <div class="block-details" ng-show="Ins.inspection_obj.results.underfoot_conditions.abrasive"
+                ng-bind="Ins.inspection_obj.results.underfoot_conditions.abrasive"></div>
+            <div class="block-details" ng-show="!Ins.inspection_obj.results.underfoot_conditions.abrasive">No
+                Data
+            </div>
+        </div>
+    </div>
+    <div class="info-block">
+        <div class="top-block">
+            Bushing Allowable Wear
+            <div class="block-details" ng-show="Ins.inspection_obj.results.bushing_allowable_wear"
+                ng-bind="Ins.inspection_obj.results.bushing_allowable_wear"></div>
+            <div class="block-details" ng-show="!Ins.inspection_obj.results.bushing_allowable_wear">No Data</div>
+        </div>
+        <div class="low-block">
+            Link Allowable Wear
+            <div class="block-details" ng-show="Ins.inspection_obj.results.link_allowable_wear"
+                ng-bind="Ins.inspection_obj.results.link_allowable_wear"></div>
+            <div class="block-details" ng-show="!Ins.inspection_obj.results.link_allowable_wear">No Data</div>
+        </div>
+    </div>
+    <div class="info-block">
+        <div class="top-block">
+            Undercarriage Brand
+            <div class="block-details" ng-show="Ins.inspection_obj.machine.under_carriage_brand"
+                ng-bind="Ins.inspection_obj.machine.under_carriage_brand"></div>
+            <div class="block-details" ng-show="!Ins.inspection_obj.machine.under_carriage_brand">No Data</div>
+        </div>
+        <div class="low-block">
+            Undercarriage Code
+            <div class="block-details" ng-show="Ins.inspection_obj.machine.under_carriage_code"
+                ng-bind="Ins.inspection_obj.machine.under_carriage_code"></div>
+            <div class="block-details" ng-show="!Ins.inspection_obj.machine.under_carriage_code">No Data</div>
+        </div>
+    </div>
+    <div class="info-block">
+        <div class="top-block">
+            Moisture
+            <div class="block-details" ng-show="Ins.inspection_obj.results.underfoot_conditions.moisture"
+                ng-bind="Ins.inspection_obj.results.underfoot_conditions.moisture"></div>
+            <div class="block-details" ng-show="!Ins.inspection_obj.results.underfoot_conditions.moisture">No
+                Data
+            </div>
+        </div>
+        <div class="low-block">
+            Packing
+            <div class="block-details" ng-show="Ins.inspection_obj.results.underfoot_conditions.packing"
+                ng-bind="Ins.inspection_obj.results.underfoot_conditions.packing"></div>
+            <div class="block-details" ng-show="!Ins.inspection_obj.results.underfoot_conditions.packing">No
+                Data
+            </div>
+        </div>
+    </div>
+    <div class="clearboth"></div>
+</div>
+
+<div class="info-section">
+    <aside ng-show="Summaries.length > 0" id="inspection-summary">
+        <h2>Summary</h2>
+        <div id="inspection-summary-header">
+            <div>&nbsp;</div>
+            <div>Measurement</div>
+            <div>Wear Percentage</div>
+            <div>Hours Remaining</div>
+            <div>100% Wear Date</div>
+            <div>120% Wear Date</div>
+        </div>
+        <div class="{{ summary.condition }} component-summary" ng-repeat="summary in Summaries">
+            <div><span ng-bind="summary.comp_type"></span></div>
+            <div><span ng-show="summary.measured">{{ summary.measured}}mm</span></div>
+            <div><span ng-show="summary.percentage" ng-bind="summary.percentage"></span></div>
+            <div><span ng-show="summary.hours_left" ng-bind="summary.hours_left"></span></div>
+            <div><span ng-bind="summary.full_wear_date"></span></div>
+            <div><span ng-bind="summary.over_wear_date"></span></div>
+        </div>
+    </aside>
+</div>

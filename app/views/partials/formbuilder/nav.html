@@ -1,0 +1,22 @@
+<div id="nav-top">
+	<a id="nav-dashboard" class="nav-link" href="#/dashboard" ng-class="{'nav-link-selected' : isActiveNav('/dashboard')}">
+		<div class="nav-icon nav-icon-dashboard"></div>
+		Form Dashboard
+	</a>
+	<a id="nav-formbuilder" class="nav-link" ng-click="open_createform();" ng-class="{'nav-link-selected' : isActiveNav('/templates'), 'nav-link-selected' : isActiveNav('/inspections')}">
+		<div class="nav-icon nav-icon-formbuilder"></div>
+		Form Builder
+	</a>
+	<a id="nav-forms" class="nav-link" href="#/forms" ng-class="{'nav-link-selected' : isActiveNav('/forms')}">
+		<div class="nav-icon nav-icon-forms"></div>
+		Forms
+	</a>
+	<a id="nav-tasks" class="nav-link" href="#/questions" ng-class="{'nav-link-selected' : isActiveNav('/questions')}">
+		<div class="nav-icon nav-icon-tasks"></div>
+		Questions
+	</a>
+	<a id="nav-tasks" class="nav-link" href="#/tasks" ng-class="{'nav-link-selected' : isActiveNav('/tasks')}">
+		<div class="nav-icon nav-icon-tasks"></div>
+		Question Builder
+	</a>
+</div>

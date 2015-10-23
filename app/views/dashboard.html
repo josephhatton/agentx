@@ -1,0 +1,355 @@
+<article class="row animated fadeIn">
+    <div id="dashboard">
+
+		<section id="trend-manager">
+			<div id="trend-manager-title" class="lineheight-full">
+			    <img id="spinner" src="./images/spinner.gif" width="30px" height="30px">
+				Statistics &amp; Trends
+				<a class="anchor-sh" ng-if="showTrends==1" ng-click="showhideTrends(0)">Hide</a>
+				<a class="anchor-sh" ng-if="showTrends==0" ng-click="showhideTrends(1)">Show</a>
+			</div>
+			<div id="trend-manager-content" ng-show="showTrends==1 && readySalesWidget">
+				<div class="row">
+					<div class="col-md-3 padding-left-0">
+						<div class="trend-wrap" id="trend-ytd-inspections">
+							<div class="trend-icon trend-icon-phone"></div>
+							<div class="trend-value">{{ Trend.ytd_inspections }}</div>
+							<div class="trend-label">YTD Inspections</div>
+						</div>
+					</div>
+					<div class="col-md-3" style="display: none;">
+						<div class="trend-wrap" id="trend-ytd-sales">
+							<div class="trend-icon trend-icon-pie"></div>
+							<div class="trend-symbol trend-symbol-dollar"></div>
+							<div class="trend-value">{{ Trend.ytd_sales }}</div>
+							<div class="trend-label">YTD Sales</div>
+						</div>
+					</div>
+					<div class="col-md-3" style="display: none;">
+						<div class="trend-wrap" id="trend-revenue">
+							<div class="trend-icon trend-icon-graph"></div>
+							<div class="trend-symbol trend-symbol-arrowup"></div>
+							<div class="trend-value">{{ Trend.revenue }}</div>
+							<div class="trend-symbol trend-symbol-percent"></div>
+							<div class="trend-label">Revenue Trends</div>
+						</div>
+					</div>
+					<div class="col-md-3 padding-right-0" style="display: none;">
+						<div class="trend-wrap" id="trend-missed-opportunities">
+							<div class="trend-icon trend-icon-alert"></div>
+							<div class="trend-value">{{ Trend.missed_opportunities }}</div>
+							<div class="trend-label">Missed Opportunities</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-6 padding-left-0" style="display: none;">
+						<div class="trend-wrap" id="trend-monthly-teamgoals">
+							<div class="trend-icon trend-icon-team"></div>
+							<div class="trend-label">Monthly Team Goal</div>
+						</div>
+					</div>
+					<div class="col-md-3" style="display: none;">
+						<div class="trend-wrap" id="trend-user-engagement">
+							<div class="trend-icon trend-icon-finger"></div>
+							<div class="trend-symbol trend-symbol-arrowdown"></div>
+							<div class="trend-value">{{ Trend.user_engagement }}</div>
+							<div class="trend-symbol trend-symbol-percent"></div>
+							<div class="trend-label">User Engagement Trends</div>
+						</div>
+					</div>
+					<div class="col-md-3 padding-right-0" style="display: none;">
+						<div class="trend-wrap" id="trend-revenue">
+							<div class="trend-icon trend-icon-handshake"></div>
+							<div class="trend-symbol trend-symbol-arrowdown"></div>
+							<div class="trend-value">{{ Trend.customer_engagement }}</div>
+							<div class="trend-symbol trend-symbol-percent"></div>
+							<div class="trend-label">Customer Engagement</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<section id="dispatch-manager">
+
+			<div id="dispatch-manager-title">
+				<div class="row">
+					<div class="col-md-9 padding-left-0 valign-top lineheight-full">
+						Dispatch Manager
+					</div>
+					<div class="col-md-3 padding-right-0 valign-top"><a href="#/inspections/add" class="green-button fullwidth align-center">Create New Inspection</a></div>
+				</div>
+			</div>
+
+			<div id="dispatch-manager-filters-map">
+				<div class="row">
+					<div class="col-md-6 padding-left-0">
+						<div id="dispatch-manager-filters">
+							<div id="dispatch-manager-filters-title" class="lineheight-full">
+								Filter
+								<a class="anchor-sh" ng-if="showFilter==1" ng-click="showhideFilter(0)">Hide</a>
+								<a class="anchor-sh" ng-if="showFilter==0" ng-click="showhideFilter(1)">Show</a>
+							</div>
+							<div id="dispatch-manager-filters-content" ng-show="showFilter==1">
+								<div class="row">
+									<div class="col-md-6 padding-left-0">
+										<fieldset>
+											<label>From Date:</label>
+											<mac-datepicker mac-datepicker-id="input-start-date" mac-datepicker-model="filterValue_FromDate"></mac-datepicker>
+										</fieldset>
+									</div>
+									<div class="col-md-6 padding-right-0">
+										<fieldset>
+											<label>To Date:</label>
+											<mac-datepicker mac-datepicker-id="input-start-date" mac-datepicker-model="filterValue_ToDate"></mac-datepicker>
+										</fieldset>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-6 padding-left-0">
+										<fieldset>
+											<label>Customer</label>
+											<div class="btn-group dropdown-select fullwidth" dropdown is-open="filterMenu.customer" enableSearch="true">
+												<button type="button" class="dropdown-toggle">
+                                                    <span class="menufilter_ellipsis">{{filterByCustomerText()}}</span>
+                                                    <span class="caret"></span>
+                                                </button>
+												<ul class="dropdown-menu" role="menu">
+                                                    <li>
+                                                    	<input type="text" placeholder="Search Customer" ng-model="filterMenu.customer_filter" ng-click="preventHide($event)" />
+                                                    </li>
+													<li ng-repeat="fCustomer in filter_Customers" ng-hide="fCustomer.name.toLowerCase().indexOf(filterMenu.customer_filter.toLowerCase())==-1">
+														<a href="" ng-click="filterByCustomer(fCustomer.id, $event)" ng-class="{'active': filterValue_Customer.indexOf(fCustomer.id) >= 0}">{{ fCustomer.name }}</a>
+													</li>
+												</ul>
+											</div>
+										</fieldset>
+									</div>
+									<div class="col-md-6 padding-right-0">
+										<fieldset>
+											<label>Model</label>
+											<div class="btn-group dropdown-select fullwidth" dropdown is-open="filterMenu.model">
+												<button type="button" class="dropdown-toggle">
+                                                    <span class="menufilter_ellipsis">{{filterByModelText()}}</span>
+                                                    <span class="caret"></span>
+                                                </button>
+												<ul class="dropdown-menu" role="menu">
+                                                    <li><input type="text" placeholder="Search Model" ng-model="filterMenu.model_filter" ng-click="preventHide($event)" /></li>
+													<li ng-repeat="fModel in filter_Models" ng-hide="fModel.model.indexOf(filterMenu.model_filter)==-1"><a href="" ng-click="filterByModel(fModel.id, $event)" ng-class="{'active': filterValue_Model.indexOf(fModel.id) >= 0}">{{ fModel.model }}</a></li>
+												</ul>
+											</div>
+										</fieldset>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-12 padding-left-0 padding-right-0">
+										<fieldset>
+											<label>Rating</label>
+											<div range-slider min="0" max="120" model-min="filterValue_FromRating" model-max="filterValue_ToRating" step="10" attach-handle-values="true" ng-mousedown="FilterMD()" ng-mouseup="FilterMU()"></div>
+										</fieldset>
+										<fieldset>
+											<label style="display:inline; margin-right: 5px;">Include inspections with ratings of N/A</label>
+											<input type="checkbox" ng-model="filterValue_NA" />
+										</fieldset>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-8 padding-left-0">
+										<a ng-href="" data-ng-click="ApplyFilters();" id="dispatch-manager-filters-applybtn" class="green-button fullwidth align-center">Apply Filters</a>
+									</div>
+									<div class="col-md-4 padding-right-0">
+										<a ng-href="" data-ng-click="ClearFilters();" class="white-button fullwidth align-center nomargin">Clear All</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-6 padding-right-0">
+						<div id="dispatch-manager-map-container">
+							<div id="dispatch-manager-map-title" class="lineheight-full">
+								Map
+								<a class="anchor-sh" ng-if="showMap==1" ng-click="showhideMap(0)">Hide</a>
+								<a class="anchor-sh" ng-if="showMap==0" ng-click="showhideMap(1)">Show</a>
+							</div>
+							<div id="dispatch-manager-map" ng-show="showMap==1">
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div id="dispatch-manager-content">
+
+				<span ng-show="DispatchReady==false"><i>Loading...</i></span>
+
+				<div class="row margin-top-10 margin-bottom-10">
+					<div class="col-md-9 padding-left-0">
+						<i>{{ (Inspections
+						| filter:tblFilterCustomer
+						| filter:tblFilterModel
+						| filter:tblFilterFromRating
+						| filter:tblFilterMonth
+						| filter:tblFilterLastThis
+						| filter:tblFilterKeyword).length }} Results</i></div>
+					<div class="col-md-3 padding-left-0 padding-right-0">
+						<input type="text" class="fullwidth" placeholder="Search Inspections" ng-model="filterValue_Keyword" />
+					</div>
+				</div>
+
+				<div class="position-relative">
+					<a class="icon-white-button margin-top-10 margin-bottom-10 margin-right-15 icon-white-button-scheduleinspection" popover="Schedule Inspection" popover-placement="bottom" popover-trigger="mouseenter" href="#/inspections/add"></a>
+					<a class="icon-white-button icon-white-button-delete margin-top-10 margin-bottom-10 margin-right-15" popover="Delete" popover-placement="bottom" popover-trigger="mouseenter" ng-click="deleteInspections()"></a>
+					<!--
+					<div class="btn-group dropdown-menubox dropdown-menubox-export width50 margin-top-10 margin-bottom-10 margin-right-15">
+						<button type="button" class="dropdown-toggle" popover="Export" popover-placement="bottom" popover-trigger="mouseenter"></button>
+						<ul class="dropdown-menu" role="menu">
+							<li><a href="" ng-click="">Export pdf</a></li>
+							<li><a href="" ng-click="">Export excel</a></li>
+						</ul>
+					</div>
+
+					<a class="icon-white-button margin-top-10 margin-bottom-10 margin-right-15 icon-white-button-share" popover="Share" popover-placement="bottom" popover-trigger="mouseenter"></a>
+					<a class="icon-white-button margin-top-10 margin-bottom-10 margin-right-15 icon-white-button-delete" popover="Delete" popover-placement="bottom" popover-trigger="mouseenter"></a>
+					<a class="icon-white-button margin-top-10 margin-bottom-10 margin-right-15 icon-white-button-print" popover="Print" popover-placement="bottom" popover-trigger="mouseenter"></a>
+                    -->
+					<a class="white-button margin-top-10 margin-bottom-10 margin-right-15" ng-class="{'active': filterValue_LastThis == 1}" ng-click="filterByLastThis(1)" ng-show="fromUnix <= filter_lastweek && filter_lastweek <= toUnix">Last Week</a>
+					<a class="white-button margin-top-10 margin-bottom-10 margin-right-15" ng-class="{'active': filterValue_LastThis == 2}" ng-click="filterByLastThis(2)" ng-show="fromUnix <= filter_lastweek && filter_lastmonth <= toUnix">Last Month</a>
+					<a class="white-button margin-top-10 margin-bottom-10 margin-right-15" ng-class="{'active': filterValue_LastThis == 3}" ng-click="filterByLastThis(3)" ng-show="fromUnix <= filter_lastweek && filter_today <= toUnix">Today</a>
+					<a class="white-button margin-top-10 margin-bottom-10 margin-right-15" ng-class="{'active': filterValue_LastThis == 4}" ng-click="filterByLastThis(4)" ng-show="fromUnix <= filter_lastweek && filter_thisweek <= toUnix">This Week</a>
+					<a class="white-button margin-top-10 margin-bottom-10 margin-right-15" ng-class="{'active': filterValue_LastThis == 5}" ng-click="filterByLastThis(5)" ng-show="fromUnix <= filter_lastweek && filter_thismonth <= toUnix">This Month</a>
+					<div class="btn-group dropdown-select width200 margin-top-10 margin-bottom-10" dropdown>
+						<button type="button" class="dropdown-toggle">
+                            <span class="menufilter_ellipsis">{{getFilterMonthsLabel()}}</span>
+                            <span class="caret"></span>
+                        </button>
+						<ul class="dropdown-menu" role="menu">
+							<li ng-repeat="fMonth in filter_Months"><a href="" ng-click="filterByMonth(fMonth.value)" ng-class="{'active': filterValue_Month.indexOf(fMonth.value) >= 0}">{{ fMonth.text }}</a></li>
+						</ul>
+					</div>
+				</div>
+
+				<table id="dispatch-manager-content-table" width="100%" ng-init="predicate='datestring';reversed=true" cellpadding="0" cellspacing="0" border="1" class="">
+					<thead>
+						<tr class="row fullwidth nopadding">
+							<th></th>
+							<th sort predicate="'rating_value'" by="predicate" reversed="reversed">Rating</th>
+							<th sort predicate="'totalimages'" by="predicate" reversed="reversed">Images</th>
+							<th sort predicate="'inspection_obj.machine.serial'" by="predicate" reversed="reversed">Serial</th>
+							<th sort predicate="'inspection_obj.machine.manufacturer.company'" by="predicate" reversed="reversed">Man / Model</th>
+							<th sort predicate="'customer_name'" by="predicate" reversed="reversed">Customer</th>
+							<th sort predicate="'datestring'" by="predicate" reversed="reversed" class="align-center">Date</th>
+							<th sort predicate="'inspection_obj.user.username'" by="predicate" reversed="reversed" class="align-center">Inspector</th>
+							<th sort predicate="'inspection_obj.status'" by="predicate" reversed="reversed" class="align-center">Status</th>
+							<th class="align-center">Opportunity</th>
+							<th>Details</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr class="fullwidth nopadding" ng-repeat-start="Inspection in Inspections
+						| filter:tblFilterCustomer
+						| filter:tblFilterModel
+						| filter:tblFilterFromRating
+						| filter:tblFilterMonth
+						| filter:tblFilterLastThis
+						| filter:tblFilterKeyword
+						| orderBy:predicate:reversed">
+							<td>
+								<input type="checkbox" ng-model="Inspection.checked" />
+							</td>
+							<td class="nopadding inspection-details-rating bg-{{Inspection.color}}-hover" ng-class="{'bg-{{Inspection.color}}-light' : Inspection.show_components == 1}">
+								<div class="bg-{{Inspection.color}} inspection-details-rating-legend"></div>
+								<div class="inspection-details-rating-value">{{ Inspection.rating }}</div>
+								<div ng-if="Inspection.show_components==0" ng-click="Inspection.show_components = 1-Inspection.show_components" class="inspection-details-rating-expander collapsed"></div>
+								<div ng-if="Inspection.show_components==1" ng-click="Inspection.show_components = 1-Inspection.show_components" class="inspection-details-rating-expander expanded"></div>
+							</td>
+							<td class="">
+								<a ng-if="Inspection.inspection_obj.totalimages>0" ng-click="openCarousel(Inspection)" style="cursor:pointer;">{{ Inspection.inspection_obj.totalimages }} images</a>
+								<span ng-if="Inspection.inspection_obj.totalimages==0">No Image</span>
+							</td>
+							<td class="">
+								<a ng-href="#/machines/{{ Inspection.inspection_obj.machine.id }}"
+								   ng-bind="Inspection.inspection_obj.machine.serial"></a>
+							</td>
+							<td class="">{{ Inspection.inspection_obj.manufacturer.company }} {{ Inspection.inspection_obj.machine.model }}</td>
+							<td class="">{{ Inspection.customer_name }}</td>
+							<td class="">{{ Inspection.datestring }}</td>
+							<td class="">{{ Inspection.inspection_obj.user.username }}</td>
+							<td class="">
+								<span ng-if="Inspection.completed==true">Completed</span>
+								<span ng-if="Inspection.completed==false">Uncompleted</span>
+							</td>
+							<td class="align-center">{{ Inspection.opportunity }}</td>
+							<td class="last align-center"><a ng-href="#inspections/{{ Inspection.id }}" class="inspection-details-view"></a></td>
+						</tr>
+						<tr ng-repeat-end  ng-if="Inspection.show_components==1">
+							<td colspan="11" style="padding: 0px;">
+
+								<table width="100%" class="tbl-inspection-components bg-{{Inspection.color}}-light ">
+									<tr ng-repeat-start="comp in Inspection.components" class="row bg-{{comp.left.color}}-light">
+										<td class="col-md-1">
+											<div class="{{usv_component[comp.component_type].icon_cls}} inspection-components-particon"></div>
+											<div class="inspection-components-percentage text-{{comp.left.color}}">{{comp.left.percentage}}</span>
+										</td>
+										<td class="col-md-1">L {{usv_component[comp.component_type].name}}</td>
+										<td class="col-md-1">
+											<img src="./images/icons/measuring-tape-icon.png" ng-if="comp.left.tool_name == 'Tape Measure'"/>
+			                                <img src="./images/icons/ultrasonic-icon.png" ng-if="comp.left.tool_name == 'Ultrasonic'"/>
+			                                <img src="./images/icons/depth-gauge-icon.png" ng-if="comp.left.tool_name == 'Depth Gauge'"/>
+			                                <img src="./images/icons/caliper-icon.png" ng-if="comp.left.tool_name == 'Caliper'"/>
+			                                <div class="inspection-components-measured">{{ comp.left.measured }}<sup>in</sup> / {{ comp.left.measured_metric }}<sup>mm</sup></div>
+			                            </td>
+			                            <!--
+										<td class="col-md-3">Part Number: </td>
+										<td class="col-md-3"><i>100% Wear Date: <span ng-if="comp.left.full_wear_date">{{ comp.left.full_wear_date }}</span></i></td>
+										<td class="col-md-3"><i>120% Wear Date: <span ng-if="comp.left.over_wear_date">{{ comp.left.over_wear_date }}</span></i></td>
+										-->
+									</tr>
+									<tr ng-repeat-end class="row bg-{{comp.right.color}}-light">
+										<td class="col-md-1">
+											<div class="{{usv_component[comp.component_type].icon_cls}} inspection-components-particon"></div>
+											<div class="inspection-components-percentage text-{{comp.right.color}}">{{comp.right.percentage}}</div>
+										</td>
+										<td class="col-md-1">R {{usv_component[comp.component_type].name}}</td>
+										<td class="col-md-1">
+											<img src="./images/icons/measuring-tape-icon.png" ng-if="comp.right.tool_name == 'Tape Measure'"/>
+			                                <img src="./images/icons/ultrasonic-icon.png" ng-if="comp.right.tool_name == 'Ultrasonic'"/>
+			                                <img src="./images/icons/depth-gauge-icon.png" ng-if="comp.right.tool_name == 'Depth Gauge'"/>
+			                                <img src="./images/icons/caliper-icon.png" ng-if="comp.right.tool_name == 'Caliper'"/>
+			                                <div class="inspection-components-measured">{{ comp.right.measured }}<sup>in</sup> / {{ comp.right.measured_metric }}<sup>mm</sup></div>
+			                            </td>
+			                            <!--
+										<td class="col-md-3">Part Number: </td>
+										<td class="col-md-3"><i>100% Wear Date: <span ng-if="comp.right.full_wear_date">{{ comp.right.full_wear_date }}</span></i></td>
+										<td class="col-md-3"><i>120% Wear Date: <span ng-if="comp.right.over_wear_date">{{ comp.right.over_wear_date }}</span></i></td>
+										-->
+									</tr>
+								</table>
+
+							</td>
+						</tr>
+					</tbody>
+				</table>
+
+			</div>
+
+ 		</section>
+    </div>
+</article>
+
+<script type="text/ng-template" id="dashboard-carousel.html">
+    <div class="modal-body">
+    	<div class="dashboard-carousel">
+	    	<ul rn-carousel rn-carousel-controls rn-carousel-index="carouselIndex">
+                <li ng-repeat="image in images track by $index">
+                    <div ng-style="{'background-image': 'url(' + image.image + ')'}" class="image"></div>
+                </li>
+            </ul>
+            <div class="info">
+            	{{ carouselIndex+1 }} of {{ images.length }}
+            	<a ng-href="#inspections/{{insid}}" style="float:right;">IN # {{insid}}</a>
+            </div>
+            <a ng-click="close()" class="closebtn"></a>
+		</div>
+    </div>
+</script>

@@ -1,0 +1,58 @@
+<div id="fb-nav" data-ng-include data-src="'views/partials/formbuilder/nav.html'"></div>
+
+<div id="fb-header">
+	<div id="fb-header-main">
+		Question Builder<img id="spinner" src="./images/spinner.gif" width="30px" height="30px" style="display: none;">
+		<input type="button" id="tpl-save" value="Save" ng-click="SaveTask()" class="btn-blue" style="float:right;">
+		
+	</div>
+	<div id="fb-header-box">
+		Question Type Box
+	</div>
+</div>
+
+<div id="fb-taskbuilder">
+	<div id="fb-taskbuilder-edit">
+		<h1>Create Question</h1>
+		<div data-ng-include data-src="'views/partials/formbuilder/steps/task.edit.html'"></div>
+		<div ng-repeat="Step in NewSteps" data-ng-include data-src="'views/partials/formbuilder/steps/base_edit.html'" style="margin: 0; width: auto;height:auto;position:relative;">
+		</div>
+	</div>
+	<div id="fb-taskbuilder-view" style="padding:15px 10px;">
+		<h2>Preview Question</h2>
+		<div data-ng-include data-src="'views/partials/formbuilder/steps/task.view.html'"></div>
+		<div ng-repeat="Step in NewSteps" data-ng-include data-src="'views/partials/formbuilder/steps/base_preview.html'" style="margin: 0; width: auto;height:auto;position:relative;">
+		</div>
+	</div>
+	<!-- <div data-ng-include data-src="'views/partials/formbuilder/dropzone.html'"></div> -->
+
+<div id="fb-taskbuilder-box">
+<br>
+<button ng-click="AddStep()">Add a Step</button>
+<br><br>
+<!--
+	<span class="dark_nav">Filter your results</span>
+	<ul id="filter_options">
+		<li><input type="text" placeholder="Search"></input></li>
+		<li><input type="checkbox"></input>All</li>
+		<li><input type="checkbox"></input>Modustri</li>
+		<li><input type="checkbox"></input>Owned by Me</li>
+		<li><input type="checkbox"></input>My Dealership</li>
+		<li><input type="checkbox"></input>Templates</li>
+		<li><input type="checkbox"></input>Inspection Types</li>
+		<li><input type="checkbox"></input>Tasks</li>
+	</ul>
+-->
+	<div id="elements_list">
+		<div class="elements_header_new">
+			<h3>New from Blank</h3>
+		</div>
+		<div ng-repeat="tplobj in TaskTypes" data-ng-include data-src="'views/partials/formbuilder/steps/list_element.html'"></div>
+		<div class="elements_header">
+			<h3>New from Existing</h3>
+		</div>
+		<div class="existing" ng-repeat="tplobj in ListTasks" data-ng-include data-src="'views/partials/formbuilder/steps/list_element.html'"></div>
+	</div>
+	<!-- keep -->
+</div>
+</div>

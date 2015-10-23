@@ -1,0 +1,39 @@
+<article class="row">
+    <div id="dashboard">
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs">
+            <li><a href="#/reports/" data-toggle="tab">Graphs</a></li>
+            <li class="active"><a href="#/longranges/" data-toggle="tab">Long Range Graphs</a></li>
+        </ul>
+
+        <!-- Tab panes -->
+        <div class="tab-content">
+            <!-- Tab Drilldowns -->
+            <div class="tab-pane active" id="longranges">
+                <h1>Daily Inspection Reports</h1>
+                <p></p>
+                <div id="stock-chart" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+                <p></p>
+                <h1>Detail Inspection Reports</h1>
+                <p></p>
+                <div id="detail-stock-chart" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+                <p></p>
+
+                <h1>Machine High-Lows Wear Detail Reports</h1>
+                <p></p>
+                <div  class="filter-row">
+                    <fieldset>
+
+                    <select ng-change="UpdateMachineChart();" ng-model="machineChartSearchFilter"
+                            ng-options="s as s for s in chartMachines">
+                    </select>
+                    </fieldset>
+                    <div class="clearboth"></div>
+                </div>
+                <div id="machine-stock-chart" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+                <p></p>
+
+            </div>
+        </div>
+    </div>
+</article>

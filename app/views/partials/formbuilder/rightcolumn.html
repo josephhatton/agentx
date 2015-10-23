@@ -1,0 +1,22 @@
+<div id="fb_right_col">
+	<!--
+	<span class="dark_nav">Filter your results</span>
+	<ul id="filter_options">
+		<li><input type="text" placeholder="Search"></input></li>
+		<li><input type="checkbox"></input>All</li>
+		<li><input type="checkbox"></input>Modustri</li>
+		<li><input type="checkbox"></input>Owned by Me</li>
+		<li><input type="checkbox"></input>My Dealership</li>
+		<li><input type="checkbox"></input>Templates</li>
+		<li><input type="checkbox"></input>Inspection Types</li>
+		<li><input type="checkbox"></input>Tasks</li>
+	</ul>
+	-->
+	<div id="elements_list">
+		<div ng-repeat="tplobj in ListTemplates" data-ng-include data-src="'views/partials/formbuilder/templates/list_element.html'"></div>
+
+		<div ng-repeat="tplobj in ListInspections" data-ng-include data-src="'views/partials/formbuilder/inspections/list_element.html'"></div>
+
+		<div ng-repeat="tplobj in ListTasks" data-ng-include data-src="'views/partials/formbuilder/tasks/list_element.html'"></div>
+	</div> <!-- keep -->
+</div>

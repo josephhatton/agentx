@@ -1,0 +1,42 @@
+{
+  "name": "modustriportal",
+  "version": "1.0.0",
+  "dependencies": {},
+  "devDependencies": {
+    "gulp": "",
+    "gulp-autoprefixer": "",
+    "gulp-browserify": "^0.5.0",
+    "gulp-clean": "",
+    "gulp-concat": "",
+    "gulp-exec": "",
+    "gulp-ftp": "",
+    "gulp-html-replace": "",
+    "gulp-jasmine": "",
+    "gulp-karma": "",
+    "gulp-livereload": "",
+    "gulp-minify-css": "",
+    "gulp-ngmin": "",
+    "gulp-order": "",
+    "gulp-rename": "",
+    "gulp-uglify": "",
+    "gulp-util": "",
+    "karma": "",
+    "karma-chrome-launcher": "",
+    "karma-coffee-preprocessor": "",
+    "karma-firefox-launcher": "",
+    "karma-html2js-preprocessor": "",
+    "karma-jasmine": "",
+    "karma-ng-html2js-preprocessor": "",
+    "karma-phantomjs-launcher": "",
+    "karma-requirejs": "",
+    "karma-safari-launcher": "",
+    "karma-script-launcher": "",
+    "map-stream": "",
+    "minimatch": "^0.3.0",
+    "q": "^1.0.1",
+    "through": ""
+  },
+  "engines": {
+    "node": ">=0.10.0"
+  }
+}

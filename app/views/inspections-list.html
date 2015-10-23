@@ -1,0 +1,115 @@
+<nav class="sub-nav-btns inspection">
+    <div class="seventy-width-block">
+    	<div class="add-button-row top-add-buttons" data-ng-show="uiShow('create')">
+	    	<a href="#/machines/add" class="add-btn green-button">Add Machine <span class="add-machine"></span></a>
+	        <a href="#/customers/add" class="add-btn green-button">Add Customer <span class="add-customer"></span></a>
+	        <a href="#/inspections/add" class="add-btn green-button">Add Inspection <span class="add-inspection"></span></a>
+	    	<div class="clearboth"></div>
+    	</div>
+    </div>
+    <div class="thirty-width-block">
+    	<div class="sub-search">
+    		<input type="text" class="rounded3px input160w alignright" md-Autocomplete-Search="inspections" placeholder="Search Inspections" />
+    	</div>
+    </div>
+    <div class="pagination-top">
+        <div class="pagination" md-Pagination="inspections" ng-hide="paginationShow==false"></div>
+    </div>
+</nav>
+
+<nav class="sub-nav-btns inspection">
+    <div class="date-range half-width-block">
+        <mac-datepicker id="sortFromDate" mac-datepicker-id="sortFromDate" ng-model="sortFromDate" mac-datepicker-model="sortFromDate"></mac-datepicker>
+        <div class="arrow sub-nav-block">
+            <p>&nbsp;</p>
+        </div>
+        <mac-datepicker id="sortToDate" mac-datepicker-id="sortToDate" ng-model="sortToDate" mac-datepicker-model="sortToDate"></mac-datepicker>
+        <div class="clear-datepickers" ng-click="clearDatePickers()">Clear</div>
+    </div>
+</nav>
+
+<table width="100%" ng-init="predicate='datestring';reversed=true" id="inspections-list" class="green-list-header data-display">
+	<tr>
+		<th>&nbsp;</th>
+        <th sort predicate="'id'" by="predicate" reversed="reversed">Machine</th>
+        <th sort predicate="'inspection_obj.customer.name'" by="predicate" reversed="reversed">Customer</th>
+        <th sort predicate="'datestring'" by="predicate" reversed="reversed">Date</th>
+        <th sort predicate="'inspection_obj.user.username'" by="predicate" reversed="reversed">Inspector</th>
+	</tr>
+	<tr class="list-entry repeated-item animated fadeIn" ng-repeat="Ins in Inspections | orderBy:predicate:reversed">
+		<td>
+            <button ng-href="{{ Ins.inspection_obj.machine.img_full }}"
+               ng-click="open( Ins.inspection_obj.machine.img_full)"
+                ng-show="Ins.inspection_obj.machine.img">
+                <img width="140" ng-src="{{ Ins.inspection_obj.machine.img }}" src="images/tmp.png" />
+            </button>
+            <img width="140" src="images/tmp.png" ng-hide="Ins.inspection_obj.machine.img" />
+        </td>
+		<td>
+			<h2><a href="#/inspections/{{Ins.id}}">Inspection {{ Ins.id }}</a></h2>
+			<table class="inner-data-display">
+				<tr class="serial-number">
+					<td class="alignright">Serial Number:</td>
+					<td width="10">&nbsp;</td>
+					<td><a ng-href="#/machines/{{ Ins.inspection_obj.machine.id }}" ng-bind="Ins.inspection_obj.machine.serial"></a></td>
+				</tr>
+				<tr class="unit-number">
+					<td class="alignright">Unit Number:</td>
+					<td width="10">&nbsp;</td>
+					<td ng-bind="Ins.inspection_obj.machine.equipment_id"></td>
+				</tr>
+				<tr class="manufacturer">
+					<td class="alignright">Manufacturer:</td>
+					<td width="10">&nbsp;</td>
+					<td ng-bind="Ins.inspection_obj.manufacturer.company"></td>
+				</tr>
+				<tr class="model">
+					<td class="alignright">Model:</td>
+					<td width="10">&nbsp;</td>
+					<td ng-bind="Ins.inspection_obj.machine.model"></td>
+				</tr>
+			</table>
+		</td>
+		<td>
+			<table class="inner-data-display">
+				<tr class="customer-name">
+					<td>&nbsp;</td>
+					<td width="10">&nbsp;</td>
+					<td class="customer-name-field">
+                        <a ng-href="#customers/{{ Ins.inspection_obj.customer.id }}" ng-bind="Ins.inspection_obj.customer.name"></a>
+                    </td>
+				</tr>
+				<tr class="phone">
+					<td class="alignright">Phone:</td>
+					<td width="10">&nbsp;</td>
+					<td ng-bind="Ins.inspection_obj.customer.phone"></td>
+				</tr>
+				<tr class="email">
+					<td class="alignright">Email:</td>
+					<td width="10">&nbsp;</td>
+					<td><a ng-href="mailto:{{ Ins.inspection.obj.customer.email }}" ng-bind="Ins.inspection_obj.customer.email"></a></td>
+				</tr>
+			</table>
+		</td>
+		<td class="date">
+			<div ng-bind="Ins.datestring"></div>
+		</td>
+		<td class="username">
+			<div ng-bind="Ins.inspection_obj.user.username"></div>
+		</td>
+	</tr>
+</table>
+
+<div class="pagination-wrapper">
+    <div class="pagination alignright" md-Pagination ng-hide="paginationShow==false"></div>
+</div>
+<script src="scripts/ui/modals.js"></script>
+
+<div inner-html-bind inner-html="modal_html_template" class="hidden modal-content" style="margin-top:150px">
+    <div class="modal-body">
+        <img src="{{ img }}" />
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" ng-click="close()">Close</button>
+    </div>
+</div>

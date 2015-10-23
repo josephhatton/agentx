@@ -1,0 +1,4 @@
+<div ng-class="{'icon-expanded': Task.expanded, 'icon-collapsed': !Task.expanded}" ng-click="Task.expanded=!Task.expanded;"></div>
+<div class="view-task-title">{{Task.name}}</div>
+
+<div ng-if="Task.expanded" ng-repeat="Step in Task.instructions.steps" ng-init="" data-ng-include data-src="'views/partials/formbuilder/steps/base_preview.html'" class="view-step" style="margin: 0; width: auto;height:auto;position:relative;">

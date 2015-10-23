@@ -1,0 +1,491 @@
+$nav_columns: #535353;
+$dark_nav: #303030;
+$template_row_bg: #f8f8f8;
+$task_icn_color: #9ECAF8;
+$insp_icn_color: #7095C2;
+$tmpl_icn_color: #416087;
+
+$fieldsetbghv: #5bb55d;
+$fieldsetbg: #2D612C;
+
+$red: #FF1700;
+$green: #5BB55D;
+$orange: #FF8600;
+
+div.form_build_edit
+{
+	width: 48%;
+	margin: 0;
+	float: left;
+	position: relative;
+}
+
+div.form_build_preview
+{
+	width: 48%;
+	margin: 0;
+	float: left;
+	position: relative;
+	background-color: $tmpl_icn_color;
+}
+
+div.elements_header_new
+{
+	background-color: $task_icn_color;
+	height: 40px;
+	padding-left: 10px;
+	padding-top: 10px;
+	border-bottom: 1px solid $insp_icn_color;
+}
+
+div.elements_header_new h3
+{
+	color: white;
+	margin: 0;
+	padding: 0;
+}
+
+div.elements_header
+{
+	background-color: $insp_icn_color;
+	border-bottom: 1px solid $task_icn_color;
+	height: 40px;
+	padding-left: 10px;
+	padding-top: 10px;
+}
+
+div.elements_header h3
+{
+	color: white;
+	margin: 0;
+	padding: 0;
+}
+
+#elements_list > div.existing > div > div.template_icn.task{
+	background-color: $insp_icn_color;
+}
+
+.attn_img{
+	width: 32px;
+	height: 32px;
+}
+
+.step_cont{
+	background-color: #E0E0E0;
+}
+
+
+.element_opt{
+	width: auto;
+	margin-left: 0;
+	margin-right: 0;
+	height: 26px;
+	line-height: 22px;
+}
+
+div.step_help{
+	position: relative;
+	float: right;
+	margin: 6px;
+	display: block;
+}
+
+div.step_boolean{
+	margin-bottom: 10px;
+}
+
+div.required
+{
+	border: 1px solid $red;
+}
+
+div.form_build_preview>h2
+{
+	color: $template_row_bg;
+}
+
+fieldset.required legend
+{
+	background-color: $red;
+	border-color: $red;
+}
+
+fieldset{
+	margin-bottom: 20px;
+	margin-left: 4px;
+	margin-right: 4px;
+	padding-left: 2px;
+	padding-bottom: 4px;
+	border: 1px solid $fieldsetbg;
+	background-color: #f8f8f8;
+}
+
+fieldset.inspection_type
+{
+	border-color: $insp_icn_color;
+}
+
+fieldset.task_type
+{
+	border-color: $task_icn_color;
+}
+
+fieldset>legend
+{
+	font-size: 16px;
+	color: $template_row_bg;
+	background-color: $fieldsetbg;
+	text-align: center;
+	line-height: 18px;
+	border: 1px solid $fieldsetbg;
+	border-radius: 3px;
+}
+
+fieldset.inspection_type>legend
+{
+	border-color: $insp_icn_color;
+	background-color: $insp_icn_color;
+}
+
+fieldset.task_type>legend
+{
+	border-color: $task_icn_color;
+	background-color: $task_icn_color;
+	color: $tmpl_icn_color;
+}
+
+fieldset input[type=text]
+{
+	width: 180px;
+}
+
+fieldset textarea
+{
+	width: 240px;
+}
+
+fieldset input[type=number]
+{
+	width: 110px;
+}
+
+fieldset select
+{
+	width: 180px;
+}
+
+.element_cont{
+	position: relative;
+	width: 48%;
+	float: left;
+	clear: left;
+}
+
+.rem_widget {
+	-moz-box-shadow:inset 0px 1px 0px 0px #f5978e;
+	-webkit-box-shadow:inset 0px 1px 0px 0px #f5978e;
+	box-shadow:inset 0px 1px 0px 0px #f5978e;
+	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #f24537), color-stop(1, #c62d1f));
+	background:-moz-linear-gradient(top, #f24537 5%, #c62d1f 100%);
+	background:-webkit-linear-gradient(top, #f24537 5%, #c62d1f 100%);
+	background:-o-linear-gradient(top, #f24537 5%, #c62d1f 100%);
+	background:-ms-linear-gradient(top, #f24537 5%, #c62d1f 100%);
+	background:linear-gradient(to bottom, #f24537 5%, #c62d1f 100%);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#f24537', endColorstr='#c62d1f',GradientType=0);
+	background-color:#f24537;
+	border:1px solid #d02718;
+	display:inline-block;
+	float: right;
+	cursor:pointer;
+	color:#ffffff;
+	padding:2px;
+	margin-right: 4px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #810e05;
+}
+.rem_widget:hover {
+	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #c62d1f), color-stop(1, #f24537));
+	background:-moz-linear-gradient(top, #c62d1f 5%, #f24537 100%);
+	background:-webkit-linear-gradient(top, #c62d1f 5%, #f24537 100%);
+	background:-o-linear-gradient(top, #c62d1f 5%, #f24537 100%);
+	background:-ms-linear-gradient(top, #c62d1f 5%, #f24537 100%);
+	background:linear-gradient(to bottom, #c62d1f 5%, #f24537 100%);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#c62d1f', endColorstr='#f24537',GradientType=0);
+	background-color:#c62d1f;
+}
+.rem_widget:active {
+	position:relative;
+	top:1px;
+}
+
+
+#page-wrapper{
+	margin: 0;
+	padding: 0;
+}
+
+#main-wrapper{
+	width: auto;
+	height: auto;
+	margin: 0;
+	position: fixed;
+	top: 80px;
+	bottom: 40px;
+	left: 0;
+	right: 0;
+	overflow: none;
+}
+
+#footer-wrapper{
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+}
+
+#template-wrapper{
+	padding: 0;
+	width: 100%;
+	height: 100%;
+	position: relative;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+}
+
+#formbuilder{
+	width: 100%;
+	height: 100%;
+}
+
+#dropped_elements{
+	position: relative;
+	border: 1px solid $dark_nav;
+	background-color: $template_row_bg;
+	width: auto;
+	height: 300px;
+	margin: 0;
+}
+
+#add_element{
+	position: relative;
+	border: 1px solid $dark_nav;
+	background-color: $nav_columns;
+	color: white;
+	text-align: center;
+	width: auto;
+	height: 60px;
+	margin: 0;
+}
+
+#add_element h3
+{
+	color: white;
+}
+
+#add_element.drag-enter {
+    border: solid 5px red;
+}
+
+#filter_options{
+	background-color: #A2A2A2;
+	padding: 10px;
+
+}
+
+#fb_left_col {
+	width: 200px;
+	left: 0;
+	top: 0;
+	bottom: 80px;
+	position: absolute;
+	margin-top: 0;
+	margin-bottom: 0;
+	height: 100%;
+	background-color: $nav_columns;
+	color: white;
+	border-right: 1px solid $dark_nav;
+}
+
+#fb_center_col{
+	position: absolute;
+	width: auto;
+	left: 200px;
+	right: 220px;
+	bottom: 150px;
+	padding-bottom: 60px;
+	top: 0;
+	padding-left: 8px;
+	padding-right: 8px;
+	height: auto;
+	overflow: auto;
+	background-color: white;
+}
+
+#fb_right_col{
+	width: 220px;
+	right: 0;
+	top: 0;
+	bottom: 80px;
+	margin: 0;
+	height: auto;
+	background-color: $nav_columns;
+	color: white;
+	position: absolute;
+	border-left: 1px solid $dark_nav;
+	overflow:scroll;
+}
+
+#elements_list{
+	height: auto;
+	margin: 0;
+	margin-bottom: 40px;
+	padding-bottom: 40px;
+}
+
+.dark_nav
+{
+	display: block;
+	background-color: $dark_nav;
+	width: auto;
+	margin: 0;
+	height: 60px;
+	text-align: left;
+	padding-left: 10px;
+	line-height: 60px;
+}
+
+.icon{
+	width: 30px;
+	height: 32px;
+	margin: 4px;
+}
+
+.icon.dashboard
+{
+	background-image: url('../images/formbuilder/dashboard.svg');
+	background-repeat: no-repeat;
+	background-position: left center;
+	background-size: 30px auto;
+	width: auto;
+	padding-left: 40px;
+}
+
+.icon.inspections
+{
+	background-image: url('../images/formbuilder/inspection.svg');
+	background-repeat: no-repeat;
+	background-position: left center;
+	background-size: 30px auto;
+	width: auto;
+	padding-left: 40px;
+}
+
+.icon.templates
+{
+	background-image: url('../images/formbuilder/template.svg');
+	background-repeat: no-repeat;
+	background-position: left center;
+	background-size: 30px auto;
+	width: auto;
+	padding-left: 40px;
+}
+
+.icon.tasks
+{
+	background-image: url('../images/formbuilder/tasks.svg');
+	background-repeat: no-repeat;
+	background-position: left center;
+	background-size: 30px auto;
+	width: auto;
+	padding-left: 40px;
+}
+
+.template_row{
+	background-color: $template_row_bg;
+	height: 40px;
+	margin-bottom: 1px;
+	clear: both;
+	width: 203px;
+	margin-left: 0;
+	margin-right: 0;
+}
+
+.template_row :hover
+{
+	background-image: url('../images/black20pct.png');
+}
+
+.template_icn{
+	width: 40px;
+	height: 40px;
+	float: left;
+	margin: 0;
+	padding: 0;
+}
+
+.template_icn.task{
+	background-color: $task_icn_color;
+}
+
+.template_icn.inspection{
+	background-color: $insp_icn_color;
+}
+
+.template_icn.template{
+	background-color: $tmpl_icn_color;
+}
+
+.template_lbl{
+	float: left;
+	width: 146px;
+	height: 40px;
+	margin: 0;
+	color: $dark_nav;
+	font-size: 8px;
+	padding-left: 1px;
+	overflow: hidden;
+	background-color: none;
+}
+
+.tpl_obj{
+	padding: 2px;
+	border: 1px solid $template_row_bg;
+}
+
+[ng-drag] {
+    -moz-user-select: -moz-none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+[ng-drag] {
+    display: block;
+    cursor: move;
+}
+
+
+[ng-drag].drag-over {
+    border: solid 1px $fieldsetbghv;
+}
+
+[ng-drag].dragging {
+    opacity: 0.5;
+}
+
+[ng-drop] {
+    display: block;
+    position: relative;
+}
+
+[ng-drop].drag-enter {
+    border: solid 3px $fieldsetbghv;
+}
+
+[ng-drop] div {
+    position: relative;
+    z-index: 2;
+}

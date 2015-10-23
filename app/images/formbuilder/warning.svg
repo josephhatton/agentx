@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="128px" height="128px" viewBox="0 0 128 128" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    <!-- Generator: Sketch 3.1 (8751) - http://www.bohemiancoding.com/sketch -->
+    <title>warning</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+        <g id="Warning-button" sketch:type="MSLayerGroup" transform="translate(-7.000000, -9.000000)">
+            <rect id="Rectangle-23" fill="#FF1700" sketch:type="MSShapeGroup" x="7" y="9" width="128" height="128" rx="6"></rect>
+            <path d="M70.921971,23.9009241 L21.8233259,110.409907 L123.76244,109.881832 L70.921971,23.9009241 Z" id="Path-42" stroke="#FFFFFF" stroke-width="5" sketch:type="MSShapeGroup"></path>
+            <path d="M74.6132812,56.9960938 L64.3920692,56.9960938 L74.6132812,73.6740875 L58.2265625,73.6740866 L84.9473095,98.587368 L73.4524931,81.4657763 L89.4210491,81.4657764 L74.6132812,56.9960938 Z" id="Path-43" stroke="#FFFFFF" stroke-width="2" fill="#FFFFFF" sketch:type="MSShapeGroup"></path>
+        </g>
+    </g>
+</svg>

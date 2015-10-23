@@ -1,0 +1,162 @@
+<section class="column-wrapper">
+    <div class="col1">
+        <table class="conditions">
+            <tr>
+                <th><label>Track Sag</label></th>
+            </tr>
+            <tr>
+                <td><span>Left</span></td>
+                <td>
+                    <div><input type="text" name="track-sag-left" id="track-sag-left"
+                        ng-model="Ins.inspection_obj.results.track_sag.left"/></div>
+                </td>
+            </tr>
+            <tr>
+                <td><span>Right</span></td>
+                <td>
+                    <div><input type="text" name="track-sag-right" id="track-sag-right"
+                        ng-model="Ins.inspection_obj.results.track_sag.right"/></div>
+                </td>
+            </tr>
+        </table>
+        <table class="conditions">
+            <tr>
+                <th><label>Extension</label></th>
+            </tr>
+            <tr>
+                <td><span>Left</span></td>
+                <td><input type="text" name="frame-extension-left" id="frame-extension-left"
+                    ng-model="Ins.inspection_obj.results.frame_extension.left"/></td>
+            </tr>
+            <tr>
+                <td><span>Right</span></td>
+                <td><input type="text" name="frame-extension-right" id="frame-extension-right"
+                    ng-model="Ins.inspection_obj.results.frame_extension.right"/></td>
+            </tr>
+        </table>
+        <table class="conditions">
+            <tr>
+                <th><label>Internal Wear</label></th>
+            </tr>
+            <tr>
+                <td><span>Left</span></td>
+                <td><input type="text" name="dry-joints-left" id="dry-joints-left"
+                    ng-model="Ins.inspection_obj.results.dry_joints.left"/></td>
+            </tr>
+            <tr>
+                <td><span>Right</span></td>
+                <td><input type="text" name="dry-joints-right" id="dry-joints-right"
+                    ng-model="Ins.inspection_obj.results.dry_joints.right"/></td>
+            </tr>
+        </table>
+        <table class="conditions">
+            <tr>
+                <th><label>Shoe Width</label></th>
+            </tr>
+            <tr>
+                <td><span>Left</span></td>
+                <td><input type="text" name="shoe-width-left" id="shoe-width-left"
+                    ng-model="Ins.inspection_obj.results.shoe_width.left"/></td>
+            </tr>
+            <tr>
+                <td><span>Right</span></td>
+                <td><input type="text" name="shoe-width-right" id="shoe-width-right"
+                    ng-model="Ins.inspection_obj.results.shoe_width.right"/></td>
+            </tr>
+        </table>
+    </div>
+    <div class="col2">
+        <div class="underfoot-conditions">
+            <div class="underfoot-conditions-header">
+                <span>Low</span>
+                <span>Mod</span>
+                <span>High</span>
+            </div>
+            <div class="radios-row">
+                <label>Impact</label>
+                <div class="radios">
+                    <input type="radio" name="impact"
+                        ng-model="Ins.inspection_obj.results.underfoot_conditions.impact" value="high">
+                    <input type="radio" name="impact"
+                        ng-model="Ins.inspection_obj.results.underfoot_conditions.impact" value="mod">
+                    <input type="radio" name="impact"
+                        ng-model="Ins.inspection_obj.results.underfoot_conditions.impact" value="low">
+                </div>
+            </div>
+            <div class="radios-row">
+                <label>Abrasive</label>
+                <div class="radios">
+                    <input type="radio" name="abrasive" value="high"
+                        ng-model="Ins.inspection_obj.results.underfoot_conditions.abrasive">
+                    <input type="radio" name="abrasive" value="mod"
+                        ng-model="Ins.inspection_obj.results.underfoot_conditions.abrasive">
+                    <input type="radio" name="abrasive" value="low"
+                        ng-model="Ins.inspection_obj.results.underfoot_conditions.abrasive">
+                </div>
+            </div>
+            <div class="radios-row">
+                <label>Moisture</label>
+                <div class="radios">
+                    <input type="radio" name="moisture" value="high"
+                        ng-model="Ins.inspection_obj.results.underfoot_conditions.moisture">
+                    <input type="radio" name="moisture" value="mod"
+                        ng-model="Ins.inspection_obj.results.underfoot_conditions.moisture">
+                    <input type="radio" name="moisture" value="low"
+                        ng-model="Ins.inspection_obj.results.underfoot_conditions.moisture">
+                </div>
+            </div>
+            <div class="radios-row">
+                <label>Packing</label>
+                <div class="radios">
+                    <input type="radio" name="packing" value="high"
+                        ng-model="Ins.inspection_obj.results.underfoot_conditions.packing">
+                    <input type="radio" name="packing" value="mod"
+                        ng-model="Ins.inspection_obj.results.underfoot_conditions.packing">
+                    <input type="radio" name="packing" value="low"
+                        ng-model="Ins.inspection_obj.results.underfoot_conditions.packing">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col3">
+        <div class="allowable-wear">
+            <div class="allowable-wear-header">
+                <span>Greater</span>
+                <span>Lesser</span>
+            </div>
+            <div class="radios-row">
+                <label>Bushing Allowable Wear</label>
+                <div class="radios">
+                    <input type="radio" name="bushing-allowable-wear"
+                        ng-model="Ins.inspection_obj.results.bushing_allowable_wear" value="lesser">
+                    <input type="radio" name="bushing-allowable-wear"
+                        ng-model="Ins.inspection_obj.results.bushing_allowable_wear" value="greater">
+                </div>
+            </div>
+            <div class="radios-row">
+                <label>Link Allowable Wear</label>
+                <div class="radios">
+                    <input type="radio" name="link-allowable-wear" value="lesser"
+                        ng-model="Ins.inspection_obj.results.link_allowable_wear">
+                    <input type="radio" name="link-allowable-wear" value="greater"
+                        ng-model="Ins.inspection_obj.results.link_allowable_wear">
+                </div>
+            </div>
+        </div>
+        <div class="allowable-wear hour-meter-operative">
+            <div class="allowable-wear-header">
+                <span>Yes</span>
+                <span>No</span>
+            </div>
+            <div class="radios-row">
+                <label>Hour Meter Operative</label>
+                <div class="radios">
+                    <input type="radio" name="hour-meter-operative"
+                        ng-model="Ins.inspection_obj.results.hour_meter_operative" value="no"/>
+                    <input type="radio" name="hour-meter-operative"
+                        ng-model="Ins.inspection_obj.results.hour_meter_operative" value="yes"/>                    
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

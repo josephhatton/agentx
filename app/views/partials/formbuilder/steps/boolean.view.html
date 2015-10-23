@@ -1,0 +1,12 @@
+<div class="step_boolean task_type" ng-class="Step.boolean.boolean_req ? 'required' : '';">
+	<div class="view-step-type-direction" ng-bind="Step.boolean.directions"></div>
+	<input ng-model="Step.boolean.value" ng-value="0" type="radio" name="boolean_v" value="0">&nbsp;
+	<span ng-if="Step.boolean.boolean_type=='0'">Incomplete</span>
+	<span ng-if="Step.boolean.boolean_type=='1'">No</span>
+	<span ng-if="Step.boolean.boolean_type=='2'">Off</span>
+	<br>
+	<input ng-model="Step.boolean.value" ng-value="1" type="radio" name="boolean_v" value="1">&nbsp;
+	<span ng-if="Step.boolean.boolean_type=='0'">Complete</span>
+	<span ng-if="Step.boolean.boolean_type=='1'">Yes</span>
+	<span ng-if="Step.boolean.boolean_type=='2'">On</span>
+</div>

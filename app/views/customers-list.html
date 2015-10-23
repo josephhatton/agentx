@@ -1,0 +1,94 @@
+<div class="customerlistpage">
+
+<nav id="section-navbtns" class="sub-nav-btns">
+	
+	<div class="row">
+		<div class="col-xs-12 col-md-8 nopadding">
+			<a class="icon-white-button icon-white-button-edit" popover="Edit" popover-placement="bottom" popover-trigger="mouseenter" style="margin-right: 10px;"></a>
+			<a class="icon-white-button icon-white-button-contact" popover="Contact" popover-placement="bottom" popover-trigger="mouseenter" style="margin-right: 10px;"></a>
+			<a class="icon-white-button icon-white-button-delete" popover="Delete" popover-placement="bottom" popover-trigger="mouseenter" style="margin-right: 10px;"></a>
+			<a href="#/customers/add" class="green-button fullwidth align-center" style="float: none;">Create New Customer</a>
+		</div>
+		<div class="col-xs-12 col-md-4 nopadding sub-search">
+            <input type="text" class="rounded3px input160w alignright" md-Autocomplete-Search="customers" placeholder="Search Customers" style="margin-right:0px; width:300px !important;" />
+		</div>
+	</div>
+    <div class="pagination" md-Pagination style="height:auto;"></div>
+    
+    <ul id="customers-index" ng-show="big_list">
+        <li><a ng-href="#/customers/list/A/1/">A</a></li>
+        <li><a ng-href="#/customers/list/B/1/">B</a></li>
+        <li><a ng-href="#/customers/list/C/1/">C</a></li>
+        <li><a ng-href="#/customers/list/D/1/">D</a></li>
+        <li><a ng-href="#/customers/list/E/1/">E</a></li>
+        <li><a ng-href="#/customers/list/F/1/">F</a></li>
+        <li><a ng-href="#/customers/list/G/1/">G</a></li>
+        <li><a ng-href="#/customers/list/H/1/">H</a></li>
+        <li><a ng-href="#/customers/list/I/1/">I</a></li>
+        <li><a ng-href="#/customers/list/J/1/">J</a></li>
+        <li><a ng-href="#/customers/list/K/1/">K</a></li>
+        <li><a ng-href="#/customers/list/L/1/">L</a></li>
+        <li><a ng-href="#/customers/list/M/1/">M</a></li>
+        <li><a ng-href="#/customers/list/N/1/">N</a></li>
+        <li><a ng-href="#/customers/list/O/1/">O</a></li>
+        <li><a ng-href="#/customers/list/P/1/">P</a></li>
+        <li><a ng-href="#/customers/list/Q/1/">Q</a></li>
+        <li><a ng-href="#/customers/list/R/1/">R</a></li>
+        <li><a ng-href="#/customers/list/S/1/">S</a></li>
+        <li><a ng-href="#/customers/list/T/1/">T</a></li>
+        <li><a ng-href="#/customers/list/U/1/">U</a></li>
+        <li><a ng-href="#/customers/list/V/1/">V</a></li>
+        <li><a ng-href="#/customers/list/W/1/">W</a></li>
+        <li><a ng-href="#/customers/list/X/1/">X</a></li>
+        <li><a ng-href="#/customers/list/Y/1/">Y</a></li>
+        <li><a ng-href="#/customers/list/Z/1/">Z</a></li>
+    </ul>
+</nav>		            
+		        
+<div id="section-customerlist">
+	<table id="tbl-customerlist" width="100%" ng-init="predicate='last_inspected';reversed=true" class="gray-thead">
+		<thead>
+		    <tr>
+				<th></th>
+		        <th sort predicate="'name'" by="predicate" reversed="reversed">Customer</th>
+		        <th sort predicate="'email'" by="predicate" reversed="reversed">Email</th>
+		        <th sort predicate="'phone'" by="predicate" reversed="reversed">Phone</th>
+		        <th sort predicate="'number_of_machines'" by="predicate" reversed="reversed">Fleet Size</th>
+		        <th sort predicate="'last_inspected'" by="predicate" reversed="reversed">Last Inspection Date</th>		
+			</tr>
+		</thead>
+		<tbody>
+			<tr class="animated fadeIn" ng-repeat="Customer in Customers | orderBy:predicate:reversed">
+				<td>
+		            <a ng-href="{{ Customer.img_full }}" ng-show="Customer.img_full" data-modal="lightbox" target="_blank">
+					    <img ng-src="{{ Customer.img }}" class="customer-img" />
+		            </a>
+		            <img src="images/default_customer.png" ng-hide="Customer.img" class="customer-img customer-noimg noimg" />
+				</td>
+				<td>
+					<a ng-href="#customers/{{ Customer.id }}" ng-bind="Customer.name"></a>			
+				</td>
+				<td>
+					<a ng-href="mailto:{{ Customer.email }}" ng-bind="Customer.email"></a>
+				</td>
+				<td>
+					{{ Customer.phone }}
+				</td>
+				<td>
+					<a ng-href="#/machines/list-by-customer/{{ Customer.id }}/1" ng-bind="Customer.number_of_machines"></a>
+				</td>
+				<td>
+					<span ng-show="Customer.last_inspector">{{ Customer.last_inspector }} - </span>
+					<span ng-show="Customer.last_inspected">{{ Customer.last_inspected }}</span>
+				</td>		
+			</tr>
+		</tbody>
+	</table>
+</div>
+
+<div class="pagination-wrapper">
+    <div class="pagination" md-Pagination></div>
+</div>
+<script src="./scripts/ui/modals.js"></script>
+
+</div>

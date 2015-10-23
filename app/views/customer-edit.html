@@ -1,0 +1,85 @@
+<form name="customer_form" novalidate>
+    <nav class="sub-nav-btns inspection">
+        <div class="seventy-width-block sub-nav-block">
+            <a href="#/machines/add" class="add-btn green-button">Add Machine <span class="add-machine"></span></a>
+            <a href="#/customers/add" class="add-btn green-button">Add Customer <span class="add-customer"></span></a>
+            <a href="#/inspections/add" class="add-btn green-button">Add Inspection <span class="add-inspection"></span></a>
+            <div class="clearboth"></div>
+        </div>
+        <div class="thirty-width-block sub-nav-block">
+            <a class="noimg-btn-right green-button" data-ng-click="saveCustomer()">Save Customer</a>
+            <a class="noimg-btn-right green-button" ng-click="cancelCustomer()">Cancel</a>
+            <a class="noimg-btn-right green-button" ng-click="deleteCustomer()" data-ng-show="uiShow('delete')">Delete</a>
+        </div>
+    </nav>
+    <div class="white-gray-bg animated fadeIn">
+        <article class="info-row">
+
+            <div class="info-block image" ng-init="new_image = false">
+                <img ng-hide="new_image" width="140" ng-src="{{ Customer.img }}" src="images/tmp.png" />
+                <div ng-show="new_image" md-image-upload="customer"></div>
+                <div id="image-btn-wrapper">
+                    <a href="" ng-hide="new_image" ng-click="new_image = !new_image" class="image-upload-btn">Upload new image</a>
+                    <a href="" ng-show="new_image" ng-click="new_image = false" class="remove-image">Remove image</a>
+                </div>
+            </div>
+            <div class="info-block unit-info">
+                <div class="info-details">
+                    <label>Name *:</label>
+                    <div class="field-details">
+                        <input type="text" id="customer_name" name="customer_name" ng-model="Customer.name" placeholder="Name" ng-minlength="3" ng-maxlength="200" ng-pattern="/^[a-zA-Z0-9]+[a-zA-Z\s]*[a-zA-Z0-9]+$/" required ng-focus>
+                        <div class="error-container ng-hide" ng-show="customer_form.customer_name.$dirty && customer_form.customer_name.$invalid && !customer_form.customer_name.$focused">
+                            <small class="error ng-hide" ng-show="customer_form.customer_name.$error.required">Name is required.</small>
+                            <small class="error ng-hide" ng-show="customer_form.customer_name.$error.minlength">Name is required to be at least 3 characters.</small>
+                            <small class="error ng-hide" ng-show="customer_form.customer_name.$error.maxlength">Name cannot be longer than 200 characters.</small>
+                            <small class="error ng-hide" ng-show="customer_form.customer_name.$error.pattern">Name should be alphabets (more than 3 chars).</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="info-details" ng-hide="new_customer">
+                    <ul>
+                        <li>Total Machines:</li>
+                        <li>Total Inspections:</li>
+                    </ul>
+                    <ul>
+                        <li ng-bind="Customer.total_machines"></li>
+                        <li ng-bind="Customer.total_inspections"></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="info-block customer" ng-hide="new_customer">
+                <div class="info-details">
+                    <label class="aligncenter">Last Inspection:</label>
+                    <h3 ng-show="Customer.last_inspected" class="aligncenter" ng-bind="Customer.last_inspected"></h3>
+                </div>
+            </div>
+            <div class="info-block customer">
+                <div class="info-details">
+                    <label>Phone :</label>
+                    <div class="field-details">
+                        <input type="text" id="customer_phone" name="customer_phone" ng-model="Customer.phone" placeholder="123-123-1234" ng-minlength="10" ng-maxlength="40" ng-pattern="/^\([0-9]{3}\)\s[0-9]{3}\s[0-9]{4}$|^[0-9]{3}-[0-9]{3}-[0-9]{4}$|^[0-9]+$/" ng-focus>
+                        <div class="error-container ng-hide" ng-show="customer_form.customer_phone.$dirty && customer_form.customer_phone.$invalid && !customer_form.customer_phone.$focused">
+                            <small class="error ng-hide" ng-show="customer_form.customer_phone.$error.minlength">Phone is required to be at least 10 characters.</small>
+                            <small class="error ng-hide" ng-show="customer_form.customer_phone.$error.maxlength">Phone cannot be longer than 40 characters.</small>
+                            <small class="error ng-hide" ng-show="customer_form.customer_phone.$error.pattern">Phone is invalid <br/>(Valid phone: <strong>(123) 123 1234</strong> or <strong>123-123-1234</strong> or <strong>1231231234</strong>).</small>
+                        </div>
+                    </div>
+                    <label>Email *:</label>
+                    <div class="field-details">
+                        <input type="email" id="customer_email" name="customer_email" ng-model="Customer.email" placeholder="your@email.com" ng-maxlength="200" ng-pattern="/^[A-Za-z0-9_.-]{2}[A-Za-z0-9_.-]*@{1}[A-Za-z0-9_.-].{1}[A-Za-z0-9_.-]+$/" required ng-focus>
+                        <div class="error-container ng-hide" ng-show="customer_form.customer_email.$dirty && customer_form.customer_email.$invalid && !customer_form.customer_email.$focused">
+                            <small class="error ng-hide" ng-show="customer_form.customer_email.$error.required">Email is required.</small>
+                            <small class="error ng-hide" ng-show="customer_form.customer_email.$error.maxlength">Email cannot be longer than 200 characters.</small>
+                            <small class="error ng-hide" ng-show="customer_form.customer_email.$error.email">Email is invalid.</small>
+                            <small class="error ng-hide" ng-show="customer_form.customer_email.$error.pattern">Email is invalid.</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="clearboth"></div>
+        </article>
+    </div>
+
+</form>

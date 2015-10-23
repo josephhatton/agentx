@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Modustri Form Builder</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+
+    <link rel="stylesheet" href="bower_components/jquery-ui/themes/south-street/jquery-ui.min.css">
+    <link rel="stylesheet" href="bower_components/angular-macgyver/lib/macgyver.css">
+    <link rel="stylesheet" href="bower_components/twitter/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="bower_components/angular-xeditable/dist/css/xeditable.css">
+    <link rel="stylesheet" href="bower_components/angular-rangeslider/angular.rangeSlider.css">
+    <link rel="stylesheet" href="bower_components/libs/angularcarousel/angular-carousel.css">
+
+    <!-- build:styles -->
+    <link rel="stylesheet" href="styles/resets.css">
+    <link rel="stylesheet" href="styles/formalize.css">
+    <link rel="stylesheet" href="styles/animate.css">
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/misc.css">
+    <link rel="stylesheet" href="styles/common.css">
+    <link rel="stylesheet" href="styles/dashboard.css">
+    <link rel="stylesheet" href="styles/formbuilder.css">
+    <!-- endbuild -->
+    <link rel="stylesheet" href="styles/print.css" media="print" />
+</head>
+<body data-ng-app="Modustri">
+    <div id="page-wrapper">
+        <section id="header-wrapper" data-ng-controller="NavigationCtrl">
+            <div class="header-inner">
+                <div class="logo-wrapper">
+                    <h1 id="logo" class="home-link">Modustri Form Builder</h1>
+                </div>
+                <div class="nav-wrapper" ng-show="username" ng-cloak>
+                    <nav id="main-nav" role="navigation">
+                        <ul>
+                            <li id="nav-dashboard">
+                                <a id="dashboard-link" href="#/dashboard/" ng-class="{active : isActiveNav('/formbuilder')}">Dashboard</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+                <div class="settings-search-wrapper">
+                    <aside id="tertiary-menu">
+                        <div ng-show="username" class="user" ng-cloak>
+                            Hello, <a href="#/settings" ng-bind="username" ng-class="{active : isActiveNav('/settings')}" show-dropdown-on-hover="top_account_setting"></a>
+                            <div id="top_account_setting" style="display:none">
+                                <ul>
+                                    <li><a href="#/settings">Account Settings</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <a ng-show="username" href="#" id="logout-link" ng-click="logout()" ng-cloak>Log Out</a>
+                    </aside>
+                </div>
+            </div>
+        </section>
+        <div id="main-wrapper" class="page">
+            <div data-ng-view id="template-wrapper" role="main"></div>
+        </div>
+
+    </div>
+    <section id="footer-wrapper" data-ng-controller="FooterNavigationCtrl">
+            <div class="footer-inner">
+                &copy; <span id="year" class="ng-hide" ng-show="copyrightYear">{{copyrightYear | date : 'yyyy'}}</span> Modustri Company. All rights reserved.
+                <a href="./eula.html" target="_blank">End User License Agreement</a> | <a href="./tos.html" target="_blank">Terms of Service</a>
+            </div>
+        </section>
+</body>
+<!-- required libraries. -->
+<script src="//maps.googleapis.com/maps/api/js?key=AIzaSyC-R14wXv_XNY8kV_fPqMObPEtMqIiv7iA&sensor=false"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.20/angular.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.20/angular-touch.min.js"></script>
+<!-- cdn failovers -->
+<script>
+    if(window.jQuery == false){
+        document.write("<script src=\"bower_components/jquery/dist/jquery.min.js\"><\/script>");
+        document.write("<script src=\"bower_components/jquery-ui/minified/jquery.ui.min.js\"><\/script>");
+    }
+    if(window.angular == false){
+        document.write("<script src=\"bower_components/angular/angular.min.js\"><\/script>")
+    }
+</script>
+<!-- utilities. -->
+<script src="bower_components/libs/angularcarousel/angular-carousel.js"></script>
+<script src="bower_components/libs/math.min.js"></script>
+<script src="bower_components/libs/sha224.js"></script>
+<script src="bower_components/libs/es6-shim.min.js"></script>
+<script src="bower_components/libs/jquery.formalize.min.js"></script>
+<script src="bower_components/underscore/underscore.js"></script>
+<script src="bower_components/moment/min/moment.min.js"></script>
+<script src="bower_components/twix/bin/twix.min.js"></script>
+<script src="bower_components/libs/picoModal.js"></script>
+<script src="bower_components/angular-route/angular-route.min.js"></script>
+<script src="bower_components/angular-animate/angular-animate.min.js"></script>
+<script src="bower_components/angular-sanitize/angular-sanitize.min.js"></script>
+<script src="bower_components/angular-xeditable/dist/js/xeditable.min.js"></script>
+<script src="bower_components/angular-cookies/angular-cookies.min.js"></script>
+<script src="bower_components/angular-macgyver/lib/macgyver.min.js"></script>
+<script src="bower_components/angular-bootstrap/ui-bootstrap.min.js"></script>
+<script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+<script src="bower_components/angular-rangeslider/angular.rangeSlider.js"></script>
+<script src="bower_components/ngDraggable/ngDraggable.js"></script>
+<script src="bower_components/angular-ui-sortable/sortable.min.js"></script>
+<script src="bower_components/angular-google-maps/dist/angular-google-maps.min.js"></script>
+
+<!-- build:scripts -->
+<script src="scripts/setup.js"></script>
+<script src="scripts/routing-formbuilder.js"></script>
+
+<script src="scripts/services/setup.js"></script>
+<script src="scripts/services/app-settings.js"></script>
+<script src="scripts/services/utils.js"></script>
+<script src="scripts/services/customer.js"></script>
+<script src="scripts/services/inspection.js"></script>
+<script src="scripts/services/user.js"></script>
+<script src="scripts/services/dealer.js"></script>
+<script src="scripts/services/machine.js"></script>
+<script src="scripts/services/password.js"></script>
+<script src="scripts/services/auth.js"></script>
+<script src="scripts/services/template.js"></script>
+
+<script src="scripts/controllers/password-set-reset.js"></script>
+<script src="scripts/controllers/update.js"></script>
+
+<script src="scripts/modustri-dir.js"></script>
+<script src="scripts/controllers/navigation.js"></script>
+<script src="scripts/controllers/formbuilder.js"></script>
+<script src="scripts/controllers/user.js"></script>
+<script src="scripts/controllers/settings.js"></script>
+<script src="scripts/controllers/login.js"></script>
+<script src="scripts/controllers/password.js"></script>
+
+<!-- endbuild -->
+<script src="https://ads.yahoo.com/pixel?id=2519975&t=1"></script>
+<img height="1" width="1" style="border-style:none;" alt="" src="https://googleads.g.doubleclick.net/pagead/viewthroughconversion/1011963747/?value=1.00&amp;label=UGrHCK2GowoQ467F4gM&amp;guid=ON&amp;script=0"/>
+<script src="https://secure.adnxs.com/seg?add=1865607&t=1" type="text/javascript"></script>
+<!--VISISTAT SNIPPET//-->
+<script type="text/javascript">
+    //<![CDATA[
+    //var DID=227097;
+    //var pcheck=(window.location.protocol == "https:") ? "https://sniff.visistat.com/live.js":"http://stats.visistat.com/live.js";
+    //document.writeln('<scr'+'ipt src="'+pcheck+'" type="text\/javascript"><\/scr'+'ipt>');
+    //]]>
+</script>
+<!--VISISTAT SNIPPET//-->
+</html>

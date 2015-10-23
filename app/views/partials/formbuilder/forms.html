@@ -1,0 +1,49 @@
+<div id="fb-nav" data-ng-include data-src="'views/partials/formbuilder/nav.html'"></div>
+<div id="fb-forms">
+	<tabset id="fb-forms-tabset">
+		<tab heading="All">
+			<table id="fb-forms-all" width="100%" class="tbl-purestyle">
+				<tbody>	
+					<tr ng-repeat="tplobj in ListForms">
+						<td width="30px">
+							<a ng-if="tplobj.type=='template'" class="icon-edit" ng-href="#/templates/{{tplobj.id}}"></a>
+							<a ng-if="tplobj.type=='instype'" class="icon-edit" ng-href="#/inspections/{{tplobj.id}}"></a>
+						</td>
+						<td><b>{{tplobj.title}}</b></td>
+						<td>{{tplobj.description}}</td>
+						<td>
+							<span ng-if="tplobj.type=='template'">Inspection</span>
+							<span ng-if="tplobj.type=='instype'">Section</span>
+						</td>
+						<td>{{tplobj.date}}</td>
+					</tr>
+				</tbody>
+			</table>
+		</tab>
+		<tab heading="Inspections">
+			<table id="fb-forms-templates" width="100%" class="tbl-purestyle">
+				<tbody>	
+					<tr ng-repeat="tplobj in ListTemplates">
+						<td width="30px"><a class="icon-edit" ng-href="#/templates/{{tplobj.id}}"></a></td>
+						<td><b>{{tplobj.title}}</b></td>
+						<td>{{tplobj.description}}</td>
+						<td>Inspection</td>
+						<td>{{tplobj.date}}</td>
+					</tr>
+				</tbody>
+			</table>
+		</tab>
+		<tab heading="Sections">
+			<table id="fb-forms-inspectiontypes" width="100%" class="tbl-purestyle">
+				<tbody>	
+					<tr ng-repeat="tplobj in ListInspections">
+						<td width="30px"><a class="icon-edit" ng-href="#/inspections/{{tplobj.id}}"></a></td>
+						<td><b>{{tplobj.title}}</b></td>
+						<td>Section</td>
+						<td>{{tplobj.date}}</td>
+					</tr>
+				</tbody>
+			</table>
+		</tab>
+	</tabset>
+</div>

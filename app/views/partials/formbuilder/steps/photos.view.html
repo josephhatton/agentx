@@ -1,0 +1,7 @@
+<div class="step_photos task_type">
+	<div class="view-step-type-direction" ng-bind="Step.photos.directions"></div>
+	<span ng-if="Step.photos.value === false">No photos added</span>
+	<div class="gen_img_tmb" ng-repeat="Img in Step.photos.value">
+		<img ng-src="ImgPath(Img)">
+	</div>
+</div>

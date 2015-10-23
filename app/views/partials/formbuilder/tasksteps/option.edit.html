@@ -1,0 +1,9 @@
+<strong>Directions</strong>
+<input type="text" ng-model="step.option.directions" />
+<strong>Add Option</strong>
+<input type="text" ng-model="step.optiontemp" placeholder="Enter new option">
+<button ng-click="step_option_add(step)">Add</button>
+<strong>Reference Key</strong>
+<div ng-repeat="Opt in step.option.option_choices track by Opt" class="element_opt">
+	{{ $index }} - {{ Opt }} <button ng-click="step_option_remove(step, $index)" class="rem_widget">X</button>
+</div>

@@ -1,0 +1,94 @@
+<div class="info-icon-block shoes">
+    <div class="icon">
+        <a class="green-button add-comp" ng-click="addPart('track_shoes')">Add Track Shoes</a>
+
+        <div class="shoes-btn graphics"></div>
+        <h1>Shoes</h1>
+    </div>
+    <form class="full-width">
+        <select ng-model="Ins.inspection_obj.results.track_shoes.model_id"
+            ng-options="component.component_id as component.label for component in Components['track_shoes']"
+            ng-change="updateAllComponentData('Track Shoe')">
+        </select>
+    </form>
+    <form class="component-row" ng-repeat="part in Ins.inspection_obj.results.track_shoes">
+        <a class=remove-component ng-click="removePart('track_shoes', $index)">&nbsp;-&nbsp;</a>
+        <section>
+
+            <!-- Left Side -->
+
+            <div class="left-component-info">
+                <div class="component-side">Left</div>
+                <aside class="left-image">
+                    <img ng-src="{{ part.left.image_url }}"/>
+                    <img ng-hide="part.left.image_url" src="images/tmp-comp.png"/>
+                </aside>
+                <div class="component-wrapper">
+                    <div class="shoes-btn small-icon"></div>
+                    <div class="left-btn">
+                        <div ng-class="condition_class(part.left.condition, 'left')"
+                            ng-bind="part.left.percentage"></div>
+                    </div>
+                    <div class="measurement">
+                        <label>
+                            <span class="tool-icon" ng-if="part.left.tool_name == 'Tape Measure'"><img
+                                src="images/icons/measuring-tape-icon.png"/></span>
+                            <span class="tool-icon" ng-if="part.left.tool_name == 'Ultrasonic'"><img
+                                src="images/icons/ultrasonic-icon.png"/></span>
+                            <span class="tool-icon" ng-if="part.left.tool_name == 'Depth Gauge'"><img
+                                src="images/icons/depth-gauge-icon.png"/></span>
+                            <span class="tool-icon" ng-if="part.left.tool_name == 'Caliper'"><img
+                                src="images/icons/caliper-icon.png"/></span>
+                        </label>
+                        <select ng-model="part.left.tool" ng-options="tool.id as tool.label for tool in Tools"
+                            ng-change="updateWearPercentages('Track Shoe', $index)">
+                            <option value="">Measurment tool...</option>
+                        </select>
+                        <input type="text" md-measurement side="left" part="track_shoes" index="{{$index}}"
+                            ng-change="updateWearPercentages('Track Shoe', $index, UserSettings.show_metric)"
+                            ng-model="part.left.measured"/>
+                    </div>
+                </div>
+                <div class="notes"><textarea ng-model="part.left.notes" placeholder="Notes"></textarea></div>
+            </div>
+
+            <!-- Right Side -->
+
+            <div class="right-component-info">
+                <div class="component-side">Right</div>
+                <aside class="right-image">
+                    <img ng-src="{{ part.right.image_url }}"/>
+                    <img ng-hide="part.right.image_url" src="images/tmp-comp.png"/>
+                </aside>
+                <div class="component-wrapper">
+                    <div class="links-btn small-icon"></div>
+                    <div class="measurement">
+                        <label>
+                            <span class="tool-icon" ng-if="part.right.tool_name == 'Tape Measure'"><img
+                                src="images/icons/measuring-tape-icon.png"/></span>
+                            <span class="tool-icon" ng-if="part.right.tool_name == 'Ultrasonic'"><img
+                                src="images/icons/ultrasonic-icon.png"/></span>
+                            <span class="tool-icon" ng-if="part.right.tool_name == 'Depth Gauge'"><img
+                                src="images/icons/depth-gauge-icon.png"/></span>
+                            <span class="tool-icon" ng-if="part.right.tool_name == 'Caliper'"><img
+                                src="images/icons/caliper-icon.png"/></span>
+                        </label>
+                        <select ng-model="part.right.tool" ng-options="tool.id as tool.label for tool in Tools"
+                            ng-change="updateWearPercentages('Track Shoe', $index)">
+                            <option value="">Measurment tool...</option>
+                        </select>
+                        <input type="text" md-measurement side="right" part="track_shoes" index="{{$index}}"
+                            ng-change="updateWearPercentages('Track Shoe', $index, UserSettings.show_metric)"
+                            ng-model="part.right.measured"/>
+                        <div class="right-btn">
+                            <div ng-class="condition_class(part.right.condition, 'right')"
+                                ng-bind="part.right.percentage"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="notes"><textarea ng-model="part.right.notes" placeholder="Notes"></textarea></div>
+            </div>
+
+        </section>
+    </form>
+</div>

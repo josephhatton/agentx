@@ -1,0 +1,103 @@
+<article class="info-row">
+    <div class="info-block image">
+        <a href="{{ Ins.inspection_obj.machine.img_full }}" target="_blank" data-modal="lightbox">
+            <img ng-src="{{ Ins.inspection_obj.machine.img }}" src="images/tmp.png"/>
+        </a>
+    </div>
+    <div class="info-block unit-info">
+        <h2>Inspection {{ Ins.id }}</h2>
+
+        <div class="info-details">
+            <ul>
+                <li>Manufacturer</li>
+                <li>Model</li>
+                <li>Serial Number</li>
+                <li>Unit Number</li>
+                <li>Customer Name</li>
+                <li>Inspection Date</li>
+                <li>Maintenance Date</li>
+                <li>Job Site</li>
+            </ul>
+            <ul>
+                <li ng-show="Ins.inspection_obj.manufacturer.company"
+                    ng-bind="Ins.inspection_obj.manufacturer.company"></li>
+                <li ng-show="!Ins.inspection_obj.manufacturer.company">No Data</li>
+
+                <li ng-show="Ins.inspection_obj.machine.model"
+                    ng-bind="Ins.inspection_obj.machine.model"></li>
+                <li ng-show="!Ins.inspection_obj.machine.model">No Data</li>
+
+                <li ng-show="Ins.inspection_obj.machine.serial" ng-bind="Ins.inspection_obj.machine.serial"></li>
+                <li ng-show="!Ins.inspection_obj.machine.serial">No Data</li>
+
+                <li ng-show="Ins.inspection_obj.machine.equipment_id"
+                    ng-bind="Ins.inspection_obj.machine.equipment_id"></li>
+                <li ng-show="!Ins.inspection_obj.machine.equipment_id">No Data</li>
+
+                <li ng-show="Ins.inspection_obj.customer.name" ng-bind="Ins.inspection_obj.customer.name | truncate"></li>
+                <li ng-show="!Ins.inspection_obj.customer.name">No Data</li>
+
+                <li ng-show="Ins.datestring" ng-bind="Ins.datestring"></li>
+                <li ng-show="!Ins.datestring">No Data</li>
+
+                <li ng-show="Ins.inspection_obj.maintenance_date" ng-bind="Ins.inspection_obj.maintenance_date"></li>
+                <li ng-show="Ins.inspection_obj.maintenance_date">No Data</li>
+
+                <li ng-show="Ins.inspection_obj.jobsite.address"
+                    ng-bind="Ins.inspection_obj.jobsite.address"></li>
+                <li ng-show="!Ins.inspection_obj.jobsite.address">No Data</li>
+            </ul>
+        </div>
+    </div>
+    <div class="info-block unit-info">
+        <div class="logo-image">
+            <img ng-show="Ins.dealer_img_url" ng-src="{{ Ins.dealer_img_url }}" alt="Dealer Logo"/>
+        </div>
+        <div class="info-details">
+            <table style="width:100%;">
+                <tr>
+                    <td>Hour Meter Operative</td>
+                    <td ng-show="Ins.inspection_obj.machine.hour_meter_operational">Yes</td>
+                    <td ng-show="!Ins.inspection_obj.machine.hour_meter_operational">No</td>
+                </tr>
+                <tr>
+                    <td>Hour Meter Reading</td>
+                    <td ng-bind="Ins.inspection_obj.hour_meter_reading"></td>
+                </tr>
+                <tr>
+                    <td>Hours Per Week</td>
+                    <td ng-bind="Ins.inspection_obj.machine.hours_per_week"></td>
+                </tr>
+                <tr>
+                    <td>Odometer Reading</td>
+                    <td ng-bind="Ins.inspection_obj.machine.odometer_reading"></td>
+                </tr>
+                <tr>
+                    <td>Remaining Life</td>
+                    <td ng-bind="Ins.inspection_obj.machine.remaining_life"></td>
+                </tr>
+                <tr>
+                    <td>Inspector</td>
+                    <td ng-bind="Ins.inspection_obj.user.username"></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+
+    <div class="toggles clearboth">
+        <h2>Inspection Type</h2>
+        <div>
+            <label>UCI</label>
+            <div ng-show="Ins.inspection_obj.inspectionTypeUCI" class="toggle-readonly"></div>
+        </div>
+        <div>
+            <label>GET</label>
+            <div ng-show="Ins.inspection_obj.inspectionTypeGET" class="toggle-readonly"></div>
+        </div>
+        <div>
+            <label>General</label>
+            <div ng-show="Ins.inspection_obj.inspectionTypeGeneral" class="toggle-readonly"></div>
+        </div>
+    </div>
+</article>

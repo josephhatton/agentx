@@ -1,0 +1,10 @@
+<div class="template_row" ng-drag="true" ng-drag-data="tplobj">
+	<div class="template_icn task">
+		<img src="./images/formbuilder/tasks.svg" class="icon">
+	</div>
+	<div class="template_lbl">
+		<strong ng-bind="tplobj.name"></strong><br>
+		{{tplobj.description}}
+	</div>
+</div>
+<div class="icon-edit" style="position:absolute; top:10px; right:10px;" ng-click="open_taskmodal(tplobj.id);"></div>

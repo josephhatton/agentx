@@ -1,0 +1,19 @@
+<div class="view-step-title">Step {{$index+1}}</div>
+
+<div class="view-step-type view-step-type-help" ng-if="Step.help" data-ng-include data-src="'views/partials/formbuilder/steps/help.view.html'"></div>
+
+<div class="view-step-type view-step-type-attention" ng-if="Step.attention" data-ng-include data-src="'views/partials/formbuilder/steps/attention.view.html'"></div>
+
+<div class="view-step-type view-step-type-goal" ng-if="Step.goal" data-ng-include data-src="'views/partials/formbuilder/steps/goal.view.html'"></div>
+
+<div class="view-step-type view-step-type-rating" ng-if="Step.rating" data-ng-include data-src="'views/partials/formbuilder/steps/rating.view.html'"></div>
+
+<div class="view-step-type view-step-type-photos" ng-if="Step.photos" data-ng-include data-src="'views/partials/formbuilder/steps/photos.view.html'"></div>
+
+<div class="view-step-type view-step-type-boolean" ng-if="Step.boolean" data-ng-include data-src="'views/partials/formbuilder/steps/boolean.view.html'"></div>
+
+<div class="view-step-type view-step-type-option" ng-if="Step.option" data-ng-include data-src="'views/partials/formbuilder/steps/option.view.html'"></div>
+
+<div class="view-step-type view-step-type-comment" ng-if="Step.comment" data-ng-include data-src="'views/partials/formbuilder/steps/comment.view.html'"></div>
+
+<div class="view-step-type view-step-type-input" ng-if="Step.input" data-ng-include data-src="'views/partials/formbuilder/steps/input.view.html'"></div>

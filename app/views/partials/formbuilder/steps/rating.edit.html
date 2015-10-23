@@ -1,0 +1,20 @@
+<fieldset class="step_rating task_type">
+	<legend>Rating</legend>
+	<input type="text" ng-model="Step.rating.directions" placeholder="Describe what is being rated"><br>
+	<rating id="UUID()"
+		ng-model="Step.rating.value"
+		max="Step.rating.rating_max"
+		min="Step.rating.rating_min"
+		></rating>
+	<br/>
+	<!--
+	<div class="element_cont">
+		<strong>Rating Maximum Value</strong>
+		<input type="number" ng-model="Step.rating.rating_max" min="1" max="100" size="2">
+	</div>
+	-->
+	<div class="element_cont">
+		<strong>Current Value:</strong> {{ Step.rating.value}}<br/>
+	</div>
+	<button ng-click="RemoveWidget($index,'rating')" class="rem_widget">Remove</button>
+</fieldset>

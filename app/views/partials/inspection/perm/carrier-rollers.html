@@ -1,0 +1,109 @@
+<div class="info-icon-block links">
+    <header ng-show="Ins.inspection_obj.results.carrier_rollers[0]">
+        <div class="carrier-rollers-btn component-icon"></div>
+        <h1>Carrier Rollers</h1>
+        <h2 ng-bind="Ins.inspection_obj.results.carrier_rollers[0].description"></h2>
+    </header>
+    <div class="component-row" ng-repeat="part in Ins.inspection_obj.results.carrier_rollers">
+        <section>
+            <div class="left-component-info">
+                <div class="component-side">Left</div>
+                <div class="inner-info">
+                    <div class="left-image">
+                        <a href="{{ part.left.image_full_url }}" target="_blank" data-modal="lightbox">
+                            <img ng-src="{{ part.left.image_url }}" alt="" />
+                        </a>
+                        <img ng-hide="part.left.image_url" src="images/tmp-comp.png" />
+                    </div>
+                    <div class="left-details">
+                        <ul>
+                            <li>
+                                <span class="tool-icon" ng-if="part.left.tool_name == 'Tape Measure'"><img
+                                    src="./images/icons/measuring-tape-icon.png"/></span>
+                                <span class="tool-icon" ng-if="part.left.tool_name == 'Ultrasonic'"><img
+                                    src="./images/icons/ultrasonic-icon.png"/></span>
+                                <span class="tool-icon" ng-if="part.left.tool_name == 'Depth Gauge'"><img
+                                    src="./images/icons/depth-gauge-icon.png"/></span>
+                                <span class="tool-icon" ng-if="part.left.tool_name == 'Caliper'"><img
+                                    src="./images/icons/caliper-icon.png"/></span>
+                                <span class="size">{{ part.left.measured | unit:'inches':UserSettings.show_metric }}</span>
+                            </li>
+                            <li>
+                                <div ng-class="condition_class(part.left.condition, 'left')" ng-bind="part.left.percentage"></div>
+                            </li>
+                            <li>
+                                <strong>
+                                    <div ng-show="part.left.full_wear_date" ng-bind="part.left.full_wear_date"></div>
+                                    <div ng-show="!part.left.full_wear_date">No Previous Data</div>
+                                </strong>
+                            </li>
+                            <li>
+                                <strong>
+                                    <div ng-show="part.left.over_wear_date" ng-bind="part.left.over_wear_date"></div>
+                                    <div ng-show="!part.left.over_wear_date">No Previous Data</div>
+                                </strong>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="notes">
+                    <span ng-show="part.left.notes" ng-bind="part.left.notes"></span>
+                    <span ng-show="!part.left.notes">No notes added.</span>
+                </div>
+            </div>
+            <div class="center-info">
+                <ul>
+                    <li>Measurement</li>
+                    <li>Wear Percentage</li>
+                    <li>100% Wear Date</li>
+                    <li>120% Wear Date</li>
+                </ul>
+            </div>
+            <div class="right-component-info">
+                <div class="component-side">Right</div>
+                <div class="inner-info">
+                    <div class="right-details">
+                        <ul>
+                            <li>
+                                <span class="tool-icon" ng-if="part.right.tool_name == 'Tape Measure'"><img
+                                    src="./images/icons/measuring-tape-icon.png"/></span>
+                                <span class="tool-icon" ng-if="part.right.tool_name == 'Ultrasonic'"><img
+                                    src="./images/icons/ultrasonic-icon.png"/></span>
+                                <span class="tool-icon" ng-if="part.right.tool_name == 'Depth Gauge'"><img
+                                    src="./images/icons/depth-gauge-icon.png"/></span>
+                                <span class="tool-icon" ng-if="part.right.tool_name == 'Caliper'"><img
+                                    src="./images/icons/caliper-icon.png"/></span>
+                                <span class="size">{{ part.right.measured | unit:'inches':UserSettings.show_metric }}</span>
+                            </li>
+                            <li>
+                                <div ng-class="condition_class(part.right.condition, 'right')" ng-bind="part.right.percentage"></div>
+                            </li>
+                            <li>
+                                <strong>
+                                    <div ng-show="part.right.full_wear_date" ng-bind="part.right.full_wear_date"></div>
+                                    <div ng-show="!part.right.full_wear_date">No Previous Data</div>
+                                </strong>
+                            </li>
+                            <li>
+                                <strong>
+                                    <div ng-show="part.right.over_wear_date" ng-bind="part.right.over_wear_date"></div>
+                                    <div ng-show="!part.right.over_wear_date">No Previous Data</div>
+                                </strong>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="right-image">
+                        <a href="{{ part.right.image_full_url }}" target="_blank" data-modal="lightbox">
+                            <img ng-src="{{ part.right.image_url }}" alt="" />
+                        </a>
+                        <img ng-hide="part.right.image_url" src="images/tmp-comp.png" />
+                    </div>
+                </div>
+                <div class="notes">
+                    <span ng-show="part.right.notes" ng-bind="part.right.notes"></span>
+                    <span ng-show="!part.right.notes">No notes added.</span>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>

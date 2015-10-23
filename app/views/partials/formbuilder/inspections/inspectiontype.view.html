@@ -1,0 +1,5 @@
+<div class="view-inspectiontype-icontitle">
+	<div class="view-icon icon-inspectiontype icon-green"></div>
+	<div class="view-inspectiontype-title">{{Inspection.title}}</div>
+</div>
+<div ng-repeat="Task in Inspection.tasks" data-ng-include data-src="'views/partials/formbuilder/tasks/task.view.html'" class="view-task" style="">

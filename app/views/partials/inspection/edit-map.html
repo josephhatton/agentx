@@ -1,0 +1,28 @@
+<div class="info-section location">
+    <div class="half-width">
+        <div class="info-field left-info">
+            <div class="field-details location">
+                <form>
+                    <div class="info-field">
+                        <label for="lat">Address:</label>
+                        <input type="text" id="address" ng-model="Ins.inspection_obj.jobsite.address"/>
+                    </div>
+                    <div class="info-field">
+                        <label for="lat">Job Site Latitude:</label>
+                        <input type="text" id="lat" ng-model="Ins.inspection_obj.jobsite.lat"/>
+                    </div>
+                    <div class="info-field">
+                        <label for="lat">Job Site Longitude:</label>
+                        <input type="text" id="lon" ng-model="Ins.inspection_obj.jobsite.lon"/>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="half-width">
+        <div class="map">
+            <div id="map-canvas" md-Map></div>
+        </div>
+    </div>
+    <div class="clearboth"></div>
+</div>

@@ -1,0 +1,11 @@
+<fieldset class="step_photos task_type">
+	<legend>Photos</legend>
+	<strong>Directions</strong>
+	<br>
+	<input type="text" ng-model="Step.photos.directions">
+	<br>
+	<strong>Number of pictures required</strong>
+	<br>
+	<input type="number" ng-model="Step.photos.photos_numreq">
+	<button ng-click="RemoveWidget($index,'photos')" class="rem_widget">Remove</button>
+</fieldset>

@@ -1,0 +1,9 @@
+<fieldset class="step_attention task_type" ng-class="Step.attention.required ? 'required' : '';">
+	<legend>Attention</legend>
+	<strong>Text:</strong>
+	<input type="text" ng-model="Step.attention.attention_text"><br/>
+	<select ng-model="Step.attention.attention_type" ng-options="opt for opt in ['info','warning'] track by opt">
+	</select>
+	<button ng-click="RemoveWidget($index,'attention')" class="rem_widget">Remove</button>
+</fieldset>
+

@@ -1,0 +1,9 @@
+<fieldset class="step_preview task_type">
+	<legend ng-bind="NewTask.name"></legend>
+	<strong>Inspection Type: </strong><span ng-if="NewTask.inspection_type_id !== 0" ng-bind="GetInsByID(NewTask.inspection_type_id)"></span>
+	<br>
+	<strong>Task required: </strong>
+	<span ng-if="NewTask.required === 0">No</span>
+	<span ng-if="NewTask.required === 1">Yes</span>
+	<br>
+</fieldset>

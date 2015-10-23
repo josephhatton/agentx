@@ -1,0 +1,15 @@
+<div id="fb-templatebuilder-editfields" style="margin-bottom: 10px;">
+	<label for="tpl-title" style="margin-bottom:5px;">Inspection Title</label>
+	<input type="text" id="tpl-title" ng-model="NewTemplate.title" placeholder="name your inspection" style="margin-bottom:5px;">
+	<label for="tpl-desc" style="margin-bottom:5px;">Description</label>
+	<textarea id="tpl-desc" ng-model="NewTemplate.description" placeholder="" style="margin-bottom:5px;"></textarea>
+</div>
+<ul id="dropped_elements" style="margin-bottom: 10px;">
+	<li ng-repeat="tplobj in DroppedObjs track by $index" ng-drag-data="tplobj" ng-drop="true" ng-drop-success="MoveElement($index, $data, $event)">
+		<div ng-drag="true" ng-drag-data="tplobj" data-ng-include="GetElemView(tplobj)"></div>
+		<div class="icon-remove" style="position:absolute; top:10px; right:10px;" ng-click="removeInDroppedObjs($index);"></div>
+	</li>
+</ul>
+<div ng-drop="true" id="add_element" ng-drop-success="DropElement($data, $event)">
+	<h3>Drag an Inspection Type from the Inspection Type Box to add it</h3>
+</div>

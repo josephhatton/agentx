@@ -1,0 +1,7 @@
+<fieldset class="step_input task_type" ng-class="Step.input.input_req ? 'required' : '';">
+	<legend>Input</legend>
+	<strong>Directions</strong>
+	<input type="text" ng-model="Step.input.directions">
+	<strong>Current Value</strong> <span ng-bind="Step.input.value"></span>
+	<button ng-click="RemoveWidget($index,'input')" class="rem_widget">Remove</button>
+</fieldset>

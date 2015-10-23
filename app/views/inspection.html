@@ -1,0 +1,585 @@
+<div class="inspectionview">
+
+    <section id="section-navbtns" class="section-navbtns row">
+        <div id="breadcrumb" class="col-md-8 padding-left-0">
+            <a href="#/customers/{{ Ins.customer_id }}">{{ Ins.customer_name }}</a> >
+            <a href="#/machines/list-by-customer/{{ Ins.customer_id }}">Machines</a> >
+            <a href="#/machines/{{ Ins.machine_id }}">{{ Ins.inspection_obj.machine.serial }}</a> >
+            IN #{{ Ins.id }}
+        </div>
+
+        <div id="commandbtns" class="col-md-4 padding-right-0 align-right" ng-show="!Ins.archived">
+            <a ng-href="#/inspections/{{ Ins.id }}/edit" data-ng-show="uiShow('edit')" class="icon-white-button icon-white-button-edit" popover="Edit" popover-placement="bottom" popover-trigger="mouseenter" style="margin-left: 10px;"></a>
+            <!--
+            <a class="icon-white-button icon-white-button-export" popover="Export" popover-placement="bottom" popover-trigger="mouseenter"></a>
+            -->
+            <a class="icon-white-button icon-white-button-share" popover="Share" popover-placement="bottom" popover-trigger="mouseenter" md-Permalink style="margin-left: 10px;"></a>
+            <a ng-click="deleteInspection()" data-ng-show="uiShow('delete')" class="icon-white-button icon-white-button-delete" popover="Delete" popover-placement="bottom" popover-trigger="mouseenter" style="margin-left: 10px;"></a>
+            <a href="javascript:void(0);" onclick="window.print();" class="icon-white-button icon-white-button-print" popover="Print" popover-placement="bottom" popover-trigger="mouseenter" style="margin-left: 10px;"></a>
+        </div>
+    </section>
+
+    <section id="section-dealerlogo" class="align-right">
+        <img ng-show="Ins.dealer_img_url" ng-src="{{ Ins.dealer_img_url }}" alt="Dealer Logo" style="height: 80px;"/>
+    </section>
+
+    <section id="section-alert">
+    	<div ng-show="Ins.archived" class="alertmsg alertmsg-red">Already Deleted !!!</div>
+    </section>
+
+    <section id="section-details" class="animated fadeIn">
+        <div id="section-mainimage" style="padding-top: 33px;">
+            <a ng-show="Ins.inspection_obj.machine.img_full" href="{{ Ins.inspection_obj.machine.img_full }}" target="_blank" data-modal="lightbox" class="bordered-image main-image">
+                <img ng-src="{{ Ins.inspection_obj.machine.img }}" src="images/tmp.png" />
+            </a>
+            <a ng-show="!Ins.inspection_obj.machine.img_full" class="bordered-image main-image">
+                <img ng-show="!Ins.inspection_obj.machine.img" ng-src="{{ Ins.inspection_obj.machine.img }}" src="images/tmp.png" />
+            </a>
+        </div>
+
+		<div id="section-inspection-details" class="row">
+	        <div class="col-md-3 padding-left-0">
+	            <table class="table tbl-details">
+	                <caption>Inspection Information</caption>
+	                <tbody>
+	                    <tr>
+	                        <td class="details-title">IN Number</td>
+	                        <td class="details-value">{{ Ins.id }}</td>
+	                    </tr>
+	                    <tr>
+	                        <td class="details-title">Inspector</td>
+	                        <td class="details-value">
+	                            <span ng-show="Ins.inspection_obj.inspector">{{ Ins.inspection_obj.inspector }}</span>
+	                            <span ng-show="!Ins.inspection_obj.inspector">No Data</span>
+	                        </td>
+	                    </tr>
+	                    <tr>
+	                        <td class="details-title">Inspection Type</td>
+	                        <td class="details-value">
+	                            <span ng-show="Ins.inspection_obj.inspectionTypeGET==1">GET</span>
+	                            <span ng-show="Ins.inspection_obj.inspectionTypeUCI==1">UCI</span>
+	                            <span ng-show="Ins.inspection_obj.inspectionTypeGeneral==1">General</span>
+	                        </td>
+	                    </tr>
+	                    <tr>
+	                        <td class="details-title">Inspection Date</td>
+	                        <td class="details-value">
+	                            <span ng-show="Ins.datestring">{{ Ins.datestring }}</span>
+	                            <span ng-show="!Ins.datestring">No Data</span>
+	                        </td>
+	                    </tr>
+	                    <tr>
+	                        <td class="details-title">Maintenance Date</td>
+	                        <td class="details-value">
+	                            <span ng-show="Ins.inspection_obj.maintenance_datestring">{{ Ins.inspection_obj.maintenance_datestring }}</span>
+	                            <span ng-show="!Ins.inspection_obj.maintenance_datestring">No Data</span>
+	                        </td>
+	                    </tr>
+	                </tbody>
+	            </table>
+	        </div>
+	
+	        <div class="col-md-3 padding-left-0">
+	            <table class="table tbl-details">
+	                <caption>Jobsite Information</caption>
+	                <tbody>
+	                    <tr>
+	                        <td class="details-title">Name</td>
+	                        <td class="details-value">{{ Ins.inspection_obj.jobsite.name }}</td>
+	                    </tr>
+	                    <tr>
+	                        <td class="details-title">Address</td>
+	                        <td class="details-value">{{ Ins.inspection_obj.jobsite.address }}</td>
+	                    </tr>
+	                    <tr>
+	                        <td class="details-title">Latitude</td>
+	                        <td class="details-value">{{ Ins.inspection_obj.jobsite.lat }}</td>
+	                    </tr>
+	                    <tr>
+	                        <td class="details-title">Longitude</td>
+	                        <td class="details-value">{{ Ins.inspection_obj.jobsite.lon }}</td>
+	                    </tr>
+	                    <tr>
+	                        <td class="details-title">&nbsp;</td>
+	                        <td class="details-value">&nbsp;</td>
+	                    </tr>
+	                </tbody>
+	            </table>
+	        </div>
+	
+	        <div class="col-md-6 padding-left-0">
+	            <table class="table tbl-details">
+	                <caption>Machine Information</caption>
+	                <tbody>
+	                    <tr>
+	                        <td class="details-title">Serial Number</td>
+	                        <td class="details-value">
+	                            <a href="#/machines/{{ Ins.inspection_obj.machine.id }}">{{ Ins.inspection_obj.machine.serial }}</a>
+	                        </td>
+	                        <td class="details-title">Hour Meter Operative</td>
+	                        <td class="details-value">
+	                            <span ng-show="Ins.inspection_obj.hour_meter_operational=='1'">Yes</span>
+	                            <span ng-show="Ins.inspection_obj.hour_meter_operational=='0'">No</span>
+	                            <span ng-show="Ins.inspection_obj.hour_meter_operational==null">No Data</span>
+	                        </td>
+	                    <tr>
+	                        <td class="details-title">Manufacturer</td>
+	                        <td class="details-value">
+	                            <span ng-show="Ins.inspection_obj.machine.manufacturer_name">{{ Ins.inspection_obj.machine.manufacturer_name }}</span>
+	                            <span ng-show="!Ins.inspection_obj.machine.manufacturer_name">No Data</span>
+	                        </td>
+	                        <td class="details-title">Hours Per Week</td>
+	                        <td class="details-value">
+	                            <span ng-show="Ins.inspection_obj.hours_per_week">{{ Ins.inspection_obj.hours_per_week }}</span>
+	                            <span ng-show="!Ins.inspection_obj.hours_per_week">No Data</span>
+	                        </td>
+	                    </tr>
+	                    <tr>
+	                        <td class="details-title">Model</td>
+	                        <td class="details-value">
+	                            <span ng-show="Ins.inspection_obj.machine.model">{{ Ins.inspection_obj.machine.model }}</span>
+	                            <span ng-show="!Ins.inspection_obj.machine.model">No Data</span>
+	                        </td>
+	                        <td class="details-title">Odometer Reading</td>
+	                        <td class="details-value">
+	                            <span ng-show="Ins.inspection_obj.machine.odometer_reading">{{ Ins.inspection_obj.machine.odometer_reading }}</span>
+	                            <span ng-show="!Ins.inspection_obj.machine.odometer_reading">0</span>
+	                        </td>
+	                    </tr>
+	                    <tr>
+	                        <td class="details-title">Customer</td>
+	                        <td class="details-value">
+	                            <span ng-show="Ins.inspection_obj.customer.name">{{ Ins.inspection_obj.customer.name }}</span>
+	                            <span ng-show="!Ins.inspection_obj.customer.name">No Data</span>
+	                        </td>
+	                        <td class="details-title">Reverse Odometer</td>
+	                        <td class="details-value">
+	                            <span ng-show="Ins.inspection_obj.reverse_odometer_reading">{{ Ins.inspection_obj.reverse_odometer_reading }}</span>
+	                            <span ng-show="!Ins.inspection_obj.reverse_odometer_reading">0</span>
+	                        </td>
+	                    </tr>
+	                    <tr>
+	                        <td class="details-title">Unit #</td>
+	                        <td class="details-value">
+	                            <span ng-show="Ins.inspection_obj.machine.equipment_id">{{ Ins.inspection_obj.machine.equipment_id }}</span>
+	                            <span ng-show="!Ins.inspection_obj.machine.equipment_id">No Data</span>
+	                        </td>
+	                        <td class="details-title">Hour Meter Reading</td>
+	                        <td class="details-value">
+	                        	<span ng-show="Ins.inspection_obj.machine.hour_meter_reading">{{ Ins.inspection_obj.machine.hour_meter_reading }}</span>
+	                        	<span ng-show="!Ins.inspection_obj.machine.hour_meter_reading">No Data</span>
+	                        </td>
+	                    </tr>
+	                </tbody>
+	            </table>
+	        </div>
+		</div>
+    </section>
+
+    <section id="section-comp-details" class="row animated fadeIn">
+        <div class="col-md-4 padding-left-0">
+            <table class="table tbl-details">
+                <caption>Site Conditions</caption>
+                <tbody>
+                    <tr>
+                        <td class="details-title">Track SAG</td>
+                        <td class="details-value">
+                            <span ng-show="Ins.inspection_obj.results.track_sag.left">{{ Ins.inspection_obj.results.track_sag.left }}</span>
+                            <span ng-show="!Ins.inspection_obj.results.track_sag.left">-</span>
+                        </td>
+                        <td class="details-value">
+                            <span ng-show="Ins.inspection_obj.results.track_sag.right">{{ Ins.inspection_obj.results.track_sag.right }}</span>
+                            <span ng-show="!Ins.inspection_obj.results.track_sag.right">-</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="details-title">Frame Extension</td>
+                        <td class="details-value">
+                            <span ng-show="Ins.inspection_obj.results.frame_extension.left">{{ Ins.inspection_obj.results.frame_extension.left }}</span>
+                            <span ng-show="!Ins.inspection_obj.results.frame_extension.left">-</span>
+                        </td>
+                        <td class="details-value">
+                            <span ng-show="Ins.inspection_obj.results.frame_extension.right">{{ Ins.inspection_obj.results.frame_extension.right }}</span>
+                            <span ng-show="!Ins.inspection_obj.results.frame_extension.right">-</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="details-title">Internal Wear</td>
+                        <td class="details-value">
+                            <span ng-show="Ins.inspection_obj.results.dry_joints.left">{{ Ins.inspection_obj.results.dry_joints.left }}</span>
+                            <span ng-show="!Ins.inspection_obj.results.dry_joints.left">-</span>
+                        </td>
+                        <td class="details-value">
+                            <span ng-show="Ins.inspection_obj.results.dry_joints.right">{{ Ins.inspection_obj.results.dry_joints.right }}</span>
+                            <span ng-show="!Ins.inspection_obj.results.dry_joints.right">-</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="details-title">Shoe Width</td>
+                        <td class="details-value">
+                            <span ng-show="Ins.inspection_obj.results.shoe_width.left">{{ Ins.inspection_obj.results.shoe_width.left }}</span>
+                            <span ng-show="!Ins.inspection_obj.results.shoe_width.left">-</span>
+                        </td>
+                        <td class="details-value">
+                            <span ng-show="Ins.inspection_obj.results.shoe_width.right">{{ Ins.inspection_obj.results.shoe_width.right }}</span>
+                            <span ng-show="!Ins.inspection_obj.results.shoe_width.right">-</span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="col-md-4 padding-left-0">
+            <table class="table tbl-details">
+                <caption>&nbsp;</caption>
+                <tbody>
+                    <tr>
+                        <td class="details-title">Impact</td>
+                        <td class="details-value">
+                            <span ng-show="Ins.inspection_obj.results.underfoot_conditions.impact">{{ Ins.inspection_obj.results.underfoot_conditions.impact }}</span>
+                            <span ng-show="!Ins.inspection_obj.results.underfoot_conditions.impact">No Data</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="details-title">Abrasive</td>
+                        <td class="details-value">
+                            <span ng-show="Ins.inspection_obj.results.underfoot_conditions.abrasive">{{ Ins.inspection_obj.results.underfoot_conditions.abrasive }}</span>
+                            <span ng-show="!Ins.inspection_obj.results.underfoot_conditions.abrasive">No Data</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="details-title">Bushing Allowable Wear</td>
+                        <td class="details-value">
+                            <span ng-show="Ins.inspection_obj.results.bushing_allowable_wear">{{ Ins.inspection_obj.results.bushing_allowable_wear }}</span>
+                            <span ng-show="!Ins.inspection_obj.results.bushing_allowable_wear">No Data</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="details-title">Link Allowable Wear</td>
+                        <td class="details-value">
+                            <span ng-show="Ins.inspection_obj.results.link_allowable_wear">{{ Ins.inspection_obj.results.link_allowable_wear }}</span>
+                            <span ng-show="!Ins.inspection_obj.results.link_allowable_wear">No Data</span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="col-md-4 padding-left-0">
+            <table class="table tbl-details">
+                <caption>&nbsp;</caption>
+                <tbody>
+                    <tr>
+                        <td class="details-title">Undercarriage Brand</td>
+                        <td class="details-value">
+                            <span ng-show="Ins.inspection_obj.machine.under_carriage_brand">{{ Ins.inspection_obj.machine.under_carriage_brand }}</span>
+                            <span ng-show="!Ins.inspection_obj.machine.under_carriage_brand">No Data</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="details-title">Undercarriage Code</td>
+                        <td class="details-value">
+                            <span ng-show="Ins.inspection_obj.machine.under_carriage_code">{{ Ins.inspection_obj.machine.under_carriage_code }}</span>
+                            <span ng-show="!Ins.inspection_obj.machine.under_carriage_code">No Data</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="details-title">Moisture</td>
+                        <td class="details-value">
+                            <span ng-show="Ins.inspection_obj.results.underfoot_conditions.moisture">{{ Ins.inspection_obj.results.underfoot_conditions.moisture }}</span>
+                            <span ng-show="!Ins.inspection_obj.results.underfoot_conditions.moisture">No Data</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="details-title">Packing</td>
+                        <td class="details-value">
+                            <span ng-show="Ins.inspection_obj.results.underfoot_conditions.packing">{{ Ins.inspection_obj.results.underfoot_conditions.packing }}</span>
+                            <span ng-show="!Ins.inspection_obj.results.underfoot_conditions.packing">No Data</span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <section id="section-comp-table" class="row animated fadeIn">
+        <table>
+            <tr ng-repeat="summary in Summaries track by $index" class="{{ summary.condition }}">
+                <td class="legend"></td>
+                <td class="icon">
+                    <img ng-if="summary.comp == 'track_links'" src="./images/svg/links.svg"/>
+                    <img ng-if="summary.comp == 'bushings'" src="./images/svg/bushings.svg"/>
+                    <img ng-if="summary.comp == 'track_shoes'" src="./images/svg/shoes.svg"/>
+                    <img ng-if="summary.comp == 'idlers_front'" src="./images/svg/idler.svg"/>
+                    <img ng-if="summary.comp == 'idlers_rear'" src="./images/svg/idler.svg"/>
+                    <img ng-if="summary.comp == 'carrier_rollers'" src="./images/svg/carrier_rollers.svg"/>
+                    <img ng-if="summary.comp == 'track_rollers'" src="./images/svg/track_rollers.svg"/>
+                    <img ng-if="summary.comp == 'sprockets'" src="./images/svg/sprockets.svg"/>
+                </td>
+                <td class="percentage">{{ summary.percentage }}</td>
+                <td class="type">{{ summary.dir }} {{ summary.comp_type }}</td>
+                <td class="tool">
+                    <img ng-if="summary.tool_name == 'Tape Measure'" src="./images/icons/measuring-tape-icon.png"/>
+                    <img ng-if="summary.tool_name == 'Ultrasonic'" src="./images/icons/ultrasonic-icon.png"/>
+                    <img ng-if="summary.tool_name == 'Depth Gauge'" src="./images/icons/depth-gauge-icon.png"/>
+                    <img ng-if="summary.tool_name == 'Caliper'" src="./images/icons/caliper-icon.png"/>
+                </td>
+                <td class="measured">
+                    {{ summary.measured }}<sup>in</sup> /
+                    {{ summary.measured_metric }}<sup>mm</sup>
+                    </td>
+                <td class="partnumber">Hours to 100%: {{ summary.hours_left_100 }}</td>
+                <td class="partnumber">Hours to 120%: {{ summary.hours_left_120 }}</td>
+                <td class="fullweardate">100% Wear Date: {{ summary.full_wear_date }}</td>
+                <td class="overweardate">120% Wear Date: {{ summary.over_wear_date }}</td>
+            </tr>
+        </table>
+    </section>
+
+    <section id="section-general" class="animated fadeIn" ng-if="Ins.inspection_obj.general">
+        <!--<div class="template-title">{{ Ins.inspection_obj.general.template_title }}</div>-->
+        <div class="template-type" ng-repeat="(typeindex, type) in Ins.inspection_obj.general.template_inspection_types">
+            <div class="template-type-label">
+            	{{ type.inspection_type_label }}
+            	<a class="showhide" ng-show="templatetype_showhide[typeindex]==0" ng-click="templatetype_showhide[typeindex]=1">Show</a>
+            	<a class="showhide" ng-show="templatetype_showhide[typeindex]==1" ng-click="templatetype_showhide[typeindex]=0">Hide</a>
+            </div>
+            <div class="template-type-task" ng-repeat="task in type.inspection_type_tasks" ng-show="templatetype_showhide[typeindex]==1">
+                <div class="template-type-task-name">{{ task.task_name }}</div>
+                <div class="template-type-task-step" ng-repeat="step in task.task_instructions_object.steps">
+                    <div class="template-type-task-step-header">
+                        <div class="template-type-task-step-goal" ng-if="step.goal">
+                            {{ step.goal }}
+                        </div>
+                        <div class="template-type-task-step-help" ng-if="step.help && (step.help.help_text || step.help.help_photos || step.help.help_videos)">
+                            <span ng-if="step.help.help_text"> {{ step.help.help_text }}</span>
+                        </div>
+                    </div>
+                    <div class="template-type-task-step-content">
+                        <div ng-repeat="(key, value) in step" ng-if="key!='goal' && key!='help'" class="template-type-task-step-content-item">
+                            <span class="item-title">
+                                <span ng-if="key!='attention'">
+                                    {{ value.directions }}
+                                </span>
+                                <span ng-if="key=='attention'">
+                                    Attention
+                                </span>
+                                <span ng-if="key=='boolean'">
+                                	({{value.values[1]}}/{{value.values[0]}})
+                                </span>
+                            </span>
+                            <span class="item-value">
+                                <span ng-if="key=='rating'">
+                                    <span class="template-type-task-step-rating" style="width:{{ value.width }}px;"></span>
+                                    <span class="template-type-task-step-rating-gray" style="width:{{ value.width_gray }}px;"></span>
+                                </span>
+                                <span ng-if="key=='photos'">
+                                    <img class="template-type-task-step-photo" ng-src="{{ photo }}" ng-repeat="(index, photo) in value.url track by $index" src="images/tmp.png" />
+                                </span>
+                                <span ng-if="key=='boolean'">
+                                    {{ value.values[value.value] }}
+                                </span>
+                                <span ng-if="key=='option'">
+									<span ng-if="value.option_select=='single' || !value.option_select">
+								    	{{ value.value }}
+								   </span>
+								   <span ng-if="value.option_select=='multi'">
+								   </span>
+                                </span>
+                                <span ng-if="key=='input'">
+                                    {{ value.value }} {{ value.input_units }}
+                                </span>
+                                <span ng-if="key=='attention'">
+                                	<span class="template-type-task-step-attentiontype {{value.attention_type}}"></span>
+                                    {{ value.attention_text }}
+                                </span>
+                                <span ng-if="key=='comment'">
+                                    {{ value.value }}
+                                </span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="section-images" class="row animated fadeIn">
+        <div id="images-title">
+            General Images
+            <a class="showhide" ng-show="generalimages_showhide==0" ng-click="generalimages_showhide=1">Show</a>
+            <a class="showhide" ng-show="generalimages_showhide==1" ng-click="generalimages_showhide=0">Hide</a>
+        </div>
+        <div id="images-content" ng-show="generalimages_showhide==1">
+            <a ng-repeat="image in general_images" href="{{ image.url }}" target="_blank" data-modal="lightbox" class="general-image-anchor">
+                <img class="bordered-image general-image" ng-src="{{image.url}}" src="images/tmp-comp.png">
+            </a>
+        </div>
+    </section>
+
+    <script>
+        $(function() {
+            $( "#comps-content-column1, #comps-content-column2" ).sortable({
+                connectWith: ".comps-content-column"
+            }).disableSelection();
+        });
+    </script>
+
+    <section id="section-comps" class="animated fadeIn">
+        <div id="comps-title">
+            Component Measurements
+            <a class="showhide" ng-show="comppanels_showhide==0" ng-click="comppanels_showhide=1">Show</a>
+            <a class="showhide" ng-show="comppanels_showhide==1" ng-click="comppanels_showhide=0">Hide</a>
+        </div>
+
+        <div id="comps-content" class="row" ng-show="comppanels_showhide==1">
+            <ul id="comps-content-column1" class="comps-content-column col-md-6 padding-left-0">
+                <li ng-repeat="comp in comppanels_left" class="comp comp-{{ comp.id }}">
+                    <div class="comp-bar">
+                        <img class="comp-icon" src="./images/{{ comp.icon }}" />
+                        <span class="comp-title">{{ comp.title }}</span>
+                        <a class="comp-showhide" ng-show="comp.showhide==0" ng-click="comp.showhide=1">Show</a>
+                        <a class="comp-showhide" ng-show="comp.showhide==1" ng-click="comp.showhide=0">Hide</a>
+                    </div>
+                    <div class="comp-info" ng-show="comp.showhide==1">
+                        <div class="comp-info-row row" ng-repeat="part in Ins.inspection_obj.results[comp.dtarray]">
+                            <div class="col-md-12 align-center comp-info-partdescription">
+                                {{part.description}}
+                            </div>
+                            <div class="comp-info-row-left col-md-6 padding-left-0">
+                                <div class="comp-info-row-bar {{ part.left.condition }}">Left {{part.left.percentage}}</div>
+                                <div class="comp-info-row-content row">
+                                	<div class="col-md-5 padding-left-0">
+                                		<a ng-show="part.left.image_full_url" href="{{ part.left.image_full_url }}" target="_blank" data-modal="lightbox" class="comp-info-image-anchor">
+	                                        <img ng-show="part.left.image_url" class="bordered-image comp-info-image" ng-src="{{ part.left.image_url }}" src="images/tmp.png"/>
+	                                    </a>
+	                                    <a ng-show="!part.left.image_full_url" class="comp-info-image-anchor">
+	                                        <img ng-show="!part.left.image_url" class="bordered-image comp-info-image" src="images/tmp.png"/>
+	                                    </a>
+                                	</div>
+                                	<div class="col-md-7 padding-right-0 padding-left-0">
+                                        <img class="comp-info-toolicon" ng-if="part.left.tool_name == 'Tape Measure'" src="./images/icons/measuring-tape-icon.png"/>
+                                        <img class="comp-info-toolicon" ng-if="part.left.tool_name == 'Ultrasonic'" src="./images/icons/ultrasonic-icon.png"/>
+                                        <img class="comp-info-toolicon" ng-if="part.left.tool_name == 'Depth Gauge'" src="./images/icons/depth-gauge-icon.png"/>
+                                        <img class="comp-info-toolicon" ng-if="part.left.tool_name == 'Caliper'" src="./images/icons/caliper-icon.png"/>
+                                        <span class="comp-info-toolicon">{{ part.left.measured }}<sup>in</sup> / {{ part.left.measured_metric }}<sup>mm</sup></span>
+                                        <div class="comp-info-installhours" ng-if="part.left.install_hours != undefined">SMU Hours: {{part.left.install_hours}}</div>
+                                        <div class="comp-info-installdate" ng-if="part.left.install_datestring != undefined">Install Date: {{part.left.install_datestring}}</div>
+                                        <div class="comp-info-notes">
+                                            <span ng-show="part.left.notes" ng-bind="part.left.notes"></span>
+                                            <span ng-show="!part.left.notes">No notes added</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="comp-info-row-right col-md-6 padding-right-0">
+                                <div class="comp-info-row-bar {{ part.right.condition }}">Right {{part.right.percentage}}</div>
+                                <div class="comp-info-row-content row">
+                                	<div class="col-md-5 padding-left-0">
+                                		<a ng-show="part.right.image_full_url" href="{{ part.right.image_full_url }}" target="_blank" data-modal="lightbox" class="comp-info-image-anchor">
+	                                        <img ng-show="part.right.image_url" class="bordered-image comp-info-image" ng-src="{{ part.right.image_url }}" src="images/tmp.png"/>
+	                                    </a>
+	                                    <a ng-show="!part.right.image_full_url" class="comp-info-image-anchor">
+	                                        <img ng-show="!part.right.image_url" class="bordered-image comp-info-image" src="images/tmp.png"/>
+	                                    </a>
+                                	</div>
+                                    <div class="col-md-7 padding-right-0 padding-left-0">
+                                        <img class="comp-info-toolicon" ng-if="part.right.tool_name == 'Tape Measure'" src="./images/icons/measuring-tape-icon.png"/>
+                                        <img class="comp-info-toolicon" ng-if="part.right.tool_name == 'Ultrasonic'" src="./images/icons/ultrasonic-icon.png"/>
+                                        <img class="comp-info-toolicon" ng-if="part.right.tool_name == 'Depth Gauge'" src="./images/icons/depth-gauge-icon.png"/>
+                                        <img class="comp-info-toolicon" ng-if="part.right.tool_name == 'Caliper'" src="./images/icons/caliper-icon.png"/>
+                                        <span class="comp-info-toolicon">{{ part.right.measured }}<sup>in</sup> / {{ part.right.measured_metric }}<sup>mm</sup></span>
+                                        <div class="comp-info-installhours" ng-if="part.right.install_hours != undefined">SMU Hours: {{part.right.install_hours}}</div>
+                                        <div class="comp-info-installdate" ng-if="part.right.install_datestring != undefined">Install Date: {{part.right.install_datestring}}</div>
+                                        <div class="comp-info-notes">
+                                            <span ng-show="part.right.notes" ng-bind="part.right.notes"></span>
+                                            <span ng-show="!part.right.notes">No notes added</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+            <ul id="comps-content-column2" class="comps-content-column col-md-6 padding-left-0 padding-right-0">
+                <li ng-repeat="comp in comppanels_right" class="comp comp-{{ comp.id }}">
+                    <div class="comp-bar">
+                        <img class="comp-icon" src="./images/{{ comp.icon }}" />
+                        <span class="comp-title">{{ comp.title }}</span>
+                        <a class="comp-showhide" ng-show="comp.showhide==0" ng-click="comp.showhide=1">Show</a>
+                        <a class="comp-showhide" ng-show="comp.showhide==1" ng-click="comp.showhide=0">Hide</a>
+                    </div>
+                    <div class="comp-info" ng-show="comp.showhide==1">
+                        <div class="comp-info-row row" ng-repeat="part in Ins.inspection_obj.results[comp.dtarray]">
+                            <div class="col-md-12 align-center comp-info-partdescription">
+                                {{part.description}}
+                            </div>
+                            <div class="comp-info-row-left col-md-6 padding-left-0">
+                                <div class="comp-info-row-bar {{ part.left.condition }}">Left {{part.left.percentage}}</div>
+                                <div class="comp-info-row-content row">
+                                    <div class="col-md-5 padding-left-0">
+                                		<a ng-show="part.left.image_full_url" href="{{ part.left.image_full_url }}" target="_blank" data-modal="lightbox" class="comp-info-image-anchor">
+	                                        <img ng-show="part.left.image_url" class="bordered-image comp-info-image" ng-src="{{ part.left.image_url }}" src="images/tmp.png"/>
+	                                    </a>
+	                                    <a ng-show="!part.left.image_full_url" class="comp-info-image-anchor">
+	                                        <img ng-show="!part.left.image_url" class="bordered-image comp-info-image" src="images/tmp.png"/>
+	                                    </a>
+                                	</div>
+                                    <div class="col-md-7 padding-right-0 padding-left-0">
+                                        <img class="comp-info-toolicon" ng-if="part.left.tool_name == 'Tape Measure'" src="./images/icons/measuring-tape-icon.png"/>
+                                        <img class="comp-info-toolicon" ng-if="part.left.tool_name == 'Ultrasonic'" src="./images/icons/ultrasonic-icon.png"/>
+                                        <img class="comp-info-toolicon" ng-if="part.left.tool_name == 'Depth Gauge'" src="./images/icons/depth-gauge-icon.png"/>
+                                        <img class="comp-info-toolicon" ng-if="part.left.tool_name == 'Caliper'" src="./images/icons/caliper-icon.png"/>
+                                        <span class="comp-info-toolicon">{{ part.left.measured }}<sup>in</sup> / {{ part.left.measured_metric }}<sup>mm</sup></span>
+                                        <div class="comp-info-installhours" ng-if="part.left.install_hours != undefined">SMU Hours: {{part.left.install_hours}}</div>
+                                        <div class="comp-info-installdate" ng-if="part.left.install_datestring != undefined">Install Date: {{part.left.install_datestring}}</div>
+                                        <div class="comp-info-notes">
+                                            <span ng-show="part.left.notes" ng-bind="part.left.notes"></span>
+                                            <span ng-show="!part.left.notes">No notes added</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="comp-info-row-right col-md-6 padding-right-0">
+                                <div class="comp-info-row-bar {{ part.right.condition }}">Right {{part.right.percentage}}</div>
+                                <div class="comp-info-row-content row">
+                                    <div class="col-md-5 padding-left-0">
+                                		<a ng-show="part.right.image_full_url" href="{{ part.right.image_full_url }}" target="_blank" data-modal="lightbox" class="comp-info-image-anchor">
+	                                        <img ng-show="part.right.image_url" class="bordered-image comp-info-image" ng-src="{{ part.right.image_url }}" src="images/tmp.png"/>
+	                                    </a>
+	                                    <a ng-show="!part.right.image_full_url" class="comp-info-image-anchor">
+	                                        <img ng-show="!part.right.image_url" class="bordered-image comp-info-image" src="images/tmp.png"/>
+	                                    </a>
+                                	</div>
+                                    <div class="col-md-7 padding-right-0 padding-left-0">
+                                        <img class="comp-info-toolicon" ng-if="part.right.tool_name == 'Tape Measure'" src="./images/icons/measuring-tape-icon.png"/>
+                                        <img class="comp-info-toolicon" ng-if="part.right.tool_name == 'Ultrasonic'" src="./images/icons/ultrasonic-icon.png"/>
+                                        <img class="comp-info-toolicon" ng-if="part.right.tool_name == 'Depth Gauge'" src="./images/icons/depth-gauge-icon.png"/>
+                                        <img class="comp-info-toolicon" ng-if="part.right.tool_name == 'Caliper'" src="./images/icons/caliper-icon.png"/>
+                                        <span class="comp-info-toolicon">{{ part.right.measured }}<sup>in</sup> / {{ part.right.measured_metric }}<sup>mm</sup></span>
+                                        <div class="comp-info-installhours" ng-if="part.right.install_hours != undefined">SMU Hours: {{part.right.install_hours}}</div>
+                                        <div class="comp-info-installdate" ng-if="part.right.install_datestring != undefined">Install Date: {{part.right.install_datestring}}</div>
+                                        <div class="comp-info-notes">
+                                            <span ng-show="part.right.notes" ng-bind="part.right.notes"></span>
+                                            <span ng-show="!part.right.notes">No notes added</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </section>
+
+    <section id="section-map" class="row animated fadeIn page-break">
+        <div class="col-md-12 padding-right-0 padding-left-0">
+            <div id="map-canvas" md-Map>
+        </div>
+    </section>
+
+</div>
+
+<script src="./scripts/ui/modals.js"></script>

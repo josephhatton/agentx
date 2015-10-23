@@ -1,0 +1,7 @@
+<strong>Question</strong>
+<input type="text" size="25" ng-model="step.boolean.directions">
+<strong>Required:</strong>
+<input ng-model="step.boolean.boolean_req" ng-value="0" type="radio" name="boolean_req_{{$index}}" value="0" checked> No
+<input ng-model="step.boolean.boolean_req" ng-value="1" type="radio" name="boolean_req_{{$index}}" value="1"> Yes
+<strong>Type:</strong>
+<select ng-model="step.boolean.boolean_type" ng-options="opt.id as opt.label for opt in [{'id':0, 'label':'Incomplete / Complete'},{'id':1,'label':'No / Yes'},{'id':2, 'label':'Off / On'}]"></select>

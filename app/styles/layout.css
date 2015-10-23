@@ -1,0 +1,240 @@
+/********************/
+/*** Main Wrapper ***/
+/********************/
+#main-wrapper {
+    background-color: #fff;
+    width: 100%;
+    margin: 0 auto;
+    overflow: hidden;
+    min-height: 100%;
+}
+
+/********************/
+/****** Header ******/
+/********************/
+#header-wrapper {
+    position: fixed;
+    z-index: 99999;
+    width: 100%;
+    min-height: 110px;
+    background-color: #353535;
+}
+
+#header-wrapper .header-inner {
+    width: 1004px;
+    margin: 0 auto;
+}
+
+/* Logo */
+#header-wrapper .header-inner .logo-wrapper {
+    width: 28%;
+    float: left;
+}
+
+#header-wrapper .header-inner .logo-wrapper #logo {
+    text-indent: -9999px;
+    background: url(../images/logo-beta.png) center left no-repeat;
+    background-size: 100%;
+    width: 223px;
+    height: 100px;
+    cursor: pointer;
+    margin: 0;
+}
+
+/* Navigation */
+#header-wrapper .header-inner .nav-wrapper {
+    width: 47%;
+    height: 110px;
+    float: left;
+}
+
+/* Login Form */
+
+.login-support .third
+{
+    border: 1px solid #ccc;
+}
+
+.login-support
+{
+    width: auto;
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 8px;
+    clear: both;
+}
+
+.login-support h3
+{
+    clear: both;
+    margin-top: 4px;
+    margin-bottom: 4px;
+    margin-left: 2px;
+    margin-right: 2px;
+    padding-top: 6px;
+    width: auto;
+    line-height: 1.4;
+    border-top: 1px solid #ccc;
+}
+
+.supported-browsers
+{
+    display: flex;
+    display: -webkit-flex; /* Safari */
+    width: 700px;
+    margin-left: auto;
+    margin-right:auto;
+}
+
+#login form
+{
+    width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#login header
+{
+    width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 8px;
+}
+
+#forgot-password{
+    clear: both;
+    margin-top: 12px;
+}
+
+/* Settings/Search */
+#header-wrapper .header-inner .settings-search-wrapper {
+    width: 25%;
+    height: 110px;
+    float: left;
+}
+
+#header-wrapper .settings-search-wrapper .settings {
+    height: 42px;
+}
+
+#header-wrapper .settings-search-wrapper .settings ul {
+    list-style: none;
+    text-align: right;
+    color: #fff;
+    background: transparent url('../images/icons/settings-arrow-icon.png') no-repeat right center;
+    padding: 0 30px 0 0;
+    margin: 0;
+    position: relative;
+    line-height: 24px;
+}
+
+#header-wrapper .settings-search-wrapper .settings ul li {
+    height: 24px;
+}
+
+#header-wrapper .settings-search-wrapper .settings ul ul {
+    display: none;
+}
+
+#header-wrapper .settings-search-wrapper .settings ul:hover ul {
+    display: block;
+    position: absolute;
+    top: 24px;
+    right: 0;
+    background-color: #fff;
+    z-index: 999;
+    padding: 0;
+}
+
+#header-wrapper .settings-search-wrapper .settings ul ul li a {
+    padding: 5px 15px 5px 25px;
+}
+
+#tertiary-menu {
+    padding: 0;
+    margin: 49px 0 0 0;
+    float: left;
+}
+
+#tertiary-menu .user {
+    float: left;
+    font-size: 14px;
+    font-weight: bold;
+    border-right: 2px solid #5e5e5e;
+    padding-right: 10px;
+}
+
+#tertiary-menu a#logout-link {
+    float: left;
+    font-size: 13px;
+    padding-left: 10px;
+    margin-top: 1px;
+}
+
+#tertiary-menu input {
+    background: #fff url('../images/icons/magnifying-glass-icon.png') no-repeat right center;
+    font-weight: 300;
+    -webkit-appearance: none;
+}
+
+#main-nav {
+    overflow: hidden;
+    height: 110px;
+    margin: 10% 0 0 0;
+}
+
+#main-nav ul {
+    margin: 0;
+    font-weight: 700;
+}
+
+nav ul {
+    overflow: hidden;
+    list-style: none;
+}
+
+nav ul li {
+    float: left;
+    margin-right: 4px;
+}
+
+nav ul li a {
+    color: #b3b3b3;
+    font-size: 14px;
+    padding: 5px 10px;
+}
+
+nav ul li a:hover,
+nav ul li a.active {
+    color: #5cb65e;
+    text-decoration: none;
+}
+
+/* Content */
+#template-wrapper {
+    padding-top: 140px;
+    width: 1004px;
+    margin: 0 auto;
+}
+
+/* Footer */
+#footer-wrapper {
+    width: 100%;
+    min-height: 30px;
+    background-color: #363636;
+}
+
+#footer-wrapper .footer-inner {
+    width: 1004px;
+    margin: 0 auto;
+    color: #fff;
+    text-align: center;
+    line-height: 30px;
+    font-weight: 700;
+    font-size: 12px;
+    margin: 0 auto;
+}
+
+#footer-wrapper a {
+    margin: 0 8px;
+}

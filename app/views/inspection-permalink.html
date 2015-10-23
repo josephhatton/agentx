@@ -1,0 +1,49 @@
+<div class="inspectionview">
+    <nav class="sub-nav-btns inspection">
+    </nav>
+    <nav class="sub-nav-btns inspection">
+        <ul class="print-menu">
+            <li class="print-data"><a href="javascript:void(0);" onclick="window.print();">Print</a></li>
+            <!-- <li class="download-data"><a href="#">Download</a></li> -->
+        </ul>
+    </nav>
+    
+    <div ng-show="Ins.archived" style="width:100%; padding:10px 0px; text-align:center; background-color:red; color:white;">Already Deleted!!!</div>
+
+    <div data-ng-include data-src="'views/partials/inspection/perm/top-permalink.html'"></div>
+
+    <div data-ng-include data-src="'views/partials/inspection/perm/summary.html'"></div>
+
+    <div class="info-section notoppadding nobottomborder">
+        <div class="info-field">
+            <div data-ng-include data-src="'views/partials/inspection/perm/links.html'"></div>
+        </div>
+        <div class="info-field">
+            <div data-ng-include data-src="'views/partials/inspection/perm/bushings.html'"></div>
+        </div>
+        <div class="info-field print-break">
+            <div data-ng-include data-src="'views/partials/inspection/perm/shoes.html'"></div>
+        </div>
+        <div class="info-field">
+            <div data-ng-include data-src="'views/partials/inspection/perm/front-idlers.html'"></div>
+        </div>
+        <div class="info-field">
+            <div data-ng-include data-src="'views/partials/inspection/perm/rear-idlers.html'"></div>
+        </div>
+        <div class="info-field print-break">
+            <div data-ng-include data-src="'views/partials/inspection/perm/carrier-rollers.html'"></div>
+        </div>
+        <div class="info-field">
+            <div data-ng-include data-src="'views/partials/inspection/perm/track-rollers.html'"></div>
+        </div>
+
+        <div class="info-field">
+            <div data-ng-include data-src="'views/partials/inspection/perm/sprockets.html'"></div>
+        </div>
+    </div>
+    
+    <div data-ng-include data-src="'views/partials/inspection/perm/map.html'"></div>
+
+</div>
+
+<script src="../scripts/ui/modals.js"></script>

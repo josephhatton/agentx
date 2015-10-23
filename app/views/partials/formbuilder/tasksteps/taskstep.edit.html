@@ -1,0 +1,16 @@
+<div class="task-step-title">Step {{$index+1}}</div>
+
+<div class="task-step-actionbar">
+	<button ng-if="step.show==false" ng-click="step.show=true" class="task-step-action" style="float:left; margin-right:10px;">Show</button>
+	<button ng-if="step.show==undefined || step.show==true" ng-click="step.show=false" class="task-step-action" style="float:left; margin-right:10px;">Hide</button>
+	<button ng-click="step_move($index,-1)" class="task-step-action" style="float:left; margin-right: 10px;">Move Up</button>
+	<button ng-click="step_move($index,1)" class="task-step-action" style="float:left;">Move Down</button>	
+	<button ng-click="step_remove($index)" class="task-step-action rem_widget" style="float:right;">Remove</button>
+</div>
+
+<div ng-if="step.show==undefined || step.show==true" class="task-step-type" ng-repeat="tasktype in task_types">
+	<div ng-if="step[tasktype.type]!=null" ng-click="step_type_remove(step, tasktype.type)" class="task-step-type-check checked"></div>
+	<div ng-if="step[tasktype.type]==null" ng-click="step_type_new(step, tasktype.type)" class="task-step-type-check unchecked"></div>
+	<div class="task-step-type-title">{{tasktype.title}}</div>
+	<div ng-if="step[tasktype.type]!=null" data-ng-include data-src="'views/partials/formbuilder/tasksteps/'+tasktype.type+'.edit.html'" class="task-step-type-content"></div>
+</div>

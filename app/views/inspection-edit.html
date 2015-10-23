@@ -1,0 +1,525 @@
+<div class="inspectionview editview inspectionedit" xmlns="http://www.w3.org/1999/html">
+
+    <section id="section-navbtns" class="row">
+        <div id="breadcrumb" class="col-md-8 padding-left-0">
+            <a href="#/customers/{{ Ins.customer_id }}">{{ Ins.customer_name }}</a> >
+            <a href="#/machines/list-by-customer/{{ Ins.customer_id }}">Machines</a> >
+            <a href="#/machines/{{ Ins.machine_id }}">{{ Ins.inspection_obj.machine.serial }}</a> >
+            <a href="#/inspections/{{ Ins.id }}">IN #{{ Ins.id }}</a> >
+            Edit Inspection
+        </div>
+
+        <div id="commandbtns" class="col-md-4 padding-right-0 align-right" ng-show="!Ins.archived">
+            <!--
+            <a data-ng-click="toggleCompleted()" data-ng-hide="Ins.completed" class="">Mark Completed</a>
+            <a data-ng-click="toggleCompleted()" data-ng-show="Ins.completed" class="">Mark Uncompleted</a>
+            -->
+            <a ng-href="#/inspections/{{ Ins.id }}" class="icon-white-button icon-white-button-cancel" popover="Cancel" popover-placement="bottom" popover-trigger="mouseenter" style="margin-left: 10px;"></a>
+            <button data-ng-click="saveInspection()" class="icon-white-button icon-white-button-saveinspection" popover="Save" popover-placement="bottom" popover-trigger="mouseenter" ng-disabled="savebtn_locked" style="margin-left: 10px;"></button>
+            <a ng-click="deleteInspection()" data-ng-show="uiShow('delete')" class="icon-white-button icon-white-button-delete" popover="Delete" popover-placement="bottom" popover-trigger="mouseenter" style="margin-left: 10px;"></a>
+        </div>
+    </section>
+
+    <section id="section-dealerlogo" class="align-right">
+        <img ng-show="Ins.dealer_img_url" ng-src="{{ Ins.dealer_img_url }}" alt="Dealer Logo" style="height: 80px;"/>
+    </section>
+    
+    <section id="section-alert">
+    	<div ng-show="Ins.archived" class="alertmsg alertmsg-red">Already Deleted !!!</div>
+    </section>
+
+    <section id="section-edit-details" class="animated fadeIn">
+        <div id="section-mainimage" class="padding-left-0" style="padding-top: 33px;">
+            <a ng-show="Ins.inspection_obj.machine.img_full" href="{{ Ins.inspection_obj.machine.img_full }}" target="_blank" data-modal="lightbox" class="bordered-image main-image">
+                <img ng-show="Ins.inspection_obj.machine.img" ng-src="{{ Ins.inspection_obj.machine.img }}" src="images/tmp.png" />
+            </a>
+            <a ng-show="!Ins.inspection_obj.machine.img_full" class="bordered-image main-image">
+                <img ng-show="!Ins.inspection_obj.machine.img" src="images/tmp.png" />
+            </a>
+        </div>
+
+		<div id="section-inspection-details" class="row">
+        <div class="col-md-3 padding-left-0">
+            <table class="table tbl-details">
+                <caption>Inspection Information</caption>
+                <tbody>
+                    <tr>
+                        <td class="details-title">IN Number</td>
+                        <td class="details-value">{{ Ins.id }}</td>
+                    </tr>
+                    <tr>
+                        <td class="details-title">Inspector</td>
+                        <td class="details-value">
+                            <select ng-model="Ins.inspection_obj.user.id"
+                                ng-options="user.id as user.username for user in UserList">
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="details-title">Inspection Type</td>
+                        <td class="details-value">
+                            <div class="inspectiontype-toggle">
+                                <label>UCI</label>
+                                <div md-Toggle="inspectionTypeUCI"></div>
+                            </div>
+                            <div class="inspectiontype-toggle">
+                                <label>GET</label>
+                                <div md-toggle="inspectionTypeGET"></div>
+                            </div>
+                            <div class="inspectiontype-toggle">
+                                <label>General</label>
+                                <div md-toggle="inspectionTypeGeneral"></div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="details-title">Inspection Date</td>
+                        <td class="details-value">
+                            <mac-datepicker id="last-inspection-date" mac-datepicker-id="last-inspection-date"
+                                mac-datepicker-model="Ins.datestring">
+                            </mac-datepicker>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="details-title">Maintenance Date</td>
+                        <td class="details-value">
+                            <mac-datepicker id="maintenance-date"
+                                mac-datepicker-model="Ins.inspection_obj.maintenance_datestring">
+                            </mac-datepicker>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="col-md-3 padding-left-0">
+            <table class="table tbl-details">
+                <caption>Jobsite Information</caption>
+                <tbody>
+                    <tr>
+                        <td class="details-title">Name</td>
+                        <td class="details-value">
+                            <input type="text" id="name" ng-model="Ins.inspection_obj.jobsite.name"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="details-title">Address</td>
+                        <td class="details-value">
+                            <input type="text" id="address" ng-model="Ins.inspection_obj.jobsite.address"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="details-title">Latitude</td>
+                        <td class="details-value">
+                            <input type="text" id="lat" ng-model="Ins.inspection_obj.jobsite.lat"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="details-title">Longitude</td>
+                        <td class="details-value">
+                            <input type="text" id="lon" ng-model="Ins.inspection_obj.jobsite.lon"/>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="col-md-6 padding-left-0 padding-right-0">
+            <table class="table tbl-details">
+                <caption>Machine Information</caption>
+                <tbody>
+                    <tr>
+                        <td class="details-title">Serial Number</td>
+                        <td class="details-value">
+                            {{ Ins.inspection_obj.machine.serial }}
+                            <input type="text" md-Autocomplete-Search="inspection-machines" class="search-serial" placeholder="Search for Serial..." />
+                        </td>
+                        <td class="details-title">Hour Meter Operative</td>
+                        <td class="details-value">
+                            Yes <input type="radio" name="hour-meter-operative" ng-model="Ins.inspection_obj.results.hour_meter_operative" value="yes"/>
+                            No <input type="radio" name="hour-meter-operative" ng-model="Ins.inspection_obj.results.hour_meter_operative" value="no"/>
+                        </td>
+                    <tr>
+                        <td class="details-title">Manufacturer</td>
+                        <td class="details-value">
+                            <span ng-show="Ins.inspection_obj.machine.manufacturer_name">{{ Ins.inspection_obj.machine.manufacturer_name }}</span>
+                            <span ng-show="!Ins.inspection_obj.machine.manufacturer_name">No Data</span>
+                        </td>
+                        <td class="details-title">Hours Per Week</td>
+                        <td class="details-value">
+                            <select ng-model="Ins.inspection_obj.hours_per_week">
+                                <option value="40">40</option>
+                                <option value="80">80</option>
+                                <option value="120">120</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="details-title">Model</td>
+                        <td class="details-value">
+                            <span ng-show="Ins.inspection_obj.machine.model">{{ Ins.inspection_obj.machine.model }}</span>
+                            <span ng-show="!Ins.inspection_obj.machine.model">No Data</span>
+                        </td>
+                        <td class="details-title">Odometer Reading</td>
+                        <td class="details-value">
+                            <input type="number" name="odometer-reading" id="odometer-reading" ng-model="Ins.inspection_obj.machine.odometer_reading"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="details-title">Customer</td>
+                        <td class="details-value">
+                            <span ng-show="Ins.inspection_obj.customer.name">{{ Ins.inspection_obj.customer.name }}</span>
+                            <span ng-show="!Ins.inspection_obj.customer.name">No Data</span>
+                        </td>
+                        <td class="details-title">Reverse Odometer</td>
+                        <td class="details-value">
+                            <input type="number" ng-model="Ins.inspection_obj.reverse_odometer_reading" name="reverse-odometer" id="reverse-odometer"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="details-title">Unit #</td>
+                        <td class="details-value">
+                            <span ng-show="Ins.inspection_obj.machine.equipment_id">{{ Ins.inspection_obj.machine.equipment_id }}</span>
+                            <span ng-show="!Ins.inspection_obj.machine.equipment_id">No Data</span>
+                        </td>
+                        <td class="details-title">Hour Meter Reading</td>
+                        <td class="details-value">
+                            <input type="number" ng-model="Ins.inspection_obj.hour_meter_reading" name="hour-meter-reading" id="hour-meter-reading"/>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        </div>
+    </section>
+
+    <section id="section-edit-feature" class="row animated fadeIn">
+        <div class="col-md-4 padding-left-0">
+            <table class="table tbl-details">
+                <caption>Site Conditions</caption>
+                <tbody>
+                    <tr>
+                        <td class="details-title" style="width: 40%;">Track SAG</td>
+                        <td class="details-value">
+                            <input type="text" name="track-sag-left" id="track-sag-left" ng-model="Ins.inspection_obj.results.track_sag.left"/>
+                        </td>
+                        <td class="details-value">
+                            <input type="text" name="track-sag-right" id="track-sag-right" ng-model="Ins.inspection_obj.results.track_sag.right"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="details-title" style="width: 40%;">Frame Extension</td>
+                        <td class="details-value">
+                            <input type="text" name="frame-extension-left" id="frame-extension-left" ng-model="Ins.inspection_obj.results.frame_extension.left"/>
+                        </td>
+                        <td class="details-value">
+                            <input type="text" name="frame-extension-right" id="frame-extension-right" ng-model="Ins.inspection_obj.results.frame_extension.right"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="details-title" style="width: 40%;">Internal Wear</td>
+                        <td class="details-value">
+                            <input type="text" name="dry-joints-left" id="dry-joints-left" ng-model="Ins.inspection_obj.results.dry_joints.left"/>
+                        </td>
+                        <td class="details-value">
+                            <input type="text" name="dry-joints-right" id="dry-joints-right" ng-model="Ins.inspection_obj.results.dry_joints.right"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="details-title" style="width: 40%;">Shoe Width</td>
+                        <td class="details-value">
+                            <input type="text" name="shoe-width-left" id="shoe-width-left" ng-model="Ins.inspection_obj.results.shoe_width.left"/>
+                        </td>
+                        <td class="details-value">
+                            <input type="text" name="shoe-width-right" id="shoe-width-right" ng-model="Ins.inspection_obj.results.shoe_width.right"/>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="col-md-4 padding-left-0">
+            <table class="table tbl-details">
+                <caption>&nbsp;</caption>
+                <tbody>
+                    <tr>
+                        <td class="details-title">Impact</td>
+                        <td class="details-value">
+                            High <input type="radio" name="impact" ng-model="Ins.inspection_obj.results.underfoot_conditions.impact" value="high">
+                            Mod <input type="radio" name="impact" ng-model="Ins.inspection_obj.results.underfoot_conditions.impact" value="mod">
+                            Low <input type="radio" name="impact" ng-model="Ins.inspection_obj.results.underfoot_conditions.impact" value="low">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="details-title">Abrasive</td>
+                        <td class="details-value">
+                            High <input type="radio" name="abrasive" value="high" ng-model="Ins.inspection_obj.results.underfoot_conditions.abrasive">
+                            Mod <input type="radio" name="abrasive" value="mod" ng-model="Ins.inspection_obj.results.underfoot_conditions.abrasive">
+                            Low <input type="radio" name="abrasive" value="low" ng-model="Ins.inspection_obj.results.underfoot_conditions.abrasive">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="details-title">Bushing Allowable Wear</td>
+                        <td class="details-value">
+                            Lesser <input type="radio" name="bushing-allowable-wear" ng-model="Ins.inspection_obj.results.bushing_allowable_wear" value="lesser">
+                            Greater <input type="radio" name="bushing-allowable-wear" ng-model="Ins.inspection_obj.results.bushing_allowable_wear" value="greater">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="details-title">Link Allowable Wear</td>
+                        <td class="details-value">
+                            Lesser <input type="radio" name="link-allowable-wear" value="lesser" ng-model="Ins.inspection_obj.results.link_allowable_wear">
+                            Greater <input type="radio" name="link-allowable-wear" value="greater" ng-model="Ins.inspection_obj.results.link_allowable_wear">
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="col-md-4 padding-left-0 padding-right-0">
+            <table class="table tbl-details">
+                <caption>&nbsp;</caption>
+                <tbody>
+                    <tr>
+                        <td class="details-title">Undercarriage Brand</td>
+                        <td class="details-value">
+                            <select
+                                ng-model="Ins.inspection_obj.machine.under_carriage_brand"
+                                ng-options="uc_brand.name as uc_brand.name for uc_brand in UndercarriageBrands">
+                                <option value="">Undercarriage Brand...</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="details-title">Undercarriage Code</td>
+                        <td class="details-value">
+                            <input type="text" name="undercarriage-code" id="undercarriage-code"
+                                ng-model="Ins.inspection_obj.machine.under_carriage_code">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="details-title">Moisture</td>
+                        <td class="details-value">
+                            High <input type="radio" name="moisture" value="high" ng-model="Ins.inspection_obj.results.underfoot_conditions.moisture">
+                            Mod <input type="radio" name="moisture" value="mod" ng-model="Ins.inspection_obj.results.underfoot_conditions.moisture">
+                            Low <input type="radio" name="moisture" value="low" ng-model="Ins.inspection_obj.results.underfoot_conditions.moisture">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="details-title">Packing</td>
+                        <td class="details-value">
+                            High <input type="radio" name="packing" value="high" ng-model="Ins.inspection_obj.results.underfoot_conditions.packing">
+                            Mod <input type="radio" name="packing" value="mod" ng-model="Ins.inspection_obj.results.underfoot_conditions.packing">
+                            Low <input type="radio" name="packing" value="low" ng-model="Ins.inspection_obj.results.underfoot_conditions.packing">
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>    
+    
+    <section id="section-general" class="animated fadeIn" ng-if="Ins.inspection_obj.general">
+        <!--<div class="template-title">{{ Ins.inspection_obj.general.template_title }}</div>-->
+        <div class="template-type" ng-repeat="(typeindex, type) in Ins.inspection_obj.general.template_inspection_types">
+            <div class="template-type-label">{{ type.inspection_type_label }}</div>
+            <div class="template-type-task" ng-repeat="(taskindex, task) in type.inspection_type_tasks">
+                <div class="template-type-task-name">{{ task.task_name }}</div>
+                <div class="template-type-task-step" ng-repeat="(stepindex, step) in task.task_instructions_object.steps">
+                    <div class="template-type-task-step-content">
+                        <div class="template-type-task-step-content-item">
+                            <span class="item-title">Goal</span>
+                            <span class="item-value">
+                                <input type="text" ng-model="step.goal"/>
+                            </span>
+                        </div>
+                        <div class="template-type-task-step-content-item" ng-if="step.help && step.help.help_text">
+                            <span class="item-title">Help Text</span>
+                            <span class="item-value">
+                                <input type="text" ng-model="step.help.help_text"/>
+                            </span>
+                        </div>
+                        <div class="template-type-task-step-content-item" ng-repeat="(key, value) in step" ng-if="key!='goal' && key!='help'">
+                            <span class="item-title">
+                                <span ng-if="key!='attention'">
+                                    {{ value.directions }}
+                                </span>
+                                <span ng-if="key=='attention'">
+                                    Attention
+                                </span>
+                                <span ng-if="key=='boolean'">
+                                	({{value.values[1]}}/{{value.values[0]}})
+                                </span>
+                            </span>
+                            <span class="item-value">
+                                <span ng-if="key=='rating'">                            
+                                    <select ng-model="value.value" ng-options="rt as rt for rt in value.values">
+                                    </select>
+                                </span>
+                                <span ng-if="key=='photos'">
+                                    <div>
+                                        Max: 
+                                        <span ng-if="value.photos_numreq">{{ value.photos_numreq }}</span>
+                                        <span ng-if="!value.photos_numreq">Unlimited</span>
+                                    </div>
+                                    <div>
+                                        <a ng-click="addPhoto(value)" ng-if="value.value.length!=value.photos_numreq">Add New</a>
+                                    </div>                                    
+                                	<div class="photo-upload" id="photo-upload-{{typeindex}}-{{taskindex}}-{{stepindex}}-{{index}}" ng-repeat="(index, photo) in value.url track by $index">                                		
+                                        <img ng-hide="value.newimage[index]" class="template-type-task-step-photo" ng-src="{{ photo }}" src="images/tmp.png" />
+                                        <div ng-show="value.newimage[index]" md-image-upload="photo_{{typeindex}}_{{taskindex}}_{{stepindex}}_{{index}}" scopevar="{{typeindex}}_{{taskindex}}_{{stepindex}}_{{index}}"></div>
+                                        <div class="image-btn-wrapper">
+                                            <a href="" ng-hide="value.newimage[index]" ng-click="value.newimage[index] = !value.newimage[index]" class="image-upload-btn"></a>
+                                            <a href="" ng-show="value.newimage[index]" ng-click="value.newimage[index] = false" class="remove-image"></a>
+                                            <a ng-click="deletePhoto(value, typeindex, taskindex, stepindex, index)" class="delete-photo">Del</a>
+                                        </div>
+                                    </div>                                    
+                                </span>
+                                <span ng-if="key=='boolean'">
+                                    <div md-toggle="value.value" bindtoinspectionobj="0" id="boolean_{{typeindex}}_{{taskindex}}_{{stepindex}}"></div>
+                                </span>
+                                <span ng-if="key=='option'">
+                                    <span ng-if="value.option_select=='single' || !value.option_select">
+                                        <span ng-repeat="(optindex,opt) in value.option_choices" class="template-type-task-step-optionradio">                                            
+                                            <input type="radio" name="option_{{typeindex}}_{{taskindex}}_{{stepindex}}" value="{{opt}}" ng-model="value.value" />
+                                            {{ opt }}
+                                        </span>
+                                    </span>
+                                    <span ng-if="value.option_select=='multi'">
+                                        {{ value.value }}
+                                    </span>
+                                </span>
+                                <span ng-if="key=='input'">
+                                	<input ng-show="!value.input_type || value.input_type=='mix'" type="text" ng-model="value.value" />
+                                	<input ng-show="value.input_type=='mix-safe'" type="text" ng-model="value.value" onkeypress="return event.charCode!=32;" />
+                                	<input ng-show="value.input_type=='integer'" type="number" ng-model="value.value" onkeypress="return event.charCode>=48 && event.charCode<=57;" />
+                                	<input ng-show="value.input_type=='decimal'" type="number" ng-model="value.value" step="any" onkeypress="return (event.charCode>=48 && event.charCode<=57) || event.charCode==46;" />
+                                    {{ value.input_units }}
+                                </span>
+                                <span ng-if="key=='attention'">
+                                	<div class="template-type-task-step-attentiontype-radios">
+	                                    <input type="radio" name="attention_{{typeindex}}_{{taskindex}}_{{stepindex}}" value="warning" ng-model="value.attention_type" />Warning
+	                                    <input type="radio" name="attention_{{typeindex}}_{{taskindex}}_{{stepindex}}" value="info" ng-model="value.attention_type" />Info
+	                                </div>                                    
+                                    <input type="text" ng-model="value.attention_text" />
+                                    <span class="template-type-task-step-attentiontype {{value.attention_type}}"></span>
+                                </span>
+                                <span ng-if="key=='comment'">
+                                    <input type="text" ng-model="value.value" />
+                                </span>
+                            </span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="section-edit-components" class="">
+        <div ng-repeat="comp in edit_comps" class="comp comp-{{ comp.id }}">
+            <div class="comp-bar row">
+                <div class="col-md-6 padding-left-0 padding-right-0">
+                    <img class="comp-icon" src="./images/{{ comp.icon }}" />
+                    <span class="comp-title">{{ comp.label }} ({{ Ins.inspection_obj.results[comp.dtarray].length }})</span>
+                </div>
+                <div class="col-md-6 align-right padding-left-0 padding-right-0">
+                    <a class="part-add green-button" ng-click="addPart(comp.dtarray)">Add Component</a>
+                </div>
+            </div>
+
+            <div class="comp-info" ng-show="Ins.inspection_obj.results[comp.dtarray].length>0">
+                <div class="row align-center">
+                    <div class="col-md-3"></div>
+                    <select ng-model="Ins.inspection_obj.results[comp.dtarray].model_id"
+                        ng-options="component.component_id as component.label for component in Components[comp.dtarray]"
+                        ng-change="updateAllComponentData(comp.title)"
+                        class="col-md-6">
+                    </select>
+                    <div class="col-md-3"></div>
+                </div>
+                <div class="row">
+                    <div class="comp-part col-md-6" ng-repeat="part in Ins.inspection_obj.results[comp.dtarray]">
+                        <div class="align-right" style="padding: 5px 0px;">
+                            <a class="part-remove icon-white-button icon-white-button-delete" ng-click="removePart(comp.dtarray, $index)"></a>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 padding-left-0" style="padding-right:2px;">
+                                <div class="comp-info-row-bar {{ part.left.condition }}">Left {{part.left.percentage}}</div>
+                                <div class="comp-info-row-content row">                                    
+                                    <div class="col-md-4 padding-left-0 padding-right-0">
+                                		<a ng-show="part.left.image_full_url" href="{{ part.left.image_full_url }}" target="_blank" data-modal="lightbox" class="comp-info-image-anchor">
+	                                        <img ng-show="part.left.image_url" class="bordered-image comp-info-image" ng-src="{{ part.left.image_url }}" src="images/tmp.png"/>
+	                                    </a>
+	                                    <a ng-show="!part.left.image_full_url" class="comp-info-image-anchor">
+	                                        <img ng-show="!part.left.image_url" class="bordered-image comp-info-image" src="images/tmp.png"/>
+	                                    </a>
+                                	</div>
+                                    <div class="col-md-8 padding-right-0">
+                                        <div class="comp-tool-icon">
+                                            <img src="images/icons/measuring-tape-icon.png" ng-if="part.left.tool_name == 'Tape Measure'" />
+                                            <img src="images/icons/ultrasonic-icon.png" ng-if="part.left.tool_name == 'Ultrasonic'" />
+                                            <img src="images/icons/depth-gauge-icon.png" ng-if="part.left.tool_name == 'Depth Gauge'" />
+                                            <img src="images/icons/caliper-icon.png" ng-if="part.left.tool_name == 'Caliper'" />
+                                        </div>
+                                        <select ng-model="part.left.tool" ng-options="tool.id as tool.label for tool in Tools"
+                                            ng-change="updateWearPercentages(comp.title, $index)"
+                                            class="comp-tool">
+                                            <option value="">Measurement tool...</option>
+                                        </select>
+                                        <input type="text" md-measurement side="left" part="{{ comp.dtarray }}" index="{{$index}}"
+                                                ng-change="updateWearPercentages(comp.title, $index, UserSettings.show_metric)"
+                                                ng-model="part.left.measured"
+                                                class="comp-metric" />
+                                        SMU Hours: <input type="text" ng-model="part.left.install_hours" />
+                                        Install Date: <input type="text" ng-model="part.left.install_datestring" dt-picker class="comp-tool-installdatestring" />
+                                    </div>
+                                    <div class="comp-note col-md-12 padding-left-0 padding-right-0"><textarea ng-model="part.left.notes" placeholder="Notes"></textarea></div>
+                                </div>
+
+                            </div>
+                            <div class="col-md-6 padding-right-0" style="padding-left:2px;">
+                                <div class="comp-info-row-bar {{ part.right.condition }}">Right {{part.right.percentage}}</div>
+                                <div class="comp-info-row-content row">                                    
+                                    <div class="col-md-4 padding-left-0 padding-right-0">
+                                		<a ng-show="part.right.image_full_url" href="{{ part.right.image_full_url }}" target="_blank" data-modal="lightbox" class="comp-info-image-anchor">
+	                                        <img ng-show="part.right.image_url" class="bordered-image comp-info-image" ng-src="{{ part.right.image_url }}" src="images/tmp.png"/>
+	                                    </a>
+	                                    <a ng-show="!part.right.image_full_url" class="comp-info-image-anchor">
+	                                        <img ng-show="!part.right.image_url" class="bordered-image comp-info-image" src="images/tmp.png"/>
+	                                    </a>
+                                	</div>
+                                    <div class="col-md-8 padding-right-0">
+                                        <div class="comp-tool-icon">
+                                            <img src="images/icons/measuring-tape-icon.png" ng-if="part.right.tool_name == 'Tape Measure'" />
+                                            <img src="images/icons/ultrasonic-icon.png" ng-if="part.right.tool_name == 'Ultrasonic'" />
+                                            <img src="images/icons/depth-gauge-icon.png" ng-if="part.right.tool_name == 'Depth Gauge'" />
+                                            <img src="images/icons/caliper-icon.png" ng-if="part.right.tool_name == 'Caliper'" />
+                                        </div>
+                                        <select ng-model="part.right.tool" ng-options="tool.id as tool.label for tool in Tools"
+                                            ng-change="updateWearPercentages(comp.title, $index)"
+                                            class="comp-tool">
+                                            <option value="">Measurement tool...</option>
+                                        </select>
+                                        <input type="text" md-measurement side="left" part="{{ comp.dtarray }}" index="{{$index}}"
+                                                ng-change="updateWearPercentages(comp.title, $index, UserSettings.show_metric)"
+                                                ng-model="part.right.measured"
+                                                class="comp-metric" />
+                                        SMU Hours: <input type="text" ng-model="part.right.install_hours" />
+                                        Install Date: <input type="text" ng-model="part.right.install_datestring" dt-picker class="comp-tool-installdatestring" />
+                                    </div>
+                                    <div class="comp-note col-md-12 padding-left-0 padding-right-0"><textarea ng-model="part.right.notes" placeholder="Notes"></textarea></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="section-edit-location" class="row animated fadeIn">      
+        <div class="col-md-12 padding-right-0 padding-left-0">
+            <div id="map-canvas" md-Map>
+        </div>
+    </section>
+
+</div>

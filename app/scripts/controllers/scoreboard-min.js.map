@@ -1,0 +1,1 @@
+{"version":3,"file":"scoreboard-min.js","sources":["scoreboard.js"],"names":["Modustri","controller","$log","$scope","$location","AuthServices"],"mappings":"AAMAA,SAASC,WAAW,kBAAmB,OAAQ,SAAU,YAAa,eAAgB,SAASC,EAAMC,EAAQC,EAAWC,GAEpH"}

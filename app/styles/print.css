@@ -1,0 +1,99 @@
+/* Page margin*/
+@page {
+    margin: 0.5cm;
+}
+
+#header-wrapper, nav.sub-nav-btns, div.generalImages {
+  display: none;
+}
+
+#template-wrapper {
+  padding-top: 0;
+}
+
+tr th input {
+  display: none;
+}
+
+/* Don't spilt sections and section headers */
+h2, h3, .info-field {
+   page-break-after: avoid;
+}
+
+/* Resizing(!) images */
+.left-image img,
+.right-image img {
+    max-width: 120px !important;
+}
+
+/* Remove url from linked images */
+a:after > img {
+   content: "";
+}
+
+a[href]:after {
+    content: none !important;
+  }
+
+/* Page Breaks & Summary Overrides */
+
+.print-break {
+	page-break-after:always;
+}
+
+.good, .fair, .poor {
+    border-color: #ccc !important;
+}
+
+.good .ng-binding {
+    background-color: #fff !important;
+    color: #4f994f !important;
+}
+
+.fair .ng-binding {
+    background-color: #fff !important;
+    color: #f9ea02 !important;
+}
+
+.poor .ng-binding {
+	background-color: #fff !important;
+	color: #f20000 !important;
+}
+
+/* Hiding as Map Data seems broken */
+section.address-fields, div.map {
+	display: none;
+}
+
+@media print and (orientation: portrait)
+{
+  div[class~="component-row"]:nth-of-type(4n)
+  {
+    page-break-after:always;
+  }
+  div[class~='info-field']
+  {
+    page-break-inside:avoid;
+  }
+}
+
+@media print and (orientation: landscape)
+{
+  div[class~="component-row"]:nth-of-type(2n)
+  {
+    page-break-after:always;
+  }
+  div[class~='info-field']
+  {
+    page-break-inside: avoid;
+  }
+  div[class~='machine-summary']
+  {
+    page-break-before: always;
+  }
+}
+
+@media screen {
+    div[id='printable-images']{ display: none; }
+    .inspectionview { display: none; }
+}
